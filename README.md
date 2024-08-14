@@ -1,4 +1,4 @@
-# api-blog-professores
+# API Blog dos Professores
 ## Instalação
 
 Para começar a usar o projeto, siga os passos abaixo:
