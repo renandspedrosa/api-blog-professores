@@ -46,6 +46,7 @@ acesse ao aplicativo pela url:
 
 ```bash
   URL: localhoat
+  banco: blog
   user: fiap
   password: fiap
   port: 3306
