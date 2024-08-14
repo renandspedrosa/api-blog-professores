@@ -1,6 +1,21 @@
 version: "3.9"
 
 services:
+  banco:
+    image: mysql:8.0
+    container_name: banco-blog
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=segredo123
+      - MYSQL_DATABASE=blog
+      - MYSQL_USER=fiap
+      - MYSQL_PASSWORD=fiap
+    networks:
+      - api-network  
   api:
     build: 
       dockerfile: Dockerfile
@@ -10,3 +25,12 @@ services:
       - ./:/app
     ports:
       - "3000:3000"
+    depends_on:
+      - banco
+    networks:
+      - api-network 
+volumes:
+  mysql_data:
+  
+networks:
+  api-network: 
