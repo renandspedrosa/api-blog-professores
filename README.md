@@ -34,3 +34,19 @@ Certifique-se de ter o Docker instalado em sua máquina e execute o seguinte com
 ```bash
   docker compose up -d
 ```
+#### 5. Acesse a API
+
+acesse ao aplicativo pela url:
+
+```bash
+  localhost:3000
+```
+
+#### 6. Acesso ao banco
+
+```bash
+  URL: localhoat
+  user: fiap
+  password: fiap
+  port: 3306
+```
