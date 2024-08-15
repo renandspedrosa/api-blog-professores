@@ -3,7 +3,7 @@ version: "3.9"
 services:
   banco:
     image: mysql:8.0
-    container_name: banco-blog
+    container_name: ${CONTAINER_DB}
     volumes:
       - mysql_data:/var/lib/mysql
     restart: always

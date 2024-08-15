@@ -9,7 +9,7 @@ app.get('/', (_req: Request, res: Response) => {
   res.send('Hello World!');
 });
 
-const PORT = parseInt(process.env.PORT_API || '3001');
+const PORT = parseInt(process.env.PORT_API || '3000');
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on http://localhost:${PORT}`);

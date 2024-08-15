@@ -51,3 +51,13 @@ acesse ao aplicativo pela url:
   password: fiap
   port: 3306
 ```
+
+#### 7. Execute as migrations
+
+Após o container iniciado por completo execute o seguinte comando para realizar as migrações do banco:
+
+**Obs:** Certifique-se de que o container e o banco esteja de pé
+
+```bash
+  npm run migrate
+```
