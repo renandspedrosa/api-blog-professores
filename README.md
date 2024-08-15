@@ -45,7 +45,7 @@ acesse ao aplicativo pela url:
 #### 6. Acesso ao banco
 
 ```bash
-  URL: localhoat
+  URL: localhost
   banco: blog
   user: fiap
   password: fiap
