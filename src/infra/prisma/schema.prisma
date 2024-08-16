@@ -1,6 +1,3 @@
-//how to use
-//https://www.prisma.io/docs/orm/prisma-schema/data-model/models
-
 generator client {
   provider = "prisma-client-js"
 }
