@@ -26,15 +26,20 @@ Use o gerenciador de pacotes Node.js (npm) para instalar todas as dependências 
 ```bash
   npm install
 ```
+#### 4. Configure os arquivos de exemplo
 
-#### 4. Inicie o aplicativo com o Docker
+Há arquivos/pastas de exemplo no projeto que você deve configurar para suas necessidades. Para fazer isso, siga estas etapas:
+
+- Localize os arquivos/pastas com nomes terminando em `.exemple` e faça cópias deles sem a extensão `.exemple`. Por exemplo, `.env.exemple` deve ser renomeado para `.env`.
+
+#### 5. Inicie o aplicativo com o Docker
 
 Certifique-se de ter o Docker instalado em sua máquina e execute o seguinte comando para iniciar o aplicativo:
 
 ```bash
   docker compose up -d
 ```
-#### 5. Acesse a API
+#### 6. Acesse a API
 
 acesse ao aplicativo pela url:
 
@@ -42,7 +47,7 @@ acesse ao aplicativo pela url:
   localhost:3000
 ```
 
-#### 6. Acesso ao banco
+#### 7. Acesso ao banco
 
 ```bash
   URL: localhost
@@ -50,4 +55,14 @@ acesse ao aplicativo pela url:
   user: fiap
   password: fiap
   port: 3306
+```
+
+#### 8. Execute as migrations
+
+Após o container iniciado por completo execute o seguinte comando para realizar as migrações do banco:
+
+**Obs:** Certifique-se de que o container e o banco esteja de pé
+
+```bash
+  npm run migrate
 ```

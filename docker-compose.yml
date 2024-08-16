@@ -3,17 +3,17 @@ version: "3.9"
 services:
   banco:
     image: mysql:8.0
-    container_name: banco-blog
+    container_name: ${CONTAINER_DB}
     volumes:
       - mysql_data:/var/lib/mysql
     restart: always
     ports:
-      - 3306:3306
+      - ${PORT_DB}:${PORT_DB}
     environment:
-      - MYSQL_ROOT_PASSWORD=segredo123
-      - MYSQL_DATABASE=blog
-      - MYSQL_USER=fiap
-      - MYSQL_PASSWORD=fiap
+      - MYSQL_ROOT_PASSWORD=${PASSWORD_ROOT_DB}
+      - MYSQL_DATABASE=${DATABASE_DB}
+      - MYSQL_USER=${USER_DB}
+      - MYSQL_PASSWORD=${PASSWORD_USER_DB}
     networks:
       - api-network  
   api:
@@ -24,7 +24,7 @@ services:
     volumes:
       - ./:/app
     ports:
-      - "3000:3000"
+       - "${PORT_API}:${PORT_API}"
     depends_on:
       - banco
     networks:
