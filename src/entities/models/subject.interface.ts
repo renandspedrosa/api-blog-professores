@@ -4,6 +4,6 @@ export interface ISubject {
     id?: string;
     name: string;
     description: string;
-    image_url: string;
+    image: string;
     tags?: ITag[];
 }

@@ -10,19 +10,26 @@ export class SubjectRepository implements ISubjectRepository {
     constructor(){
         this.repository = appDataSource.getRepository(Subject);
     }
-    create(subject: ISubject): Promise<ISubject> {
+    async findAll(page: number, limit: number ): Promise<ISubject[]> {
+        return this.repository.find({
+            relations: ['tags'],
+            skip:(page - 1) * limit,
+            take: limit
+        });
+    }
+    async findById(id: string): Promise<ISubject | null> {
+        return this.repository.findOne({
+            relations: ['tags'],
+            where: {id}
+        });
+    }
+    async create(subject: ISubject): Promise<ISubject> {
         return this.repository.save(subject);
     }
-    // update(subject: ISubject): Promise<ISubject> {
-    //     throw new Error("Method not implemented.");
-    // }
-    // delete(id: string): Promise<boolean> {
-    //     throw new Error("Method not implemented.");
-    // }
-    // findById(id: string): Promise<ISubject | null> {
-    //     throw new Error("Method not implemented.");
-    // }
-    // findAll(): Promise<ISubject[]> {
-    //     throw new Error("Method not implemented.");
-    // }
+    async update(subject: ISubject): Promise<ISubject> {
+        return this.repository.save(subject);
+    }
+    async delete(id: string): Promise<void> {
+        await this.repository.delete(id);
+    }
 }

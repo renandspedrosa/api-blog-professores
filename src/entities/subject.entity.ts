@@ -29,7 +29,7 @@ export class Subject implements ISubject {
         name: 'image_url',
         type: 'varchar'
     })
-    image_url: string;
+    image: string;
 
     @ManyToMany(() => Tag, {
         cascade: true
