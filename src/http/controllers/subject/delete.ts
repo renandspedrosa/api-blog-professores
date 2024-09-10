@@ -1,14 +1,8 @@
 import { makeDeleteSubjectUseCase } from "@/use-cases/factory/make-delete-subject";
-import { Request, Response, NextFunction } from "express";
-import { z } from "zod";
-
+import { Request, Response } from "express";
 
 export async function deleteSubject(req: Request, res: Response) {
-    const registerParamsSchema =  z.object({
-        id: z.coerce.string()
-    });
-
-    const {id} = registerParamsSchema.parse(req.params);
+    const { id } = req.params
 
     const deleteSubjectUseCase = makeDeleteSubjectUseCase();
 

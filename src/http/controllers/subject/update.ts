@@ -1,27 +1,9 @@
 import { makeUpdateSubjectUseCase } from "@/use-cases/factory/make-update-subject";
-import { Request, Response, NextFunction } from "express";
-import { z } from "zod";
+import { Request, Response } from "express";
 
 export async function update(req: Request, res: Response) {
-    const registerParamsSchema =  z.object({
-        id: z.coerce.string()
-    });
-
-    const {id} = registerParamsSchema.parse(req.params);
-
-    const registerBodySchema = z.object({
-        name: z.string(),
-        description: z.string(),
-        image: z.string(),
-        tags: z.array(
-            z.object({
-                id: z.coerce.number(),
-                name: z.string()
-            })
-        ).optional()
-    });
-
-    const {name, description, image, tags} = registerBodySchema.parse(req.body);
+    const { id } = req.params
+    const { name, description, image, tags  } = req.body;
 
     const updateSubjectUseCase = makeUpdateSubjectUseCase();
 
