@@ -1,5 +1,5 @@
 import { UserRepository } from "@/repositories/pg/user.repository";
-import { FindWithTeacherUseCase } from "../find-with-teacher";
+import { FindWithTeacherUseCase } from "../teacher/find-with-teacher";
 
 export function makeFindWithTeacherUseCase() {
     const userRepository = new UserRepository();

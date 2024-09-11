@@ -1,5 +1,5 @@
 import { TeacherRepository } from "@/repositories/pg/teacher.repository";
-import { CreateTeacherUseCase } from "../create-teacher";
+import { CreateTeacherUseCase } from "../teacher/create-teacher";
 
 
 export function makeCreateTeacherUseCase() {

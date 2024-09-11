@@ -1,5 +1,5 @@
 import { SubjectRepository } from "@/repositories/typeorm/subject.repository";
-import { FindAllSubjectUseCase } from "../find-all-subject";
+import { FindAllSubjectUseCase } from "../subject/find-all-subject";
 
 export function makeFindAllSubjectUseCase() {
     const subjectRepository = new SubjectRepository();

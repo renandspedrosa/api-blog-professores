@@ -1,5 +1,5 @@
 import { SubjectRepository } from "@/repositories/typeorm/subject.repository";
-import { DeleteSubjectUseCase } from "../delete-subject";
+import { DeleteSubjectUseCase } from "../subject/delete-subject";
 
 export function makeDeleteSubjectUseCase() {
     const subjectRepository = new SubjectRepository();
