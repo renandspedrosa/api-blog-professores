@@ -4,10 +4,11 @@ import { Request, Response, NextFunction } from "express";
 
 export async function create(req: Request, res: Response, next: NextFunction) {
     try {
-        const { name, description, image, tags  } = req.body;
+        // const { name, tags  } = req.body;
+        const { name } = req.body;
 
         const createSubjectUseCase = makeCreateSubjectUseCase();
-        const subject = await createSubjectUseCase.handler({ name, description, image, tags });
+        const subject = await createSubjectUseCase.handler({ name });
 
         return res.status(201).json(subject);
     } catch (error) {

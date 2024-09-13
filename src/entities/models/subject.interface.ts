@@ -1,9 +1,10 @@
-import { ITag } from "./tags.interface";
+// import { ITag } from "./tags.interface";
 
 export interface ISubject {
-    id?: string;
+    id?: string; 
     name: string;
-    description: string;
-    image: string;
-    tags?: ITag[];
+    status?: number; 
+    created_at?: Date;
+    updated_at?: Date | null;
+    // tags?: ITag[];
 }

@@ -4,6 +4,8 @@ export class FindAllSubjectUseCase {
     constructor(private subjectRepository: ISubjectRepository) {}
 
     async handler(page: number, limit: number) {
-        return this.subjectRepository.findAll(page, limit);
+        const subjects = await this.subjectRepository.findAll(page, limit);
+        if (!subjects) { throw new Error('Subject not found'); }
+        return subjects
     }
 }

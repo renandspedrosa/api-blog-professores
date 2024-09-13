@@ -4,13 +4,13 @@ import { ZodError, z } from 'zod';
 export function validateCreateSubject(req: Request, res: Response, next: NextFunction) {
     const registerBodySchema = z.object({
         name: z.string(),
-        description: z.string(),
-        image_url: z.string(),
-        tags: z.array(
-            z.object({
-                id: z.coerce.number().optional(),
-                name: z.string()
-            })).optional()
+        status: z.number().optional().default(1), // Campo status com valor padrão 1
+        // tags: z.array(
+        //     z.object({
+        //         id: z.coerce.number().optional(),
+        //         name: z.string()
+        //     })
+        // ).optional()
     });
 
     try {

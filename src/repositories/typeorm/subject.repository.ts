@@ -12,24 +12,29 @@ export class SubjectRepository implements ISubjectRepository {
     }
     async findAll(page: number, limit: number ): Promise<ISubject[]> {
         return this.repository.find({
-            relations: ['tags'],
+            // relations: ['tags'],
+            where: { status: 1 }, 
             skip:(page - 1) * limit,
             take: limit
         });
     }
     async findById(id: string): Promise<ISubject | null> {
         return this.repository.findOne({
-            relations: ['tags'],
-            where: {id}
+            // relations: ['tags'],
+            where: { id, status: 1 } 
         });
     }
     async create(subject: ISubject): Promise<ISubject> {
         return this.repository.save(subject);
     }
     async update(subject: ISubject): Promise<ISubject> {
-        return this.repository.save(subject);
+        const updatedSubject = {
+            ...subject,
+            updated_at: new Date()
+        };
+        return this.repository.save(updatedSubject);
     }
     async delete(id: string): Promise<void> {
-        await this.repository.delete(id);
+        await this.repository.update(id, { status: 0 }); 
     }
 }

@@ -7,8 +7,8 @@ import { validateJwt } from '@/http/middlewares/jwt-validate';
 
 const router = Router();
 
-router.post('/',validateJwt, validateCreateUser, create);
-router.get('/:id',validateJwt, findUser);
+router.post('/', validateCreateUser, create);
+router.get('/:id', findUser);
 router.post('/signin',validateCreateUser, signin);
 
 export default router;

@@ -3,17 +3,16 @@ import { Request, Response } from "express";
 
 export async function update(req: Request, res: Response) {
     const { id } = req.params
-    const { name, description, image, tags  } = req.body;
+    // const { name, tags  } = req.body;
+    const { name} = req.body;
 
     const updateSubjectUseCase = makeUpdateSubjectUseCase();
 
     const subject = await updateSubjectUseCase.handler({
         id,
-        name,
-        description,
-        image: image,
-        tags: tags || []
+        name
+        // tags: tags || []
     });
 
-    return res.status(200).json(subject);
+    return res.status(200).json({id, name});
 }
