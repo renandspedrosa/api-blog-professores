@@ -18,13 +18,12 @@ export class PostRepository implements IPostRepository {
         return this.repository.save(post);
     }
 
-    async findPostByIdTeacher(teacherId: number, page: number, limit: number): Promise<(IPost & ITeacher)[]> {
+    async findPostByIdTeacher(teacherId: number, page: number, limit: number): Promise<(IPost)[]> {
         const offset = (page - 1) * limit;
 
-        // Ajuste o find para garantir que 'teacher_id' não seja 'undefined'
         return this.repository.find({
-            relations: ['teacher', 'tags'],
-            where: { teacher_id: teacherId, status: 1 }, // Filtre pelo ID do professor
+            relations: ['tags'],
+            where: { teacher_id: teacherId, status: 1 },
             skip: offset,
             take: limit
         });
