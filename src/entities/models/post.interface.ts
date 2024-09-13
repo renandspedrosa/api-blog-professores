@@ -1,7 +1,11 @@
+import { ITag } from "./tags.interface";
 export interface IPost {
-    id?: number;
+    id?: string;
     title: string;
     content: string;
-    state: string;
-    teacher_id?: number;
+    status?: number; 
+    teacher_id: number;
+    tags?: ITag[];
+    created_at?: Date;
+    updated_at?: Date | null;
 }

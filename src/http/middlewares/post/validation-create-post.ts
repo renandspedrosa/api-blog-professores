@@ -5,8 +5,14 @@ export function validateCreatePost(req: Request, res: Response, next: NextFuncti
     const registerBodySchema = z.object({
         title: z.string(),
         content: z.string(),
-        state: z.coerce.string(),
-        teacher_id: z.coerce.number()
+        teacher_id: z.coerce.number(),
+        tags: z.array(
+            z.object({
+                id: z.coerce.number().optional(),
+                name: z.string()
+            })
+        ).optional()
+
     });
 
     try {

@@ -3,6 +3,7 @@ import { makeCreatePostUseCase } from "@/use-cases/factory/make-create-post-use-
 
 export async function create(req: Request, res: Response) {
     const createPostUseCase = makeCreatePostUseCase();
-    const createdPost = await createPostUseCase.handler(req.body);
+    const { title,content,teacher_id,tags } = req.body;
+    const createdPost = await createPostUseCase.handler({ title,content,teacher_id,tags });
     return res.status(201).json(createdPost);
 }

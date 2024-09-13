@@ -1,4 +1,4 @@
-import { PostRepository } from "@/repositories/pg/post.repository";
+import { PostRepository } from "@/repositories/typeorm/post.repository";
 import { FindPostByTeacherUseCase } from "../post/find-post-by-teacher";
 
 export function makeFindPostByTeacherUseCase() {

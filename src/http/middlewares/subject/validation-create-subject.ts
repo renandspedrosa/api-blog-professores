@@ -4,7 +4,7 @@ import { ZodError, z } from 'zod';
 export function validateCreateSubject(req: Request, res: Response, next: NextFunction) {
     const registerBodySchema = z.object({
         name: z.string(),
-        status: z.number().optional().default(1), // Campo status com valor padrão 1
+        status: z.number().optional().default(1), 
         // tags: z.array(
         //     z.object({
         //         id: z.coerce.number().optional(),

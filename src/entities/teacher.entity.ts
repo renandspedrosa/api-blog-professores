@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import { User } from "./user.entity";
 import { ITeacher } from "./models/teacher.interface";
+import { Post } from "./post.entity";
 
 @Entity({
     name: 'teachers'
@@ -54,4 +55,7 @@ export class Teacher implements ITeacher {
     })
     @JoinColumn({ name: 'user_id' })
     user?: User;
+
+    @OneToMany(() => Post, post => post.teacher)
+    posts?: Post[];
 }

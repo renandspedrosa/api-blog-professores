@@ -61,7 +61,7 @@ export class CreateTablesWithConstraints1725488490452 implements MigrationInterf
         await queryRunner.query(`
             CREATE TABLE IF NOT EXISTS "posts" (
                 "id" UUID NOT NULL DEFAULT uuid_generate_v4(),
-                "title" CHAR(1) NULL DEFAULT NULL,
+                "title" VARCHAR(255) NOT NULL,
                 "content" TEXT NULL DEFAULT NULL,
                 "teacher_id" INTEGER NOT NULL,
                 "status" INTEGER NOT NULL DEFAULT 1,

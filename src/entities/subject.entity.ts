@@ -1,8 +1,5 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { ISubject } from "./models/subject.interface";
-// import { ITag } from "./models/tags.interface";
-// import { Tag } from "./tag.entity";
-
 
 @Entity({
     name: 'subjects'
@@ -43,19 +40,5 @@ export class Subject implements ISubject {
     })
     updated_at?: Date | null;
 
-    // @ManyToMany(() => Tag, {
-    //     cascade: true
-    // })
-    // @JoinTable({
-    //     name: 'subject_tags',
-    //     joinColumn: {
-    //         name: 'subject_id',
-    //         referencedColumnName: 'id'
-    //     },
-    //     inverseJoinColumn: {
-    //         name: 'tag_id',
-    //         referencedColumnName: 'id'
-    //     }
-    // })
-    // tags?: ITag[] | undefined;
+
 }

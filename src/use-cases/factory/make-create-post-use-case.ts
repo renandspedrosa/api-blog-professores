@@ -1,4 +1,4 @@
-import { PostRepository } from "@/repositories/pg/post.repository";
+import { PostRepository } from "@/repositories/typeorm/post.repository";
 import { CreatePostUseCase } from "../post/create-post";
 
 export function makeCreatePostUseCase() {
