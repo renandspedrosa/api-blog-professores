@@ -56,6 +56,6 @@ export class Teacher implements ITeacher {
     @JoinColumn({ name: 'user_id' })
     user?: User;
 
-    @OneToMany(() => Post, post => post.teacher)
+    @OneToMany(() => Post, post => post.teacher_id)
     posts?: Post[];
 }

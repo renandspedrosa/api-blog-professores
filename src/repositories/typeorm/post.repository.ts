@@ -1,5 +1,5 @@
 import { IPostRepository } from "../post.repository.interface";
-import { Repository, EntityRepository } from "typeorm";
+import { Repository } from "typeorm";
 import { Post } from "@/entities/post.entity";
 import { Teacher } from "@/entities/teacher.entity";
 import { appDataSource } from "@/lib/typeorm/typeorm";
@@ -7,30 +7,27 @@ import { IPost } from "@/entities/models/post.interface";
 import { ITeacher } from "@/entities/models/teacher.interface";
 
 export class PostRepository implements IPostRepository {
-    private postRepository: Repository<Post>;
+    private repository: Repository<Post>;
 
     constructor() {
-        this.postRepository = appDataSource.getRepository(Post);
+        this.repository = appDataSource.getRepository(Post);
     }
 
     async create(postData: IPost): Promise<IPost | undefined> {
-        const post = this.postRepository.create(postData);
-        return this.postRepository.save(post);
+        const post = this.repository.create(postData);
+        return this.repository.save(post);
     }
 
-    async findPostById(teacherId: number, page: number, limit: number): Promise<(IPost & ITeacher)[]> {
-        // const offset = (page - 1) * limit;
-        
-        // const posts = await this.postRepository
-        //     .createQueryBuilder('post')
-        //     .leftJoinAndSelect('post.teacher', 'teacher')
-        //     .where('teacher.id = :teacherId', { teacherId })
-        //     .skip(offset)
-        //     .take(limit)
-        //     .getMany();
-        
-        // return posts;
-        return [];
+    async findPostByIdTeacher(teacherId: number, page: number, limit: number): Promise<(IPost & ITeacher)[]> {
+        const offset = (page - 1) * limit;
+
+        // Ajuste o find para garantir que 'teacher_id' não seja 'undefined'
+        return this.repository.find({
+            relations: ['teacher', 'tags'],
+            where: { teacher_id: teacherId, status: 1 }, // Filtre pelo ID do professor
+            skip: offset,
+            take: limit
+        });
     }
 
 

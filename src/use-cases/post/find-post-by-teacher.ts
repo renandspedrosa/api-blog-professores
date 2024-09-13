@@ -6,6 +6,6 @@ export class FindPostByTeacherUseCase {
   constructor(private postRepository: IPostRepository) {}
 
   async handler(teacherId: number, page: number, limit: number): Promise<(IPost & ITeacher)[]> {
-    return this.postRepository.findPostById(teacherId, page, limit);
+    return this.postRepository.findPostByIdTeacher(teacherId, page, limit);
   }
 }

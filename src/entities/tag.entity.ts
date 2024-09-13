@@ -1,5 +1,6 @@
-import { Column, PrimaryGeneratedColumn, Entity } from "typeorm";
+import { Column, PrimaryGeneratedColumn, Entity, ManyToMany } from "typeorm";
 import { ITag } from "./models/tags.interface";
+import { Post } from "./post.entity";
 
 
 @Entity({
@@ -23,4 +24,7 @@ export class Tag implements ITag {
         default: () => 'CURRENT_TIMESTAMP'
     })
     created_at?: Date;
+
+    @ManyToMany(() => Post, post => post.tags)
+    posts: Post[];
 }

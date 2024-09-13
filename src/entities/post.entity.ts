@@ -66,10 +66,10 @@ export class Post implements IPost {
     })
     tags?: ITag[] | undefined;
 
-    @ManyToOne(() => Teacher, teacher => teacher.posts, {
-        nullable: true,
-        onDelete: 'SET NULL'
-    })
+    @ManyToOne(() => Teacher, teacher => teacher.posts)
     @JoinColumn({ name: 'teacher_id' })
+    teacher: Teacher;
+
+    @Column({ name: 'teacher_id', type: 'integer' })
     teacher_id: number;
 }

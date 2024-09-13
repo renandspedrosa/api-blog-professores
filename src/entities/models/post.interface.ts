@@ -4,8 +4,8 @@ export interface IPost {
     title: string;
     content: string;
     status?: number; 
-    teacher_id: number;
-    tags?: ITag[];
     created_at?: Date;
     updated_at?: Date | null;
+    teacher_id: number;
+    tags?: ITag[];
 }
