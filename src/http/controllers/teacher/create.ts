@@ -3,11 +3,12 @@ import { Request, Response, NextFunction } from "express";
 
 export async function create(req: Request, res: Response, next: NextFunction) {
     try {
-        const { cpf, name, birth, email, user_id } = req.body;
+        const {name, user_id } = req.body;
 
         const createTeacherUseCase = makeCreateTeacherUseCase();
-        const teacher = await createTeacherUseCase.handler({ cpf, name, birth, email, user_id });
+        const teacher = await createTeacherUseCase.handler({name,user_id });
 
+        
         return res.status(201).json(teacher);
     } catch (error) {
         next(error);

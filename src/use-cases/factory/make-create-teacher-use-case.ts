@@ -1,4 +1,4 @@
-import { TeacherRepository } from "@/repositories/pg/teacher.repository";
+import { TeacherRepository } from "@/repositories/typeorm/teacher.repository";
 import { CreateTeacherUseCase } from "../teacher/create-teacher";
 
 

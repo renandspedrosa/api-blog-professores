@@ -1,17 +1,57 @@
+import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, ManyToOne, JoinColumn } from "typeorm";
+import { User } from "./user.entity";
 import { ITeacher } from "./models/teacher.interface";
 
-export class Teacher implements ITeacher{
+@Entity({
+    name: 'teachers'
+})
+export class Teacher implements ITeacher {
+    @PrimaryGeneratedColumn({
+        type: 'integer'
+    })
     id?: number;
-    cpf: string;
+
+    @Column({
+        name: 'name',
+        type: 'varchar',
+        length: 100
+    })
     name: string;
-    birth: Date;
-    email: string;
+
+    @Column({
+        name: 'user_id',
+        type: 'int',
+        nullable: true,
+        default: null
+    })
     user_id?: number;
 
-    constructor(cpf: string, name: string, births: Date, email: string) {
-        this.cpf = cpf;
-        this.name = name;
-        this.birth = births;
-        this.email = email;
-    }
+    @Column({
+        name: 'status',
+        type: 'int',
+        nullable: true,
+        default: 1
+    })
+    status?: number;
+
+    @CreateDateColumn({
+        name: 'created_at',
+        type: 'timestamp',
+        default: () => 'CURRENT_TIMESTAMP'
+    })
+    created_at?: Date;
+
+    @UpdateDateColumn({
+        name: 'updated_at',
+        type: 'timestamp',
+        nullable: true
+    })
+    updated_at?: Date | null;
+    
+    @ManyToOne(() => User, user => user.teachers, {
+        nullable: true,
+        onDelete: 'SET NULL'
+    })
+    @JoinColumn({ name: 'user_id' })
+    user?: User;
 }
