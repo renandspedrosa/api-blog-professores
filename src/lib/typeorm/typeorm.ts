@@ -1,6 +1,8 @@
 import { DataSource } from "typeorm";
 import { env } from "@/env";
-import { SubjectAutoGenerateUUID1725488490452 } from "./migrations/1725488490452-SubjectAutoGenerateUUID";
+import { CreateTablesWithConstraints1725488490452 } from "./migrations/1725488490452-CreateTablesWithConstraints";
+import { Subject } from "@/entities/subject.entity";
+import { Tag } from "@/entities/tag.entity";
 
 export const appDataSource = new DataSource({
     type: 'postgres',
@@ -9,8 +11,9 @@ export const appDataSource = new DataSource({
     username: env.DATABASE_USER,
     password: env.DATABASE_PASSWORD,
     database: env.DATABASE_NAME,
-    entities: ['src/entities/**/*.entity.ts'],
-    migrations: [SubjectAutoGenerateUUID1725488490452],
+    // entities: ['src/entities/**/*.entity.ts'],
+    entities: [Subject,Tag],
+    migrations: [CreateTablesWithConstraints1725488490452],
     logging: env.NODE_ENV === 'development'
 })
 
