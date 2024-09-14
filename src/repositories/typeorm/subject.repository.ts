@@ -12,7 +12,6 @@ export class SubjectRepository implements ISubjectRepository {
     }
     async findAll(page: number, limit: number ): Promise<ISubject[]> {
         return this.repository.find({
-            // relations: ['tags'],
             where: { status: 1 }, 
             skip:(page - 1) * limit,
             take: limit
@@ -20,7 +19,6 @@ export class SubjectRepository implements ISubjectRepository {
     }
     async findById(id: string): Promise<ISubject | null> {
         return this.repository.findOne({
-            // relations: ['tags'],
             where: { id, status: 1 } 
         });
     }
