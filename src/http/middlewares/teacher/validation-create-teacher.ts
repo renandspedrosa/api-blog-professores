@@ -3,10 +3,7 @@ import { ZodError, z } from 'zod';
 
 export function validateCreateTeacher(req: Request, res: Response, next: NextFunction) {
     const registerBodySchema = z.object({
-        cpf: z.string(),
         name: z.string(),
-        birth: z.coerce.date(),
-        email: z.string().email(),
         user_id: z.coerce.number()
     });
 
