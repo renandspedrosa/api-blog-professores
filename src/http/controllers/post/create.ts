@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { makeCreatePostUseCase } from '@/use-cases/factory/make-create-post-use-case'
+import { makeCreatePostUseCase } from '@/use-cases/factory/post/make-create-post-use-case'
 
 export async function create(req: Request, res: Response) {
   const createPostUseCase = makeCreatePostUseCase()

@@ -1,5 +1,5 @@
 import { PostRepository } from '@/repositories/typeorm/post.repository'
-import { FindPostByTeacherUseCase } from '../post/find-post-by-teacher'
+import { FindPostByTeacherUseCase } from '@/use-cases/post/find-post-by-teacher'
 
 export function makeFindPostByTeacherUseCase() {
   const postRepository = new PostRepository()

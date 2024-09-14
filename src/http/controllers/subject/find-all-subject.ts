@@ -1,4 +1,4 @@
-import { makeFindAllSubjectUseCase } from '@/use-cases/factory/make-find-all-subject-use-case'
+import { makeFindAllSubjectUseCase } from '@/use-cases/factory/subject/make-find-all-subject-use-case'
 import { Request, Response } from 'express'
 
 export async function findAllSubject(req: Request, res: Response) {

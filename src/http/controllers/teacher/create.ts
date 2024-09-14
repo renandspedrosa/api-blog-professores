@@ -1,4 +1,4 @@
-import { makeCreateTeacherUseCase } from '@/use-cases/factory/make-create-teacher-use-case'
+import { makeCreateTeacherUseCase } from '@/use-cases/factory/teacher/make-create-teacher-use-case'
 import { Request, Response, NextFunction } from 'express'
 
 export async function create(req: Request, res: Response, next: NextFunction) {

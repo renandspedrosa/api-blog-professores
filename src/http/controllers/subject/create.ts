@@ -1,4 +1,4 @@
-import { makeCreateSubjectUseCase } from '@/use-cases/factory/make-create-subject-use-case'
+import { makeCreateSubjectUseCase } from '@/use-cases/factory/subject/make-create-subject-use-case'
 import { Request, Response, NextFunction } from 'express'
 
 export async function create(req: Request, res: Response, next: NextFunction) {

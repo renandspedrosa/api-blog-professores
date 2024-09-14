@@ -1,4 +1,4 @@
-import { makeUpdateSubjectUseCase } from '@/use-cases/factory/make-update-subject'
+import { makeUpdateSubjectUseCase } from '@/use-cases/factory/subject/make-update-subject'
 import { Request, Response } from 'express'
 
 export async function update(req: Request, res: Response) {
@@ -14,5 +14,5 @@ export async function update(req: Request, res: Response) {
     // tags: tags || []
   })
 
-  return res.status(200).json({ id, name })
+  return res.status(200).json({ id: subject.id, name: subject.name })
 }

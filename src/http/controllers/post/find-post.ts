@@ -1,4 +1,4 @@
-import { makeFindPostByTeacherUseCase } from '@/use-cases/factory/make-find-post-by-teacher-use-case'
+import { makeFindPostByTeacherUseCase } from '@/use-cases/factory/post/make-find-post-by-teacher-use-case'
 import { Request, Response } from 'express'
 import { z } from 'zod'
 

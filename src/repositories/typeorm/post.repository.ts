@@ -1,10 +1,10 @@
 import { IPostRepository } from '../post.repository.interface'
 import { Repository } from 'typeorm'
 import { Post } from '@/entities/post.entity'
-import { Teacher } from '@/entities/teacher.entity'
+// import { Teacher } from '@/entities/teacher.entity'
 import { appDataSource } from '@/lib/typeorm/typeorm'
 import { IPost } from '@/entities/models/post.interface'
-import { ITeacher } from '@/entities/models/teacher.interface'
+// import { ITeacher } from '@/entities/models/teacher.interface'
 
 export class PostRepository implements IPostRepository {
   private repository: Repository<Post>

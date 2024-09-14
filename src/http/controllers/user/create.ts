@@ -1,4 +1,4 @@
-import { makeCreateUserUseCase } from '@/use-cases/factory/make-create-user-use-case'
+import { makeCreateUserUseCase } from '@/use-cases/factory/user/make-create-user-use-case'
 import { hash } from 'bcryptjs'
 import { Request, Response, NextFunction } from 'express'
 export async function create(req: Request, res: Response, next: NextFunction) {

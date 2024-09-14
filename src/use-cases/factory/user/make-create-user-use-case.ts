@@ -1,5 +1,5 @@
 import { UserRepository } from '@/repositories/typeorm/user.repository'
-import { CreateUserUseCase } from '../user/create-user'
+import { CreateUserUseCase } from '@/use-cases/user/create-user'
 
 export function makeCreateUserUseCase() {
   const userRepository = new UserRepository()

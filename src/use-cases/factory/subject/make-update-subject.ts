@@ -1,5 +1,5 @@
 import { SubjectRepository } from '@/repositories/typeorm/subject.repository'
-import { UpdateSubjectUseCase } from '../subject/update-subject'
+import { UpdateSubjectUseCase } from '@/use-cases/subject/update-subject'
 
 export function makeUpdateSubjectUseCase() {
   const subjectRepository = new SubjectRepository()

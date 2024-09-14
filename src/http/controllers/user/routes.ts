@@ -9,6 +9,6 @@ const router = Router()
 
 router.post('/', validateCreateUser, create)
 router.get('/:id', findUser)
-router.post('/signin', validateCreateUser, signin)
+router.post('/signin', validateJwt, signin)
 
 export default router

@@ -1,4 +1,4 @@
-import { makeCreateTagUseCase } from '@/use-cases/factory/make-create-tag'
+import { makeCreateTagUseCase } from '@/use-cases/factory/tag/make-create-tag'
 import { Request, Response, NextFunction } from 'express'
 
 export async function create(req: Request, res: Response, next: NextFunction) {

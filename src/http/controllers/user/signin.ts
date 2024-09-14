@@ -1,5 +1,5 @@
 import { generateJwt } from '@/http/middlewares/jwt-validate'
-import { makeSigninUseCase } from '@/use-cases/factory/make-signin-use-case'
+import { makeSigninUseCase } from '@/use-cases/factory/user/make-signin-use-case'
 import { compare } from 'bcryptjs'
 import { Request, Response, NextFunction } from 'express'
 
