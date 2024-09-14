@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "0b146229-8729-49aa-9b02-080d5e9f4f2c",
+		"name": "API Blog Professores",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "12044180"
+	},
+	"item": [
+		{
+			"name": "Usuário",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"teste@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/user"
+					},
+					"response": []
+				},
+				{
+					"name": "signin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"teste@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/user/signin"
+					},
+					"response": []
+				},
+				{
+					"name": "find user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/user/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Professor",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\":\"42817521889\", \r\n    \"name\":\"renan\", \r\n    \"birth\":\"1994-05-06\", \r\n    \"email\":\"teste@teste.com\",\r\n    \"user_id\":\"1\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/teacher"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Matéria",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Matemática\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/subject"
+					},
+					"response": []
+				},
+				{
+					"name": "find-all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "page",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "limit",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/subject?page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"subject"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "page",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "limit",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "{{base_url}}/subject/18076474-49a3-4e2b-a361-0d3090590544"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "page",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "limit",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"His\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/subject/18076474-49a3-4e2b-a361-0d3090590544"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "page",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "limit",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "{{base_url}}/subject/9caa14ab-7a35-4f36-b6d6-fd3f27de7487"
+					},
+					"response": []
+				}
+			],
+			"description": "matéria que os professores são aula"
+		},
+		{
+			"name": "Tag",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"novidade\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/tag"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Postagem",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"AAAAAAAAAAAAA\",\r\n    \"content\": \"conteúdo teste\",\r\n    \"teacher_id\": \"1\",\r\n    \"tags\":[\r\n        {\r\n            \"id\":\"1\",\r\n            \"name\":\"teste\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/post"
+					},
+					"response": []
+				},
+				{
+					"name": "find-post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/post/teacher/1?page=1&limit=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"post",
+								"teacher",
+								"1"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0ZUBnbWFpbC5jb20iLCJpYXQiOjE3MjYyNzE4MzQsImV4cCI6MTcyNjI3NTQzNH0.fLNiCGqIRkelV870c4Jh43DsFjLCcw7sEQeZhwg17iI"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:3000",
+			"type": "string"
+		}
+	]
+}
