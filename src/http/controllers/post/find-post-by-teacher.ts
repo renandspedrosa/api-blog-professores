@@ -2,7 +2,7 @@ import { makeFindPostByTeacherUseCase } from '@/use-cases/factory/post/make-find
 import { Request, Response } from 'express'
 import { z } from 'zod'
 
-export async function findPost(req: Request, res: Response) {
+export async function findPostByTeacher(req: Request, res: Response) {
   const registerParamsSchema = z.object({
     teacherId: z.coerce.number(),
   })

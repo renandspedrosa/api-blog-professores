@@ -18,6 +18,26 @@ export class PostRepository implements IPostRepository {
     return this.repository.save(post)
   }
 
+  async findAll(page: number, limit: number): Promise<IPost[]> {
+    return this.repository.find({
+      relations: ['tags'],
+      where: { status: 1 },
+      skip: (page - 1) * limit,
+      take: limit,
+    })
+  }
+
+  async findPostById(id: string): Promise<IPost | undefined> {
+    const post = await this.repository.findOne({
+      relations: ['tags'],
+      where: { id },
+    })
+
+    if (!post) throw new Error('Post not found')
+
+    return post
+  }
+
   async findPostByIdTeacher(
     teacherId: number,
     page: number,
@@ -31,5 +51,13 @@ export class PostRepository implements IPostRepository {
       skip: offset,
       take: limit,
     })
+  }
+
+  async updatePost(post: IPost): Promise<IPost> {
+    return this.repository.save(post)
+  }
+
+  async deletePost(id: string): Promise<void> {
+    await this.repository.update(id, { status: 0 })
   }
 }
