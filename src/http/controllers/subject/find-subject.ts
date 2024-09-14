@@ -1,10 +1,11 @@
 import { makeFindSubjectUseCase } from '@/use-cases/factory/subject/make-find-subject-use-case'
-import { NextFunction, Request, Response } from 'express'
+import { Request, Response } from 'express'
+// import { NextFunction, Request, Response } from 'express'
 
 export async function findSubject(
   req: Request,
   res: Response,
-  next: NextFunction,
+  // next: NextFunction,
 ) {
   try {
     const findSubjectUseCase = makeFindSubjectUseCase()
