@@ -1,7 +1,7 @@
-import { UserRepository } from "@/repositories/typeorm/user.repository";
-import { SigninUseCase } from "../user/signin";
+import { UserRepository } from '@/repositories/typeorm/user.repository'
+import { SigninUseCase } from '../user/signin'
 
 export function makeSigninUseCase() {
-    const userRepository = new UserRepository();
-    return new SigninUseCase(userRepository);
+  const userRepository = new UserRepository()
+  return new SigninUseCase(userRepository)
 }

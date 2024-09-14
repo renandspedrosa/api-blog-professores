@@ -1,20 +1,20 @@
-import { makeCreateUserUseCase } from "@/use-cases/factory/make-create-user-use-case";
-import { hash } from "bcryptjs";
-import { Request, Response, NextFunction } from "express";
+import { makeCreateUserUseCase } from '@/use-cases/factory/make-create-user-use-case'
+import { hash } from 'bcryptjs'
+import { Request, Response, NextFunction } from 'express'
 export async function create(req: Request, res: Response, next: NextFunction) {
-    try {
-        const { username, password } = req.body;
+  try {
+    const { username, password } = req.body
 
-        const hashedPassword = await hash(password, 8);
+    const hashedPassword = await hash(password, 8)
 
-        const userWithHashedPassword = { username, password: hashedPassword };
+    const userWithHashedPassword = { username, password: hashedPassword }
 
-        const createUserUseCase = makeCreateUserUseCase();
+    const createUserUseCase = makeCreateUserUseCase()
 
-        const user = await createUserUseCase.handler(userWithHashedPassword);
+    const user = await createUserUseCase.handler(userWithHashedPassword)
 
-        return res.status(201).json({id:user?.id, username:user?.username});
-    } catch (error) {
-        next(error);
-    }
+    return res.status(201).json({ id: user?.id, username: user?.username })
+  } catch (error) {
+    next(error)
+  }
 }

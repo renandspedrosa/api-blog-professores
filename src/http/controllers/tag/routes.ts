@@ -1,9 +1,9 @@
-import { Router } from 'express';
-import { create } from './create';
-import { validateCreateTag } from '@/http/middlewares/tag/validation-create-tag';
+import { Router } from 'express'
+import { create } from './create'
+import { validateCreateTag } from '@/http/middlewares/tag/validation-create-tag'
 
-const router = Router();
+const router = Router()
 
-router.post('/',validateCreateTag, create);
+router.post('/', validateCreateTag, create)
 
-export default router;
+export default router
