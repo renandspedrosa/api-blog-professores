@@ -1,9 +1,6 @@
 name: Verify Code Eslint
 
-on: 
-  pull_request:
-    branches:
-      ['develop']
+on: pull_request
 
 jobs:
   continuous-integration:
