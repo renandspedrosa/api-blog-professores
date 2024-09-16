@@ -1,4 +1,4 @@
-name: Continuoes Integration
+name: Verify Code Eslint
 
 on: 
   pull_request:
