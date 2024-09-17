@@ -3,7 +3,7 @@ name: Verify Code Eslint
 on: pull_request
 
 jobs:
-  eslint:
+  Eslint:
     runs-on: ubuntu-latest
 
     steps:

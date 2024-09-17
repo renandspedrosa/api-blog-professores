@@ -1,5 +1,5 @@
-import { ISubject } from "@/entities/models/subject.interface";
+import { ISubject } from '@/entities/models/subject.interface'
 
 export interface ITagRepository {
-    create(name:string, subject?: ISubject[]): Promise<void>;
+  create(name: string, subject?: ISubject[]): Promise<void>
 }

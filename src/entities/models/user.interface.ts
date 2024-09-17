@@ -1,8 +1,8 @@
-import { ITeacher } from "./teacher.interface";
+import { ITeacher } from './teacher.interface'
 
 export interface IUser {
-    id?: number;
-    username: string;
-    password: string;
-    teachers?: ITeacher[];
+  id?: number
+  username: string
+  password: string
+  teachers?: ITeacher[]
 }
