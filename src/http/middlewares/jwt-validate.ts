@@ -13,7 +13,6 @@ export const validateJwt = (
   res: Response,
   next: NextFunction,
 ) => {
-
   // Middleware express-jwt para validar o token nas outras rotas
   expressjwt({
     secret: jwtSecret,
