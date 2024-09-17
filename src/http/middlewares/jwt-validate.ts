@@ -13,8 +13,6 @@ export const validateJwt = (
   res: Response,
   next: NextFunction,
 ) => {
-  // Verificar se a rota está na lista de rotas livres
-  const validateRoute = `${req.method}-${req.path}`
 
   // Middleware express-jwt para validar o token nas outras rotas
   expressjwt({
