@@ -6,6 +6,6 @@ export interface IPost {
   status?: number
   created_at?: Date
   updated_at?: Date | null
-  teacher_id: number
+  teacher_id?: number
   tags?: ITag[]
 }
