@@ -4,5 +4,5 @@ import app from '@/app'
 const PORT = env.PORT
 
 app.listen(PORT, () => {
-  console.log(`Server running on PORT:${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 })
