@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "2191baff-a61f-4409-bac0-0177248d1ffc",
+		"_postman_id": "007afed8-9219-43ad-ba88-b1070b0a4c9a",
 		"name": "API Blog Professores",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15657263"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "12044180"
 	},
 	"item": [
 		{
@@ -23,15 +23,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/user",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"user"
-							]
-						}
+						"url": "{{base_url}}/user"
 					},
 					"response": []
 				},
@@ -49,16 +41,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/user/signin",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"user",
-								"signin"
-							]
-						}
+						"url": "{{base_url}}/user/signin"
 					},
 					"response": []
 				},
@@ -67,16 +50,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{base_url}}/user/1",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"user",
-								"1"
-							]
-						}
+						"url": "{{base_url}}/user/1"
 					},
 					"response": []
 				}
@@ -99,15 +73,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/teacher",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"teacher"
-							]
-						}
+						"url": "{{base_url}}/teacher"
 					},
 					"response": []
 				}
@@ -130,15 +96,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/subject",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"subject"
-							]
-						}
+						"url": "{{base_url}}/subject"
 					},
 					"response": []
 				},
@@ -214,16 +172,7 @@
 							"mode": "formdata",
 							"formdata": []
 						},
-						"url": {
-							"raw": "{{base_url}}/subject/18076474-49a3-4e2b-a361-0d3090590544",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"subject",
-								"18076474-49a3-4e2b-a361-0d3090590544"
-							]
-						}
+						"url": "{{base_url}}/subject/18076474-49a3-4e2b-a361-0d3090590544"
 					},
 					"response": []
 				},
@@ -254,16 +203,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/subject/18076474-49a3-4e2b-a361-0d3090590544",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"subject",
-								"18076474-49a3-4e2b-a361-0d3090590544"
-							]
-						}
+						"url": "{{base_url}}/subject/18076474-49a3-4e2b-a361-0d3090590544"
 					},
 					"response": []
 				},
@@ -289,16 +229,7 @@
 							"mode": "formdata",
 							"formdata": []
 						},
-						"url": {
-							"raw": "{{base_url}}/subject/9caa14ab-7a35-4f36-b6d6-fd3f27de7487",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"subject",
-								"9caa14ab-7a35-4f36-b6d6-fd3f27de7487"
-							]
-						}
+						"url": "{{base_url}}/subject/9caa14ab-7a35-4f36-b6d6-fd3f27de7487"
 					},
 					"response": []
 				}
@@ -322,15 +253,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/tag",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"tag"
-							]
-						}
+						"url": "{{base_url}}/tag"
 					},
 					"response": []
 				}
@@ -353,15 +276,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/post",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"post"
-							]
-						}
+						"url": "{{base_url}}/post"
 					},
 					"response": []
 				},
@@ -379,16 +294,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/post/176e3fd0-e8dc-4414-8e0e-62050ab734b8",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"post",
-								"176e3fd0-e8dc-4414-8e0e-62050ab734b8"
-							]
-						}
+						"url": "{{base_url}}/post/176e3fd0-e8dc-4414-8e0e-62050ab734b8"
 					},
 					"response": []
 				},
@@ -427,19 +333,51 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "find-post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/post/5c949026-5c3a-4e89-9809-4bb410a78b96"
+					},
+					"response": []
+				},
+				{
+					"name": "find-all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/post?page=1&limit=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"post"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
 	],
 	"auth": {
 		"type": "bearer",
-		"bearer": [
-			{
-				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0ZUBnbWFpbC5jb20iLCJpYXQiOjE3MjY1Mjg0NzIsImV4cCI6MTcyNjUzMjA3Mn0.TeN7W7VxMD6iLRMuHnwyfp69kA15qLhP3Ujcovi3s_s",
-				"type": "string"
-			}
-		]
+		"bearer": {
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0ZUBnbWFpbC5jb20iLCJpYXQiOjE3MjY3MDU1NTIsImV4cCI6MTcyNjcwOTE1Mn0.BRWHyAO_LZtu4XbvoFsbTXzZcLOmM2x8GMmaBmJHhqQ"
+		}
 	},
 	"event": [
 		{
