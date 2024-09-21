@@ -24,6 +24,20 @@ export class Tag implements ITag {
   })
   created_at?: Date
 
+  @Column({
+    name: 'updated_at',
+    type: 'timestamp without time zone',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  updated_at?: Date
+
+  @Column({
+    name: 'status',
+    type: 'timestamp without time zone',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  status?: boolean
+
   @ManyToMany(() => Post, (post) => post.tags)
   posts: Post[]
 }
