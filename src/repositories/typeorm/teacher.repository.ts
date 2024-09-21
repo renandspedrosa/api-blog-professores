@@ -16,6 +16,17 @@ export class TeacherRepository implements ITeacherRepository {
     return this.repository.save(teacher)
   }
 
+  async getAllTeachers(page: number, limit: number): Promise<ITeacher[]> {
+    console.log('page:', page)
+    console.log('number:', limit)
+
+    return this.repository.find({
+      where: { status: 1 },
+      skip: (page - 1) * limit,
+      take: limit,
+    })
+  }
+
   async update(teacherData: ITeacher): Promise<ITeacher> {
     const teacher = this.repository.create(teacherData)
     return this.repository.save(teacher)
