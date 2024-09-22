@@ -1,3 +1,13 @@
+name: Run Tests
+
+on:
+  push:  # Acionar em todos os commits
+    branches:
+      - '*'  # Qualquer branch
+  pull_request:  # Acionar em pull requests
+    branches:
+      - '*'  # Qualquer branch
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -6,13 +16,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18.
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm run test
+      - name: Set up
