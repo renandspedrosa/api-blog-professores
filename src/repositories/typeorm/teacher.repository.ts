@@ -31,4 +31,8 @@ export class TeacherRepository implements ITeacherRepository {
     const teacher = this.repository.create(teacherData)
     return this.repository.save(teacher)
   }
+
+  async delete(teacherId: number): Promise<void> {
+    await this.repository.update(teacherId, { status: 0 })
+  }
 }

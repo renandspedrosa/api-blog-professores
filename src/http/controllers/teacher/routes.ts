@@ -3,11 +3,13 @@ import { validateCreateTeacher } from '@/http/middlewares/teacher/validation-cre
 import { getAllTeachers } from '@/http/controllers/teacher/get-all-teachers'
 import { create } from '@/http/controllers/teacher/create'
 import { update } from '@/http/controllers/teacher/update'
+import { deleteTeacher } from './delete'
 
 const router = Router()
 
 router.get('/', getAllTeachers)
 router.post('/', validateCreateTeacher, create)
 router.put('/:id', update)
+router.delete('/:id', deleteTeacher)
 
 export default router
