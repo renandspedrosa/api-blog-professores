@@ -20,4 +20,4 @@ app.use('/post', validateJwt, postRouter)
 app.use('/subject', validateJwt, subjectRouter)
 app.use('/tag', validateJwt, tagRouter)
 
-export default app // Exportação correta
+export default app
