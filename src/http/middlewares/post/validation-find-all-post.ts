@@ -9,6 +9,7 @@ export function validationFindAllPost(
   const registerParamsSchema = z.object({
     page: z.coerce.number().default(1),
     limit: z.coerce.number().default(10),
+    tag: z.coerce.number().optional(),
   })
 
   try {

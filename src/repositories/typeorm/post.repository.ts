@@ -1,10 +1,8 @@
 import { IPostRepository } from '../post.repository.interface'
-import { Repository } from 'typeorm'
+import { FindManyOptions, FindOptionsWhere, Repository } from 'typeorm'
 import { Post } from '@/entities/post.entity'
-// import { Teacher } from '@/entities/teacher.entity'
 import { appDataSource } from '@/lib/typeorm/typeorm'
 import { IPost } from '@/entities/models/post.interface'
-// import { ITeacher } from '@/entities/models/teacher.interface'
 
 export class PostRepository implements IPostRepository {
   private repository: Repository<Post>
@@ -18,13 +16,25 @@ export class PostRepository implements IPostRepository {
     return this.repository.save(post)
   }
 
-  async findAll(page: number, limit: number): Promise<IPost[]> {
-    return this.repository.find({
+  async findAll(page: number, limit: number, tagId?: number): Promise<IPost[]> {
+    const queryOptions: FindManyOptions<IPost> = {
       relations: ['tags'],
-      where: { status: 1 },
       skip: (page - 1) * limit,
       take: limit,
-    })
+      order: {
+        created_at: 'DESC',
+      },
+    }
+
+    const whereConditions: FindOptionsWhere<IPost> = { status: 1 }
+
+    if (tagId) {
+      whereConditions.tags = { id: tagId }
+    }
+
+    queryOptions.where = whereConditions
+
+    return this.repository.find(queryOptions)
   }
 
   async findPostById(id: string): Promise<IPost | undefined> {
