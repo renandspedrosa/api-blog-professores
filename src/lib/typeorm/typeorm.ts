@@ -6,6 +6,7 @@ import { Tag } from '@/entities/tag.entity'
 import { User } from '@/entities/user.entity'
 import { Teacher } from '@/entities/teacher.entity'
 import { Post } from '@/entities/post.entity'
+import { AlterCommentsTable1726544526547 } from './migrations/1726544526547-AlterCommentsTable'
 
 export const appDataSource = new DataSource({
   type: 'postgres',
@@ -16,7 +17,10 @@ export const appDataSource = new DataSource({
   database: env.DATABASE_NAME,
   // entities: ['src/entities/**/*.entity.ts'],
   entities: [Subject, Tag, User, Teacher, Post],
-  migrations: [CreateTablesWithConstraints1725488490452],
+  migrations: [
+    CreateTablesWithConstraints1725488490452,
+    AlterCommentsTable1726544526547,
+  ],
   logging: env.NODE_ENV === 'development',
 })
 
