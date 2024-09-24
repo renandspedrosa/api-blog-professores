@@ -3,9 +3,9 @@ import { Request, Response } from 'express'
 
 export async function findAllPost(req: Request, res: Response) {
   try {
-    const { page, limit } = req.body
+    const { page, limit, tag } = req.body
     const findAllPostUseCase = makeFindAllPostUseCase()
-    const posts = await findAllPostUseCase.handler(page, limit)
+    const posts = await findAllPostUseCase.handler(page, limit, tag)
 
     return res.status(200).json(posts)
   } catch (error) {
