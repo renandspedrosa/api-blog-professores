@@ -7,7 +7,6 @@ import postRouter from '@/http/controllers/post/routes'
 import subjectRouter from '@/http/controllers/subject/routes'
 import tagRouter from '@/http/controllers/tag/routes'
 import { validateJwt } from './http/middlewares/jwt-validate'
-// import { generateJwt, validateJwt } from './http/middlewares/jwt-validate'
 // import { globalErrorHandler } from '@/utils/global-error-handler';
 
 const app = express()
