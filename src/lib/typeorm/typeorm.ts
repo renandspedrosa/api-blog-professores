@@ -7,6 +7,7 @@ import { User } from '@/entities/user.entity'
 import { Teacher } from '@/entities/teacher.entity'
 import { Post } from '@/entities/post.entity'
 import { AlterCommentsTable1726544526547 } from './migrations/1726544526547-AlterCommentsTable'
+import { AlterTableUsersToUniqueUsername1726795708879 } from './migrations/1726795708879-AlterTableUsersToUniqueUsername'
 
 export const appDataSource = new DataSource({
   type: 'postgres',
@@ -20,6 +21,7 @@ export const appDataSource = new DataSource({
   migrations: [
     CreateTablesWithConstraints1725488490452,
     AlterCommentsTable1726544526547,
+    AlterTableUsersToUniqueUsername1726795708879,
   ],
   logging: env.NODE_ENV === 'development',
 })
