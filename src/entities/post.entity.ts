@@ -24,7 +24,7 @@ export class Post implements IPost {
   @Column({
     name: 'title',
     type: 'varchar',
-    length: 255,
+    length: 10,
   })
   title: string
 
