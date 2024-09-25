@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 
-export function validateCreateUserWithUniqueUsername(
+export function validateCreateUserWithUniqueEmail(
   err: Error,
   req: Request,
   res: Response,

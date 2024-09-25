@@ -8,6 +8,7 @@ import { Teacher } from '@/entities/teacher.entity'
 import { Post } from '@/entities/post.entity'
 import { AlterCommentsTable1726544526547 } from './migrations/1726544526547-AlterCommentsTable'
 import { AlterTableUsersToUniqueUsername1726795708879 } from './migrations/1726795708879-AlterTableUsersToUniqueUsername'
+import { AlterTableUsersToChangeUsernameToEmail1727228921260 } from './migrations/1727228921260-AlterTableUsersToChangeUsernameToEmail'
 
 export const appDataSource = new DataSource({
   type: 'postgres',
@@ -22,6 +23,7 @@ export const appDataSource = new DataSource({
     CreateTablesWithConstraints1725488490452,
     AlterCommentsTable1726544526547,
     AlterTableUsersToUniqueUsername1726795708879,
+    AlterTableUsersToChangeUsernameToEmail1727228921260,
   ],
   logging: env.NODE_ENV === 'development',
 })

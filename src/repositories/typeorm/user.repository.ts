@@ -12,9 +12,9 @@ export class UserRepository implements IUserRepository {
     this.repository = appDataSource.getRepository(User)
   }
 
-  async findByUsername(username: string): Promise<IUser | undefined> {
+  async findByEmail(email: string): Promise<IUser | undefined> {
     const user = await this.repository.findOne({
-      where: { username },
+      where: { email },
     })
     return user ?? undefined
   }
