@@ -8,14 +8,15 @@ import { updatePost } from './update-post'
 import { findPost } from './find-post'
 import { findAllPost } from './find-all-post'
 import { validationFindAllPost } from '@/http/middlewares/post/validation-find-all-post'
+import { isTeacher } from '@/http/middlewares/teacher/is-teacher'
 
 const router = Router()
 
-router.post('/', validateCreatePost, create)
+router.post('/', isTeacher, validateCreatePost, create)
 router.get('/teacher/:teacherId', findPostByTeacher)
 router.get('/', validationFindAllPost, findAllPost)
-router.put('/:id', validationFindPost, updatePost)
+router.put('/:id', isTeacher, validationFindPost, updatePost)
 router.get('/:id', validationFindPost, findPost)
-router.delete('/:id', validationFindPost, deletePost)
+router.delete('/:id', isTeacher, validationFindPost, deletePost)
 
 export default router
