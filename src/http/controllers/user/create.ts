@@ -13,11 +13,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
 
     const user = await createUserUseCase.handler(userWithHashedPassword)
 
-    return user
-      ? res.status(201).json({ id: user?.id, email: user?.email })
-      : res.status(409).json({
-          message: 'E-mail allready exists. Try another one',
-        })
+    return res.status(201).json({ id: user?.id, email: user?.email })
   } catch (error) {
     next(error)
   }
