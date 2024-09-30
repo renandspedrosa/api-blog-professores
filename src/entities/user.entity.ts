@@ -10,11 +10,11 @@ export class User {
   id?: number
 
   @Column({
-    name: 'username',
+    name: 'email',
     type: 'varchar',
     length: 255,
   })
-  username: string
+  email: string
 
   @Column({
     name: 'password',
