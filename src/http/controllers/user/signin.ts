@@ -5,11 +5,11 @@ import { Request, Response, NextFunction } from 'express'
 
 export async function signin(req: Request, res: Response, next: NextFunction) {
   try {
-    const { username, password } = req.body
+    const { email, password } = req.body
 
     const signinUseCase = makeSigninUseCase()
 
-    const user = await signinUseCase.handler(username)
+    const user = await signinUseCase.handler(email)
 
     const doestPasswordMatch = await compare(password, user.password)
 
@@ -18,7 +18,7 @@ export async function signin(req: Request, res: Response, next: NextFunction) {
     }
     const plainUser = {
       id: user.id,
-      username: user.username,
+      email: user.email,
     }
     const token = generateJwt(plainUser)
     return res.status(200).json({ token })
