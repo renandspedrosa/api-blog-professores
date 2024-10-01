@@ -8,7 +8,7 @@ export class FindWithTeacherUseCase {
     this.userRepository = userRepository
   }
 
-  async handler(userId: number): Promise<(User & Teacher) | undefined> {
+  async handler(userId: number): Promise<(User & Teacher) | User | undefined> {
     const user = await this.userRepository.findWithTeacher(userId)
     // if (!user) throw new ResourceNotFoundError()
     return user

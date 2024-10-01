@@ -1,7 +1,7 @@
 import { Subject } from '@/entities/subject.entity'
 
 describe('Entity subject', () => {
-  it('deve criar um novo subject e definir seus valores', async () => {
+  it('It should create a new subject object and define its values', async () => {
     const newSubject = new Subject()
     newSubject.id = '1e5eaf1c-5c9c-4efb-9f80-5c10e99e76f4'
     newSubject.name = 'Test Subject'
