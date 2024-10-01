@@ -9,6 +9,7 @@ import { Post } from '@/entities/post.entity'
 import { AlterCommentsTable1726544526547 } from './migrations/1726544526547-AlterCommentsTable'
 import { AlterTableUsersToUniqueUsername1726795708879 } from './migrations/1726795708879-AlterTableUsersToUniqueUsername'
 import { AlterTableUsersToChangeUsernameToEmail1727228921260 } from './migrations/1727228921260-AlterTableUsersToChangeUsernameToEmail'
+import { DropTeachersUserIdIndex1727742920773 } from './migrations/1727742920773-DropTeachersUserIdIndex'
 
 export const appDataSource = new DataSource({
   type: 'postgres',
@@ -24,6 +25,7 @@ export const appDataSource = new DataSource({
     AlterCommentsTable1726544526547,
     AlterTableUsersToUniqueUsername1726795708879,
     AlterTableUsersToChangeUsernameToEmail1727228921260,
+    DropTeachersUserIdIndex1727742920773,
   ],
   logging: env.NODE_ENV === 'development',
 })
