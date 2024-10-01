@@ -24,10 +24,6 @@ export class TeacherRepository implements ITeacherRepository {
     })
   }
 
-  async findByIdUser(id: number): Promise<ITeacher | null> {
-    return this.repository.findOne({ where: { user_id: id, status: 1 } })
-  }
-
   async update(teacherData: ITeacher): Promise<ITeacher> {
     const teacher = this.repository.create(teacherData)
     return this.repository.save(teacher)
