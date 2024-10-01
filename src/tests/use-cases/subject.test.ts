@@ -19,7 +19,7 @@ const mockSubjects: ISubject[] = [
   { id: 'b8c5d3c5-6d5f-4f88-a1b3-4b6d90a8c7f0', name: 'Subject 2' },
 ]
 
-describe('Casos de Usos para a matéria', () => {
+describe('Use Cases for the Subject', () => {
   let createSubjectUseCase: CreateSubjectUseCase
   let findAllSubjectUseCase: FindAllSubjectUseCase
   let findSubjectUseCase: FindSubjectUseCase
@@ -32,7 +32,7 @@ describe('Casos de Usos para a matéria', () => {
     deleteSubjectUseCase = new DeleteSubjectUseCase(mockSubjectRepository)
   })
 
-  it('deve criar um novo subject usando o repositório', async () => {
+  it('It should create a new subject using the repository', async () => {
     const newSubject: ISubject = {
       id: '1e5eaf1c-5c9c-4efb-9f80-5c10e99e76f4',
       name: 'Test Subject',
@@ -45,7 +45,7 @@ describe('Casos de Usos para a matéria', () => {
     expect(result).toBe(newSubject)
   })
 
-  it('deve encontrar todos os subjects com paginação', async () => {
+  it('It should find all subjects with pagination', async () => {
     const page = 1
     const limit = 10
     mockSubjectRepository.findAll.mockResolvedValue(mockSubjects)
@@ -56,7 +56,7 @@ describe('Casos de Usos para a matéria', () => {
     expect(result).toEqual(mockSubjects)
   })
 
-  it('deve encontrar um subject pelo ID', async () => {
+  it('It should find a subject by its ID.', async () => {
     const subjectId = '1e5eaf1c-5c9c-4efb-9f80-5c10e99e76f4'
     mockSubjectRepository.findById.mockResolvedValue(mockSubjects[0])
 
@@ -66,7 +66,7 @@ describe('Casos de Usos para a matéria', () => {
     expect(result).toEqual(mockSubjects[0])
   })
 
-  it('deve deletar um subject pelo ID', async () => {
+  it('It should delete a subject by its ID', async () => {
     const subjectId = '1e5eaf1c-5c9c-4efb-9f80-5c10e99e76f4'
     mockSubjectRepository.delete.mockResolvedValue(undefined) // Simulando que o delete não retorna nada
 

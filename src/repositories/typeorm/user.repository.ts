@@ -12,9 +12,9 @@ export class UserRepository implements IUserRepository {
     this.repository = appDataSource.getRepository(User)
   }
 
-  async findByUsername(username: string): Promise<IUser | undefined> {
+  async findByEmail(email: string): Promise<IUser | undefined> {
     const user = await this.repository.findOne({
-      where: { username },
+      where: { email },
     })
     return user ?? undefined
   }
@@ -25,21 +25,23 @@ export class UserRepository implements IUserRepository {
 
   async findWithTeacher(
     userId: number,
-  ): Promise<(IUser & ITeacher) | undefined> {
-    const user = await this.repository.findOne({
-      where: { id: userId },
-      relations: ['teachers'],
-    })
+  ): Promise<(IUser & ITeacher) | IUser | undefined> {
+    const userWithTeacher = await this.repository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect(
+        'user.teachers',
+        'teacher',
+        'teacher.status = :status',
+        {
+          status: 1,
+        },
+      )
+      .where('user.id = :userId', { userId })
+      .getOne()
 
-    if (!user) {
+    if (!userWithTeacher) {
       return undefined
     }
-
-    const combinedResult: IUser & ITeacher = {
-      ...user,
-      name: user.teachers?.[0]?.name || '',
-    } as IUser & ITeacher
-
-    return combinedResult
+    return userWithTeacher
   }
 }
