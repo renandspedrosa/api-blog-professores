@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { ZodError, z } from 'zod'
 
-export function validationFindAllSubject(
+export function validationFindAll(
   req: Request,
   res: Response,
   next: NextFunction,
