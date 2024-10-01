@@ -15,7 +15,7 @@ app.use(express.json())
 
 app.use('/teacher', validateJwt, teacherRouter)
 app.use('/user', userRouter)
-app.use('/post', validateJwt, postRouter)
+app.use('/posts', validateJwt, postRouter)
 app.use('/subject', validateJwt, subjectRouter)
 app.use('/tag', validateJwt, tagRouter)
 
