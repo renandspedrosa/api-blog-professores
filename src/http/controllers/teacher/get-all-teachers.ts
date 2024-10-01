@@ -3,15 +3,10 @@ import { Request, Response } from 'express'
 
 export async function getAllTeachers(req: Request, res: Response) {
   try {
-    const { page, limit } = req.query
-    const pageNumber = Number(page)
-    const limitNumber = Number(limit)
+    const { page, limit } = req.body
 
     const findAllTeachersUseCase = makeGetAllTeachersUseCase()
-    const teachers = await findAllTeachersUseCase.handler(
-      pageNumber,
-      limitNumber,
-    )
+    const teachers = await findAllTeachersUseCase.handler(page, limit)
 
     return res.status(200).json(teachers)
   } catch (error) {

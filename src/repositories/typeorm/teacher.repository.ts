@@ -17,14 +17,15 @@ export class TeacherRepository implements ITeacherRepository {
   }
 
   async getAllTeachers(page: number, limit: number): Promise<ITeacher[]> {
-    console.log('page:', page)
-    console.log('number:', limit)
-
     return this.repository.find({
       where: { status: 1 },
       skip: (page - 1) * limit,
       take: limit,
     })
+  }
+
+  async findByIdUser(id: number): Promise<ITeacher | null> {
+    return this.repository.findOne({ where: { user_id: id, status: 1 } })
   }
 
   async update(teacherData: ITeacher): Promise<ITeacher> {
