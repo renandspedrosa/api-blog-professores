@@ -1,5 +1,5 @@
 import { IPostRepository } from '../post.repository.interface'
-import { FindManyOptions, FindOptionsWhere, Repository } from 'typeorm'
+import { FindManyOptions, FindOptionsWhere, Like, Repository } from 'typeorm'
 import { Post } from '@/entities/post.entity'
 import { appDataSource } from '@/lib/typeorm/typeorm'
 import { IPost } from '@/entities/models/post.interface'
@@ -59,6 +59,22 @@ export class PostRepository implements IPostRepository {
       relations: ['tags'],
       where: { teacher_id: teacherId, status: 1 },
       skip: offset,
+      take: limit,
+    })
+  }
+
+  async findPostByTextSearch(
+    text: string,
+    page: number,
+    limit: number,
+  ): Promise<IPost[]> {
+    return this.repository.find({
+      relations: ['tags'],
+      where: [
+        { content: Like(`%${text}%`), status: 1 },
+        { title: Like(`%${text}%`), status: 1 },
+      ],
+      skip: (page - 1) * limit,
       take: limit,
     })
   }
