@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "007afed8-9219-43ad-ba88-b1070b0a4c9a",
+		"_postman_id": "23010a5a-f2b8-4bfd-a7c1-fafe215a4447",
 		"name": "API Blog Professores",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "12044180"
@@ -66,7 +66,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"cpf\":\"42817521889\", \r\n    \"name\":\"renan\", \r\n    \"birth\":\"1994-05-06\", \r\n    \"email\":\"teste@teste.com\",\r\n    \"user_id\":\"1\"\r\n}\r\n",
+							"raw": "{\r\n    \"name\":\"renan\", \r\n    \"user_id\":\"2\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -74,6 +74,51 @@
 							}
 						},
 						"url": "{{base_url}}/teacher"
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/teacher"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"joao\", \r\n    \"user_id\":\"2\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/teacher/34"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/teacher/34"
 					},
 					"response": []
 				}
@@ -256,6 +301,24 @@
 						"url": "{{base_url}}/tag"
 					},
 					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"novidade\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/tag/1"
+					},
+					"response": []
 				}
 			]
 		},
@@ -269,14 +332,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"AAAAAAAAAAAAA\",\r\n    \"content\": \"conteúdo teste\",\r\n    \"teacher_id\": \"1\",\r\n    \"tags\":[\r\n        {\r\n            \"id\":\"1\",\r\n            \"name\":\"teste\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"title\": \"AAAAAAAAAAA\",\r\n    \"content\": \"EEEEEEEEEEE\",\r\n    \"teacher_id\": \"36\",\r\n    \"tags\":[\r\n        {\r\n            \"id\":\"1\",\r\n            \"name\":\"teste\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{base_url}}/post"
+						"url": "{{base_url}}/posts"
 					},
 					"response": []
 				},
@@ -294,7 +357,7 @@
 								}
 							}
 						},
-						"url": "{{base_url}}/post/176e3fd0-e8dc-4414-8e0e-62050ab734b8"
+						"url": "{{base_url}}/posts/176e3fd0-e8dc-4414-8e0e-62050ab734b8"
 					},
 					"response": []
 				},
@@ -311,14 +374,14 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{base_url}}/post/teacher/1?page=1&limit=2",
+							"raw": "{{base_url}}/posts/teacher/35?page=1&limit=2",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"post",
+								"posts",
 								"teacher",
-								"1"
+								"35"
 							],
 							"query": [
 								{
@@ -339,7 +402,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{base_url}}/post/5c949026-5c3a-4e89-9809-4bb410a78b96"
+						"url": "{{base_url}}/posts/5c949026-5c3a-4e89-9809-4bb410a78b96"
 					},
 					"response": []
 				},
@@ -349,12 +412,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/post?page=1&limit=2",
+							"raw": "{{base_url}}/posts?page=1&limit=2&tag=1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"post"
+								"posts"
 							],
 							"query": [
 								{
@@ -364,6 +427,42 @@
 								{
 									"key": "limit",
 									"value": "2"
+								},
+								{
+									"key": "tag",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-term",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/posts/search?page=1&limit=2&term=EEEEEEEE",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posts",
+								"search"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "term",
+									"value": "EEEEEEEE"
 								}
 							]
 						}
@@ -376,7 +475,7 @@
 	"auth": {
 		"type": "bearer",
 		"bearer": {
-			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0ZUBnbWFpbC5jb20iLCJpYXQiOjE3MjY3MDU1NTIsImV4cCI6MTcyNjcwOTE1Mn0.BRWHyAO_LZtu4XbvoFsbTXzZcLOmM2x8GMmaBmJHhqQ"
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0ZUBnbWFpbC5jb20iLCJpYXQiOjE3Mjc4MjkwODQsImV4cCI6MTcyNzgzMjY4NH0.RQGRMC5FmvJ18iBbS2pZ30dH9P3iZ2pTEMobiAL4hdQ"
 		}
 	},
 	"event": [

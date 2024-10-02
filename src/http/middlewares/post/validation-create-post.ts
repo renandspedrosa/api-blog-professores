@@ -1,7 +1,8 @@
+import { makeFindTeacherByIdUseCase } from '@/use-cases/factory/teacher/make-find-teacher-by-id-use-case'
 import { Request, Response, NextFunction } from 'express'
 import { ZodError, z } from 'zod'
 
-export function validateCreatePost(
+export async function validateCreatePost(
   req: Request,
   res: Response,
   next: NextFunction,
@@ -22,6 +23,12 @@ export function validateCreatePost(
 
   try {
     req.body = registerBodySchema.parse(req.body)
+    const { teacher_id } = req.body
+    const findWithTeacherUseCase = makeFindTeacherByIdUseCase()
+    const teacher = await findWithTeacherUseCase.handler(teacher_id)
+    if (!teacher) {
+      return res.status(404).json({ message: 'Teacher not found' })
+    }
     next()
   } catch (error) {
     if (error instanceof ZodError) {

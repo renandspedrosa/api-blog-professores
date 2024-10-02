@@ -9,12 +9,16 @@ import { findPost } from './find-post'
 import { findAllPost } from './find-all-post'
 import { validationFindAllPost } from '@/http/middlewares/post/validation-find-all-post'
 import { isTeacher } from '@/http/middlewares/teacher/is-teacher'
+import { findPostByTerm } from './find-post-by-term'
+import { validationFindByTerm } from '@/http/middlewares/post/validation-find-by-term'
+import { validationFindAll } from '@/http/middlewares/utils/validation-find-all'
 
 const router = Router()
 
 router.post('/', isTeacher, validateCreatePost, create)
-router.get('/teacher/:teacherId', findPostByTeacher)
+router.get('/teacher/:teacherId', validationFindAll, findPostByTeacher)
 router.get('/', validationFindAllPost, findAllPost)
+router.get('/search', validationFindByTerm, findPostByTerm)
 router.put('/:id', isTeacher, validationFindPost, updatePost)
 router.get('/:id', validationFindPost, findPost)
 router.delete('/:id', isTeacher, validationFindPost, deletePost)
