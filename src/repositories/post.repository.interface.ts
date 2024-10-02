@@ -9,6 +9,11 @@ export interface IPostRepository {
     limit: number,
   ): Promise<IPost[]>
   findPostById(id: string): Promise<IPost | undefined>
+  findPostByTextSearch(
+    text: string,
+    page: number,
+    limit: number,
+  ): Promise<IPost[]>
   updatePost(post: IPost): Promise<IPost | undefined>
   deletePost(id: string): Promise<void>
 }

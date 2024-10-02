@@ -7,13 +7,8 @@ export async function findPostByTeacher(req: Request, res: Response) {
     teacherId: z.coerce.number(),
   })
 
-  const registerQuerySchema = z.object({
-    page: z.coerce.number(),
-    limit: z.coerce.number(),
-  })
-
   const { teacherId } = registerParamsSchema.parse(req.params)
-  const { page, limit } = registerQuerySchema.parse(req.query)
+  const { page, limit } = req.body
 
   const findPostByTeacherUseCase = makeFindPostByTeacherUseCase()
 
