@@ -1,4 +1,5 @@
 import { ITeacher } from '@/entities/models/teacher.interface'
+import { IStudent } from '@/entities/models/student.interface'
 import { IUser } from '@/entities/models/user.interface'
 
 export interface IUserRepository {
@@ -7,4 +8,7 @@ export interface IUserRepository {
   ): Promise<(IUser & ITeacher) | IUser | undefined>
   findByEmail(email: string): Promise<IUser | undefined>
   create(user: IUser): Promise<IUser>
+  findWithStudent(
+      userId: number,
+  ): Promise<(IUser & IStudent) | IUser | undefined>
 }
