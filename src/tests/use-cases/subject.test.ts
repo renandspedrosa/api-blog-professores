@@ -4,6 +4,7 @@ import { CreateSubjectUseCase } from '@/use-cases/subject/create-subject'
 import { FindAllSubjectUseCase } from '@/use-cases/subject/find-all-subject'
 import { FindSubjectUseCase } from '@/use-cases/subject/find-subject'
 import { DeleteSubjectUseCase } from '@/use-cases/subject/delete-subject'
+import { UpdateSubjectUseCase } from '@/use-cases/subject/update-subject'
 
 // Mock do repositório
 const mockSubjectRepository: jest.Mocked<ISubjectRepository> = {
@@ -23,12 +24,14 @@ describe('Use Cases for the Subject', () => {
   let createSubjectUseCase: CreateSubjectUseCase
   let findAllSubjectUseCase: FindAllSubjectUseCase
   let findSubjectUseCase: FindSubjectUseCase
+  let updateSubjectUseCase: UpdateSubjectUseCase
   let deleteSubjectUseCase: DeleteSubjectUseCase
 
   beforeEach(() => {
     createSubjectUseCase = new CreateSubjectUseCase(mockSubjectRepository)
     findAllSubjectUseCase = new FindAllSubjectUseCase(mockSubjectRepository)
     findSubjectUseCase = new FindSubjectUseCase(mockSubjectRepository)
+    updateSubjectUseCase = new UpdateSubjectUseCase(mockSubjectRepository)
     deleteSubjectUseCase = new DeleteSubjectUseCase(mockSubjectRepository)
   })
 
@@ -64,6 +67,20 @@ describe('Use Cases for the Subject', () => {
 
     expect(mockSubjectRepository.findById).toHaveBeenCalledWith(subjectId)
     expect(result).toEqual(mockSubjects[0])
+  })
+
+  it('It should update a subject by its ID', async () => {
+    const subjectId = '1e5eaf1c-5c9c-4efb-9f80-5c10e99e76f4'
+    const updatedSubject: ISubject = {
+      id: subjectId,
+      name: 'Updated Subject',
+    }
+    mockSubjectRepository.update.mockResolvedValue(updatedSubject)
+
+    const result = await updateSubjectUseCase.handler(updatedSubject)
+
+    expect(mockSubjectRepository.update).toHaveBeenCalledWith(updatedSubject)
+    expect(result).toBe(updatedSubject)
   })
 
   it('It should delete a subject by its ID', async () => {
