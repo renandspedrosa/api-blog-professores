@@ -6,14 +6,12 @@ import {
   CreateDateColumn,
   ManyToOne,
   JoinColumn,
-  OneToMany,
 } from 'typeorm'
 import { User } from './user.entity'
 import { IStudent } from './models/student.interface'
-import { Post } from './post.entity'
 
 @Entity({
-  name: 'teachers',
+  name: 'students',
 })
 export class Student implements IStudent {
   @PrimaryGeneratedColumn({
@@ -64,5 +62,4 @@ export class Student implements IStudent {
   })
   @JoinColumn({ name: 'user_id' })
   user?: User
-
 }

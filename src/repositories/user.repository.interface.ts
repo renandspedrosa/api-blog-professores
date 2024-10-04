@@ -9,6 +9,6 @@ export interface IUserRepository {
   findByEmail(email: string): Promise<IUser | undefined>
   create(user: IUser): Promise<IUser>
   findWithStudent(
-      userId: number,
+    userId: number,
   ): Promise<(IUser & IStudent) | IUser | undefined>
 }
