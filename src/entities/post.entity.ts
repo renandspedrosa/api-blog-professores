@@ -11,6 +11,8 @@ import { IPost } from './models/post.interface'
 import { ITag } from './models/tags.interface'
 import { Tag } from './tag.entity'
 import { Teacher } from './teacher.entity'
+import { Comment } from './comment.entity'
+import { IComment } from './models/comment.interface'
 
 @Entity({
   name: 'posts',
@@ -72,6 +74,22 @@ export class Post implements IPost {
     },
   })
   tags?: ITag[] | undefined
+
+  @ManyToMany(() => Comment, {
+    cascade: true,
+  })
+  @JoinTable({
+    name: 'posts_comments',
+    joinColumn: {
+      name: 'post_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'comment_id',
+      referencedColumnName: 'id',
+    },
+  })
+  comments?: IComment[] | undefined
 
   @ManyToOne(() => Teacher, (teacher) => teacher.posts)
   @JoinColumn({ name: 'teacher_id' })
