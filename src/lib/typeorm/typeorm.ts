@@ -10,6 +10,7 @@ import { AlterCommentsTable1726544526547 } from './migrations/1726544526547-Alte
 import { AlterTableUsersToUniqueUsername1726795708879 } from './migrations/1726795708879-AlterTableUsersToUniqueUsername'
 import { AlterTableUsersToChangeUsernameToEmail1727228921260 } from './migrations/1727228921260-AlterTableUsersToChangeUsernameToEmail'
 import { DropTeachersUserIdIndex1727742920773 } from './migrations/1727742920773-DropTeachersUserIdIndex'
+import { Student } from '@/entities/student.entity'
 
 export const appDataSource = new DataSource({
   type: 'postgres',
@@ -19,7 +20,7 @@ export const appDataSource = new DataSource({
   password: env.DATABASE_PASSWORD,
   database: env.DATABASE_NAME,
   // entities: ['src/entities/**/*.entity.ts'],
-  entities: [Subject, Tag, User, Teacher, Post],
+  entities: [Subject, Tag, User, Teacher, Post, Student],
   migrations: [
     CreateTablesWithConstraints1725488490452,
     AlterCommentsTable1726544526547,

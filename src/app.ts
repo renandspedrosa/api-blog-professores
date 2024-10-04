@@ -7,6 +7,7 @@ import postRouter from '@/http/controllers/post/routes'
 import commentsRouter from '@/http/controllers/comments/routes'
 import subjectRouter from '@/http/controllers/subject/routes'
 import tagRouter from '@/http/controllers/tag/routes'
+import studentRoute from '@/http/controllers/student/routes'
 import { validateJwt } from './http/middlewares/jwt-validate'
 import errorMiddleware from './global/error-midleware'
 // import { globalErrorHandler } from '@/utils/global-error-handler';
@@ -21,6 +22,7 @@ app.use('/posts', validateJwt, postRouter)
 app.use('/comments', validateJwt, commentsRouter)
 app.use('/subject', validateJwt, subjectRouter)
 app.use('/tag', validateJwt, tagRouter)
+app.use('/student', validateJwt, studentRoute)
 
 app.use(errorMiddleware)
 
