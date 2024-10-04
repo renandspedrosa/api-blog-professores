@@ -1,6 +1,9 @@
 # Define a imagem base
 FROM node:18-slim
 
+# Instala o cliente do PostgreSQL
+RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
+
 # Define o diretório de trabalho
 WORKDIR /app
 
@@ -13,9 +16,11 @@ RUN npm install
 # Copia o restante dos arquivos
 COPY . .
 
-# Executa o comando de build
-# RUN npm run build
+# Executa o build da aplicação
+RUN npm run build
 
+# Copia o script de espera para o container
+COPY wait-for-postgres.sh .
 
-# Inicia a aplicação
-CMD ["npm", "run", "start:dev"]
+# Inicia a aplicação e realiza as migrações
+CMD ["sh", "-c", "./wait-for-postgres.sh && npm run migrate:prod && npm run start"]

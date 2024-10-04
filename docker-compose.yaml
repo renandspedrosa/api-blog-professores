@@ -17,20 +17,23 @@ services:
       - app-network
     restart: unless-stopped
 
-  api:
-    build: 
-      dockerfile: Dockerfile
-    container_name: api-blog
-    restart: always
-    volumes:
-      - ./:/app
-      - /app/node_modules
-    ports:
-      - "${PORT}:${PORT}" 
-    networks:
-      - app-network
-    depends_on:
-      - postgres
+  # alterar o DATABASE_HOST=postgres do env para executar a api em modo de container para produção
+  # api:
+  #   build: 
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: api-blog
+  #   restart: always
+  #   ports:
+  #     - "${PORT}:${PORT}" 
+  #   networks:
+  #     - app-network
+  #   depends_on:
+  #     - postgres
+  #   environment:
+  #     DATABASE_USER: ${DATABASE_USER}
+  #     DATABASE_HOST: ${DATABASE_HOST}
+  #     DATABASE_PORT: ${DATABASE_PORT}
 
 networks:
   app-network: 
