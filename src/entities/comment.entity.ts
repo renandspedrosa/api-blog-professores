@@ -1,4 +1,4 @@
-import { Column, PrimaryGeneratedColumn, Entity, ManyToMany } from 'typeorm'
+import { Column, PrimaryGeneratedColumn, Entity, ManyToOne } from 'typeorm'
 import { Post } from './post.entity'
 import { IComment } from './models/comment.interface'
 
@@ -51,6 +51,6 @@ export class Comment implements IComment {
   })
   user_id?: number | undefined
 
-  @ManyToMany(() => Post, (post) => post.comments)
-  posts: Post[]
+  @ManyToOne(() => Post, (post) => post.comments)
+  post: Post
 }

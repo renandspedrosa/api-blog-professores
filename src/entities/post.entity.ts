@@ -5,13 +5,15 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { IPost } from './models/post.interface'
 import { ITag } from './models/tags.interface'
 import { Tag } from './tag.entity'
+import { ITeacher } from './models/teacher.interface'
 import { Teacher } from './teacher.entity'
-import { Comment } from './comment.entity'
+import { Comment } from '@/entities/comment.entity'
 import { IComment } from './models/comment.interface'
 
 @Entity({
@@ -75,11 +77,9 @@ export class Post implements IPost {
   })
   tags?: ITag[] | undefined
 
-  @ManyToMany(() => Comment, {
-    cascade: true,
-  })
+  @OneToMany(() => Comment, (comment) => comment, { cascade: true })
   @JoinTable({
-    name: 'posts_comments',
+    name: 'post_comments',
     joinColumn: {
       name: 'post_id',
       referencedColumnName: 'id',
@@ -89,11 +89,11 @@ export class Post implements IPost {
       referencedColumnName: 'id',
     },
   })
-  comments?: IComment[] | undefined
+  comments?: IComment[] | []
 
   @ManyToOne(() => Teacher, (teacher) => teacher.posts)
   @JoinColumn({ name: 'teacher_id' })
-  teacher: Teacher
+  teacher: ITeacher
 
   @Column({ name: 'teacher_id', type: 'integer' })
   teacher_id: number
