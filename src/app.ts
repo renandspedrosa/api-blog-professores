@@ -13,7 +13,7 @@ const app = express()
 
 app.use(express.json())
 
-app.use('/teacher', validateJwt, teacherRouter)
+app.use('/teacher', teacherRouter)
 app.use('/user', userRouter)
 app.use('/post', validateJwt, postRouter)
 app.use('/subject', validateJwt, subjectRouter)

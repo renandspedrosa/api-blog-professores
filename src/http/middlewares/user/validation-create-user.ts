@@ -20,7 +20,7 @@ export function validateCreateUser(
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed',
+        message: 'Validation failed for creare User',
         errors: error.format(),
       })
     }

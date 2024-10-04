@@ -8,7 +8,8 @@ export function validateCreateTeacher(
 ) {
   const registerBodySchema = z.object({
     name: z.string(),
-    user_id: z.coerce.number(),
+    email: z.string(),
+    password: z.string(),
   })
 
   try {
@@ -17,7 +18,7 @@ export function validateCreateTeacher(
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed',
+        message: 'Validation failed for create Teacher',
         errors: error.format(),
       })
     }
