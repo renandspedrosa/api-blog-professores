@@ -6,14 +6,56 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: ${{ secrets.DATABASE_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U ${{ secrets.DATABASE_USER }}"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
     - uses: actions/checkout@v3
+
+    # Carregar as variáveis de ambiente do .env
+    - name: Load environment variables from .env
+      uses: natemoo-re/dotenv-action@v2
+      with:
+        path: .env  # Certifique-se de que o arquivo .env esteja no repositório
 
     - name: Using Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 18.
-    - name : test
+        node-version: '18'
+
+    - name: Wait for PostgreSQL to be ready
       run: |
-        npm install
-        npm run test
+        for i in {30..0}; do
+          if pg_isready -h ${{ env.DATABASE_HOST_ACTION }} -p ${{ env.DATABASE_PORT }} -U ${{ env.DATABASE_USER }}; then
+            break
+          fi
+          echo 'Postgres is unavailable - sleeping'
+          sleep 1
+        done
+        echo 'Postgres is up - continuing'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm run test
+
+    # Usar variáveis do arquivo .env no ambiente
+    env:
+      DATABASE_HOST: ${{ env.DATABASE_HOST_ACTION }}
+      DATABASE_PORT: ${{ env.DATABASE_PORT }}
+      DATABASE_USER: ${{ env.DATABASE_USER }}
+      DATABASE_PASSWORD: ${{ env.DATABASE_PASSWORD }}
+      DATABASE_NAME: ${{ env.DATABASE_NAME }}
