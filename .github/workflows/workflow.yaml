@@ -55,7 +55,11 @@ jobs:
       run: npm install
 
     - name: Run migrate
+      env:
+          POSTGRES_HOST: localhost
       run: npm run migrate
 
     - name: Run tests
+      env:
+          POSTGRES_HOST: localhost
       run: npm run test
