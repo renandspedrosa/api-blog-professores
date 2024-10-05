@@ -47,6 +47,8 @@ jobs:
       run: |
         if [ -f ../../.env ]; then
           export $(cat ../../.env | xargs)
+        else
+          echo "File ../../.env not found!"
         fi
 
     - name: Run tests
