@@ -51,13 +51,16 @@ jobs:
         done
         pg_isready -h localhost -p 5432 -U user || exit 1
 
-    - name: Debug PostgreSQL environment variables
-      run: |
-        echo "Printing PostgreSQL-related environment variables"
-        printenv | grep POSTGRES
+    # - name: Debug PostgreSQL environment variables
+    #   run: |
+    #     echo "Printing PostgreSQL-related environment variables"
+    #     printenv | grep POSTGRES
 
     - name: Install dependencies
       run: npm install
+
+    - name: Run migrate
+      run: npm run migrate
 
     - name: Run tests
       run: npm run test
