@@ -1,6 +1,7 @@
 name: testing code
 
-on: pull_request
+on:
+  pull_request
 
 jobs:
   test:
@@ -10,13 +11,13 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER: ${{ secrets.DATABASE_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: 123456
+          POSTGRES_DB: fiap
         ports:
           - 5432:5432
         options: >-
-          --health-cmd="pg_isready -U ${{ secrets.DATABASE_USER }}"
+          --health-cmd="pg_isready -U user"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -24,38 +25,36 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    # Carregar as variáveis de ambiente do .env
-    - name: Load environment variables from .env
-      uses: natemoo-re/dotenv-action@v2
-      with:
-        path: .env  # Certifique-se de que o arquivo .env está presente no repositório
-
-    - name: Using Node.js
+    - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
         node-version: '18'
 
+    - name: Copy .env.workdir to .env if .env in workflows
+      run: |
+          cp .env.workdir .env
+
     - name: Wait for PostgreSQL to be ready
       run: |
-        for i in {30..0}; do
-          if pg_isready -h postgres -p ${{ secrets.DATABASE_PORT }} -U ${{ secrets.DATABASE_USER }}; then
+        for i in {120..0}; do
+          if pg_isready -h localhost -p 5432 -U user; then
+            echo "Postgres is up - continuing"
             break
           fi
           echo 'Postgres is unavailable - sleeping'
-          sleep 1
+          sleep 5
         done
-        echo 'Postgres is up - continuing'
+        pg_isready -h localhost -p 5432 -U user || exit 1
 
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: npm run test
+    - name: Run migrate
+      env:
+          POSTGRES_HOST: localhost
+      run: npm run migrate
 
-    # Definindo variáveis de ambiente
-    env:
-      DATABASE_HOST: postgres  # Nome do serviço do PostgreSQL
-      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}  # Porta do banco de dados
-      DATABASE_USER: ${{ secrets.DATABASE_USER }}  # Usuário do banco de dados
-      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}  # Senha do banco de dados
-      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}  # Nome do banco de dados
+    - name: Run tests
+      env:
+          POSTGRES_HOST: localhost
+      run: npm run test
