@@ -49,15 +49,12 @@ jobs:
           echo 'Postgres is unavailable - sleeping'
           sleep 5
         done
-        # Verificar novamente após a espera
         pg_isready -h localhost -p 5432 -U user || exit 1
 
-    - name: Debug environment variables
+    - name: Debug PostgreSQL environment variables
       run: |
-        echo "Printing environment variables related to the database"
-        printenv | grep DATABASE
-        echo "Checking PostgreSQL availability"
-        pg_isready -h localhost -p 5432 -U user
+        echo "Printing PostgreSQL-related environment variables"
+        printenv | grep POSTGRES
 
     - name: Install dependencies
       run: npm install
