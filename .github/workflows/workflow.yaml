@@ -10,13 +10,13 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER: ${{ secrets.DATABASE_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: 123456
+          POSTGRES_DB: fiap
         ports:
-          - ${{ secrets.DATABASE_PORT }}:${{ secrets.DATABASE_PORT }}
+          - 5432:5432
         options: >-
-          --health-cmd="pg_isready -U ${{ secrets.DATABASE_USER }}"
+          --health-cmd="pg_isready -U user"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -38,7 +38,7 @@ jobs:
     - name: Wait for PostgreSQL to be ready
       run: |
         for i in {30..0}; do
-          if pg_isready -h postgres -p ${{ secrets.DATABASE_PORT }} -U ${{ secrets.DATABASE_USER }}; then
+          if pg_isready -h postgres -p 5432 -U user; then
             break
           fi
           echo 'Postgres is unavailable - sleeping'
@@ -55,7 +55,7 @@ jobs:
     # Definindo variáveis de ambiente
     env:
       DATABASE_HOST: postgres  # Nome do serviço do PostgreSQL
-      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}  # Porta do banco de dados
-      DATABASE_USER: ${{ secrets.DATABASE_USER }}  # Usuário do banco de dados
-      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}  # Senha do banco de dados
-      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}  # Nome do banco de dados
+      DATABASE_PORT: 5432  # Porta do banco de dados
+      DATABASE_USER: user  # Usuário do banco de dados
+      DATABASE_PASSWORD: 123456  # Senha do banco de dados
+      DATABASE_NAME: fiap  # Nome do banco de dados
