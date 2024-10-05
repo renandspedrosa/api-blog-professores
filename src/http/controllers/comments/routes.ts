@@ -5,7 +5,7 @@ import { deleteComment } from './delete-comment'
 
 const router = Router()
 
-router.post('/', create)
+router.post('/:post_id', create)
 router.put('/:id', update)
 router.delete('/:id', deleteComment)
 

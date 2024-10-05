@@ -1,4 +1,10 @@
-import { Column, PrimaryGeneratedColumn, Entity, ManyToOne } from 'typeorm'
+import {
+  Column,
+  PrimaryGeneratedColumn,
+  Entity,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm'
 import { Post } from './post.entity'
 import { IComment } from './models/comment.interface'
 
@@ -6,16 +12,14 @@ import { IComment } from './models/comment.interface'
   name: 'comments',
 })
 export class Comment implements IComment {
-  @PrimaryGeneratedColumn('increment', {
+  @PrimaryGeneratedColumn('uuid', {
     name: 'id',
   })
   id?: string | undefined
 
-  @Column({
-    name: 'post_id',
-    type: 'varchar',
-  })
-  post_id: string
+  @ManyToOne(() => Post, (post) => post.comments)
+  @JoinColumn({ name: 'post_id' })
+  post: Post
 
   @Column({
     name: 'content',
@@ -50,7 +54,4 @@ export class Comment implements IComment {
     type: 'int',
   })
   user_id?: number | undefined
-
-  @ManyToOne(() => Post, (post) => post.comments)
-  post: Post
 }
