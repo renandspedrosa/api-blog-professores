@@ -24,12 +24,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    # Carregar as variáveis de ambiente do .env
-    - name: Load environment variables from .env
-      uses: natemoo-re/dotenv-action@v2
-      with:
-        path: .env  # Certifique-se de que o arquivo .env está presente no repositório
-
     - name: Using Node.js
       uses: actions/setup-node@v2
       with:
@@ -51,11 +45,3 @@ jobs:
 
     - name: Run tests
       run: npm run test
-
-    # Definindo variáveis de ambiente
-    env:
-      DATABASE_HOST: postgres  # Nome do serviço do PostgreSQL
-      DATABASE_PORT: 5432  # Porta do banco de dados
-      DATABASE_USER: user  # Usuário do banco de dados
-      DATABASE_PASSWORD: 123456  # Senha do banco de dados
-      DATABASE_NAME: fiap  # Nome do banco de dados
