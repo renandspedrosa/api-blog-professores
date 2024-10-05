@@ -28,7 +28,7 @@ jobs:
     - name: Load environment variables from .env
       uses: natemoo-re/dotenv-action@v2
       with:
-        path: .env  # Certifique-se de que o arquivo .env esteja no repositório
+        path: .env  # Certifique-se de que o arquivo .env está presente no repositório
 
     - name: Using Node.js
       uses: actions/setup-node@v2
@@ -38,7 +38,7 @@ jobs:
     - name: Wait for PostgreSQL to be ready
       run: |
         for i in {30..0}; do
-          if pg_isready -h ${{ env.DATABASE_HOST_ACTION }} -p ${{ env.DATABASE_PORT }} -U ${{ env.DATABASE_USER }}; then
+          if pg_isready -h postgres -p ${{ secrets.DATABASE_PORT }} -U ${{ secrets.DATABASE_USER }}; then
             break
           fi
           echo 'Postgres is unavailable - sleeping'
@@ -52,10 +52,10 @@ jobs:
     - name: Run tests
       run: npm run test
 
-    # Usar variáveis do arquivo .env no ambiente
+    # Definindo variáveis de ambiente
     env:
-      DATABASE_HOST: ${{ env.DATABASE_HOST_ACTION }}
-      DATABASE_PORT: ${{ env.DATABASE_PORT }}
-      DATABASE_USER: ${{ env.DATABASE_USER }}
-      DATABASE_PASSWORD: ${{ env.DATABASE_PASSWORD }}
-      DATABASE_NAME: ${{ env.DATABASE_NAME }}
+      DATABASE_HOST: postgres  # Nome do serviço do PostgreSQL
+      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}  # Porta do banco de dados
+      DATABASE_USER: ${{ secrets.DATABASE_USER }}  # Usuário do banco de dados
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}  # Senha do banco de dados
+      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}  # Nome do banco de dados
