@@ -39,45 +39,28 @@ jobs:
           echo ".env already exists"
         fi
 
-    - name: Copy .env.example to .env if .env in project
-      run: |
-        if [ ! -f .env ]; then
-          cp ../../.env.example ../../.env
-          echo "../../.env created from ../../.env.example"
-        else
-          echo "../../.env already exists"
-        fi
-
     - name: Wait for PostgreSQL to be ready
       run: |
-        for i in {60..0}; do
-          if pg_isready -h postgres -p 5432 -U user; then
+        for i in {120..0}; do
+          if pg_isready -h localhost -p 5432 -U user; then
             echo "Postgres is up - continuing"
             break
           fi
           echo 'Postgres is unavailable - sleeping'
-          sleep 1
+          sleep 5
         done
-        sleep 5
-        pg_isready -h postgres -p 5432 -U user
+        # Verificar novamente após a espera
+        pg_isready -h localhost -p 5432 -U user || exit 1
 
     - name: Debug environment variables
       run: |
         echo "Printing environment variables related to the database"
         printenv | grep DATABASE
         echo "Checking PostgreSQL availability"
-        pg_isready -h postgres -p 5432 -U user
+        pg_isready -h localhost -p 5432 -U user
 
     - name: Install dependencies
       run: npm install
 
     - name: Run tests
       run: npm run test
-
-      env:
-        DATABASE_HOST: postgres
-        DATABASE_PORT: 5432
-        DATABASE_USER: user
-        DATABASE_PASSWORD: 123456
-        DATABASE_NAME: fiap
-        JWT_SECRET: secreto
