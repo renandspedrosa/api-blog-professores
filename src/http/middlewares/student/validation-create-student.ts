@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from 'express'
 import { ZodError, z } from 'zod'
 
-export function validateCreateSubject(
+export function validateCreateStudent(
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
   const registerBodySchema = z.object({
     name: z.string(),
-    status: z.number().optional().default(1),
+    user_id: z.coerce.number(),
   })
 
   try {
