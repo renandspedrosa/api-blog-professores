@@ -1,7 +1,11 @@
 import { makeFindAllPostUseCase } from '@/use-cases/factory/post/make-find-all-post-use-case'
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 
-export async function findAllPost(req: Request, res: Response) {
+export async function findAllPost(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
     const { page, limit, tag } = req.body
     const findAllPostUseCase = makeFindAllPostUseCase()
@@ -12,13 +16,8 @@ export async function findAllPost(req: Request, res: Response) {
     if (error instanceof Error) {
       if (error.message === 'Post not found') {
         return res.status(404).json({})
-      } else {
-        console.error('Unexpected error:', error)
-        return res.status(500).json({ message: 'An unexpected error occurred' })
       }
-    } else {
-      console.error('Unexpected error type:', error)
-      return res.status(500).json({ message: 'An unexpected error occurred' })
     }
+    next(error)
   }
 }

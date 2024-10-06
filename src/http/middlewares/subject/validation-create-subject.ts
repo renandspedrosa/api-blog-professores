@@ -8,8 +8,7 @@ export function validateCreateSubject(
 ) {
   const registerBodySchema = z.object({
     name: z.string(),
-    email: z.string().email(),
-    password: z.string(),
+    status: z.number().optional().default(1),
   })
 
   try {
