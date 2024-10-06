@@ -16,6 +16,27 @@ export class CommentRepository implements ICommentRepository {
     return this.repository.save(newComment)
   }
 
+  async getAllComments(page: number, limit: number): Promise<IComment[]> {
+    return this.repository.find({
+      where: { status: 1 },
+      skip: (page - 1) * limit,
+      take: limit,
+    })
+  }
+
+  async getById(commentId: string): Promise<IComment | null> {
+    const comment = await this.repository.findOne({
+      where: { id: commentId, status: 1 },
+    })
+    return comment || null
+  }
+
+  getCommentsByPostId(post_id: string): Promise<IComment[]> {
+    return this.repository.find({
+      where: { post_id, status: 1 },
+    })
+  }
+
   async update(comment: IComment): Promise<IComment> {
     const updatedComment = {
       ...comment,
