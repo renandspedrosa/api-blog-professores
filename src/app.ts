@@ -15,12 +15,12 @@ const app = express()
 
 app.use(express.json())
 
-app.use('/teacher', validateJwt, teacherRouter)
+app.use('/teacher', teacherRouter)
 app.use('/user', userRouter)
 app.use('/posts', validateJwt, postRouter)
 app.use('/subject', validateJwt, subjectRouter)
 app.use('/tag', validateJwt, tagRouter)
-app.use('/student', validateJwt, studentRoute)
+app.use('/student', studentRoute)
 
 app.use(errorMiddleware)
 

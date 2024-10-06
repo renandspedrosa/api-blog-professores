@@ -24,6 +24,13 @@ export class User {
   })
   password: string
 
+  @Column({
+    name: 'name',
+    type: 'varchar',
+    length: 100,
+  })
+  name: string
+
   @OneToMany(() => Teacher, (teacher) => teacher.user)
   teachers?: Teacher[]
 
