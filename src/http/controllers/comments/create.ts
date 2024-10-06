@@ -6,13 +6,12 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     const createCommentUseCase = makeCreateCommentUseCase()
     const { post_id } = req.params
     const { content, user_id } = req.body
-    const commentData = {
+    const newComment = await createCommentUseCase.handler({
       post_id,
       content,
       user_id,
-    }
-    await createCommentUseCase.handler(commentData)
-    return res.status(201).json(commentData)
+    })
+    return res.status(201).json(newComment)
   } catch (error) {
     next(error)
   }
