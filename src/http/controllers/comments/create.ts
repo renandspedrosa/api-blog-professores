@@ -4,15 +4,15 @@ import { makeCreateCommentUseCase } from '@/use-cases/factory/comment/create-com
 export async function create(req: Request, res: Response, next: NextFunction) {
   try {
     const createCommentUseCase = makeCreateCommentUseCase()
-    const { postId } = req.params
+    const { post_id } = req.params
     const { content, user_id } = req.body
-
-    const newComment = await createCommentUseCase.handler({
-      post_id: postId as string,
+    const commentData = {
+      post_id,
       content,
       user_id,
-    })
-    return res.status(201).json(newComment)
+    }
+    await createCommentUseCase.handler(commentData)
+    return res.status(201).json(commentData)
   } catch (error) {
     next(error)
   }

@@ -22,6 +22,12 @@ export class Comment implements IComment {
   post: Post
 
   @Column({
+    name: 'post_id',
+    type: 'uuid',
+  })
+  post_id: string
+
+  @Column({
     name: 'content',
     type: 'text',
   })
@@ -53,5 +59,5 @@ export class Comment implements IComment {
     name: 'user_id',
     type: 'int',
   })
-  user_id?: number | undefined
+  user_id: number
 }

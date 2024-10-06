@@ -11,9 +11,9 @@ export class CommentRepository implements ICommentRepository {
     this.repository = appDataSource.getRepository(Comment)
   }
 
-  async create(commentData: IComment): Promise<void> {
+  async create(commentData: IComment): Promise<IComment | undefined> {
     const newComment = this.repository.create(commentData)
-    await this.repository.save(newComment)
+    return this.repository.save(newComment)
   }
 
   async update(comment: IComment): Promise<IComment> {
