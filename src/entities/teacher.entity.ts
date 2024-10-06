@@ -22,13 +22,6 @@ export class Teacher implements ITeacher {
   id?: number
 
   @Column({
-    name: 'name',
-    type: 'varchar',
-    length: 100,
-  })
-  name: string
-
-  @Column({
     name: 'user_id',
     type: 'int',
     nullable: true,

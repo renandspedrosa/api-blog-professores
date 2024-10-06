@@ -7,6 +7,7 @@ export function validateCreateUser(
   next: NextFunction,
 ) {
   const registerBodySchema = z.object({
+    name: z.string(),
     email: z
       .string()
       .min(1, 'Email is required')
