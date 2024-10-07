@@ -1,7 +1,11 @@
 import { makeGetAllStudentsUseCase } from '@/use-cases/factory/student/make-get-all-students-use-case'
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 
-export async function getAllStudents(req: Request, res: Response) {
+export async function getAllStudents(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
     const { page, limit } = req.body
 
@@ -12,14 +16,9 @@ export async function getAllStudents(req: Request, res: Response) {
   } catch (error) {
     if (error instanceof Error) {
       if (error.message === 'student not found') {
-        return res.status(404).json({})
-      } else {
-        console.error('Unexpected error:', error)
-        return res.status(500).json({ message: 'An unexpected error occurred' })
+        return res.status(404).json([])
       }
-    } else {
-      console.error('Unexpected error type:', error)
-      return res.status(500).json({ message: 'An unexpected error occurred' })
     }
+    next(error)
   }
 }
