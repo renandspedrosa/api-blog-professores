@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { ISubject } from './models/subject.interface'
+import { Teacher } from './teacher.entity'
 
 @Entity({
   name: 'subjects',
@@ -39,4 +40,7 @@ export class Subject implements ISubject {
     nullable: true,
   })
   updated_at?: Date | null
+
+  @ManyToMany(() => Teacher, (teacher) => teacher.subjects)
+  teachers: Teacher[]
 }

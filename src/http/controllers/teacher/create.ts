@@ -5,7 +5,7 @@ import { Request, Response, NextFunction } from 'express'
 
 export async function create(req: Request, res: Response, next: NextFunction) {
   try {
-    const { name, email, password } = req.body
+    const { name, email, password, subjects } = req.body
 
     const hashedPassword = await hash(password, 8)
     const userWithHashedPassword = { name, email, password: hashedPassword }
@@ -14,8 +14,10 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     const newUser = await createUserUseCase.handler(userWithHashedPassword)
 
     const createTeacherUseCase = makeCreateTeacherUseCase()
+
     const teacher = await createTeacherUseCase.handler({
       user_id: Number(newUser.id),
+      subjects,
     })
 
     return res.status(201).json(teacher)
