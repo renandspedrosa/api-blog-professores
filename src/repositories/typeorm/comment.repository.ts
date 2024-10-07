@@ -24,15 +24,15 @@ export class CommentRepository implements ICommentRepository {
     })
   }
 
-  async getById(commentId: string): Promise<IComment | null> {
+  async getById(id: string): Promise<IComment | null> {
     return this.repository.findOne({
-      where: { id: commentId, status: 1 },
+      where: { id, status: 1 },
     })
   }
 
   getCommentsByPostId(post_id: string): Promise<IComment[]> {
     return this.repository.find({
-      where: { post_id, status: 1 },
+      where: { post_id },
     })
   }
 

@@ -3,12 +3,15 @@ import { makeGetAllCommentsUseCase } from '@/use-cases/factory/comment/get-all-c
 
 export async function getAll(req: Request, res: Response, next: NextFunction) {
   try {
-    const { page, limit } = req.body
+    const { page, limit } = req.query
 
     const createCommentUseCase = makeGetAllCommentsUseCase()
-    const newComment = await createCommentUseCase.handler(page, limit)
+    const comments = await createCommentUseCase.handler(
+      Number(page),
+      Number(limit),
+    )
 
-    return res.status(200).json(newComment)
+    return res.status(200).json(comments)
   } catch (error) {
     next(error)
   }
