@@ -28,11 +28,6 @@ export class TeacherRepository implements ITeacherRepository {
     return this.repository.findOne({ where: { id: teacherId, status: 1 } })
   }
 
-  async update(teacherData: ITeacher): Promise<ITeacher> {
-    const teacher = this.repository.create(teacherData)
-    return this.repository.save(teacher)
-  }
-
   async delete(teacherId: number): Promise<void> {
     await this.repository.update(teacherId, { status: 0 })
   }

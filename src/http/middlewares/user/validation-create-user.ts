@@ -7,6 +7,7 @@ export function validateCreateUser(
   next: NextFunction,
 ) {
   const registerBodySchema = z.object({
+    name: z.string(),
     email: z
       .string()
       .min(1, 'Email is required')
@@ -20,7 +21,7 @@ export function validateCreateUser(
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed',
+        message: 'Validation failed for creare User',
         errors: error.format(),
       })
     }

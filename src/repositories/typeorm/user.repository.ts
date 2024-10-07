@@ -24,6 +24,11 @@ export class UserRepository implements IUserRepository {
     return this.repository.save(user)
   }
 
+  async update(userData: IUser): Promise<IUser> {
+    const user = this.repository.create(userData)
+    return this.repository.save(user)
+  }
+
   async findWithTeacher(
     userId: number,
   ): Promise<(IUser & ITeacher) | IUser | undefined> {

@@ -22,7 +22,7 @@ export async function validateCreateUserWithUniqueEmail(
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed',
+        message: 'Validation failed for create unique user email',
         errors: error.format(),
       })
     }

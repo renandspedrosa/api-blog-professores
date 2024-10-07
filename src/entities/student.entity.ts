@@ -28,13 +28,6 @@ export class Student implements IStudent {
   user_id?: number
 
   @Column({
-    name: 'name',
-    type: 'varchar',
-    length: 100,
-  })
-  name: string
-
-  @Column({
     name: 'status',
     type: 'int',
     nullable: true,

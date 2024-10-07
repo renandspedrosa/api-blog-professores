@@ -13,6 +13,9 @@ import { AlterTableUsersToChangeUsernameToEmail1727228921260 } from './migration
 import { DropTeachersUserIdIndex1727742920773 } from './migrations/1727742920773-DropTeachersUserIdIndex'
 import { Student } from '@/entities/student.entity'
 import { AlterCommentsIdToUUID1728184531106 } from './migrations/1728184531106-AlterCommentsIdToUUID'
+import { AddNameColumnToUsers1728226144255 } from './migrations/1728226144255-AddNameColumnToUsers'
+import { DropNameColumnFromTeachers1728226361845 } from './migrations/1728226361845-DropNameColumnFromTeachers'
+import { DropNameColumnFromStudents1728226454832 } from './migrations/1728226454832-DropNameColumnFromStudents'
 
 export const appDataSource = new DataSource({
   type: 'postgres',
@@ -30,6 +33,9 @@ export const appDataSource = new DataSource({
     AlterTableUsersToChangeUsernameToEmail1727228921260,
     DropTeachersUserIdIndex1727742920773,
     AlterCommentsIdToUUID1728184531106,
+    AddNameColumnToUsers1728226144255,
+    DropNameColumnFromTeachers1728226361845,
+    DropNameColumnFromStudents1728226454832,
   ],
   logging: env.NODE_ENV === 'development',
 })

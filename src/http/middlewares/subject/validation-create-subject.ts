@@ -9,12 +9,6 @@ export function validateCreateSubject(
   const registerBodySchema = z.object({
     name: z.string(),
     status: z.number().optional().default(1),
-    // tags: z.array(
-    //     z.object({
-    //         id: z.coerce.number().optional(),
-    //         name: z.string()
-    //     })
-    // ).optional()
   })
 
   try {
