@@ -32,7 +32,7 @@ export class CommentRepository implements ICommentRepository {
 
   getCommentsByPostId(post_id: string): Promise<IComment[]> {
     return this.repository.find({
-      where: { post_id },
+      where: { post_id, status: 1 },
     })
   }
 
