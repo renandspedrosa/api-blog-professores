@@ -11,7 +11,6 @@ import {
 import { IPost } from './models/post.interface'
 import { ITag } from './models/tags.interface'
 import { Tag } from './tag.entity'
-import { ITeacher } from './models/teacher.interface'
 import { Teacher } from './teacher.entity'
 import { Comment } from '@/entities/comment.entity'
 import { IComment } from './models/comment.interface'
@@ -93,8 +92,6 @@ export class Post implements IPost {
 
   @ManyToOne(() => Teacher, (teacher) => teacher.posts)
   @JoinColumn({ name: 'teacher_id' })
-  teacher: ITeacher
-
   @Column({ name: 'teacher_id', type: 'integer' })
   teacher_id: number
 }

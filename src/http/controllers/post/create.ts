@@ -4,13 +4,12 @@ import { makeCreatePostUseCase } from '@/use-cases/factory/post/make-create-post
 export async function create(req: Request, res: Response, next: NextFunction) {
   try {
     const createPostUseCase = makeCreatePostUseCase()
-    const { title, content, teacher_id, tags, comments } = req.body
+    const { title, content, teacher_id, tags } = req.body
     const createdPost = await createPostUseCase.handler({
       title,
       content,
       teacher_id,
       tags,
-      comments,
     })
     return res.status(201).json(createdPost)
   } catch (error) {
