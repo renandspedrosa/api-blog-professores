@@ -1,4 +1,5 @@
 import { makeFindUserByEmailUseCase } from '@/use-cases/factory/user/make-find-user-by-email-use-case'
+import { makeFindUserByIdUseCase } from '@/use-cases/factory/user/make-find-user-by-id-use-case'
 import { Request, Response, NextFunction } from 'express'
 import { ZodError, z } from 'zod'
 
@@ -22,13 +23,10 @@ export async function validateCreateComment(
     const { post_id } = req.params
     const { user_id } = req.body
 
-    const findWithTeacherUseCase = makeFindUserByEmailUseCase()
-    const userTeacher = await findWithTeacherUseCase.handler(user_id)
+    const findWithUserUseCase = makeFindUserByIdUseCase()
+    const user = await findWithUserUseCase.handler(user_id)
 
-    const findWithStudentUseCase = makeFindUserByEmailUseCase()
-    const userStudent = await findWithStudentUseCase.handler(user_id)
-
-    if (!userTeacher || !userStudent) {
+    if (!user) {
       return res.status(404).json({ message: 'User not found' })
     }
 

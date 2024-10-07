@@ -12,7 +12,7 @@ import { isTeacher } from '@/http/middlewares/teacher/is-teacher'
 import { findPostByTerm } from './find-post-by-term'
 import { validationFindByTerm } from '@/http/middlewares/post/validation-find-by-term'
 import { validationFindAll } from '@/http/middlewares/utils/validation-find-all'
-import { findCommentsByPostId } from '@/http/controllers/comments/find-comments-by-post-id'
+import { findCommentsByPostId } from '@/http/controllers/post/find-comments-by-post-id'
 
 const router = Router()
 
@@ -22,7 +22,7 @@ router.get('/', validationFindAllPost, findAllPost)
 router.get('/search', validationFindByTerm, findPostByTerm)
 router.put('/:id', isTeacher, validationFindPost, updatePost)
 router.get('/:id', validationFindPost, findPost)
-router.get('/:id/comments ', findCommentsByPostId)
+router.get('/:id/comments', findCommentsByPostId)
 router.delete('/:id', isTeacher, validationFindPost, deletePost)
 
 export default router
