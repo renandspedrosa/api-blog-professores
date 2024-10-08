@@ -23,6 +23,13 @@ export async function findUser(
     const user = student || teacher
 
     if (!user) return res.status(404).json({ message: 'User not found' })
+
+    if (student) {
+      user.students = student.students
+    }
+    if (teacher) {
+      user.teachers = teacher.teachers
+    }
     return res.status(200).json(user)
   } catch (error) {
     next(error)
