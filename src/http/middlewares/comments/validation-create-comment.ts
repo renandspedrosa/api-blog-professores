@@ -1,4 +1,3 @@
-import { makeFindUserByEmailUseCase } from '@/use-cases/factory/user/make-find-user-by-email-use-case'
 import { makeFindUserByIdUseCase } from '@/use-cases/factory/user/make-find-user-by-id-use-case'
 import { Request, Response, NextFunction } from 'express'
 import { ZodError, z } from 'zod'
