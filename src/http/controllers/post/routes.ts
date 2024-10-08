@@ -14,6 +14,7 @@ import { validationFindByTerm } from '@/http/middlewares/post/validation-find-by
 import { validationFindAll } from '@/http/middlewares/utils/validation-find-all'
 import { validateCreatePostViewed } from '@/http/middlewares/post/validation-create-post-viewed'
 import { createPostViewed } from './create-post-viewed'
+import { findCommentsByPostId } from '@/http/controllers/post/find-comments-by-post-id'
 
 const router = Router()
 
@@ -23,6 +24,7 @@ router.get('/', validationFindAllPost, findAllPost)
 router.get('/search', validationFindByTerm, findPostByTerm)
 router.put('/:id', isTeacher, validationFindPost, updatePost)
 router.get('/:id', validationFindPost, findPost)
+router.get('/:id/comments', findCommentsByPostId)
 router.delete('/:id', isTeacher, validationFindPost, deletePost)
 router.post('/:post_id/viewed', validateCreatePostViewed, createPostViewed)
 
