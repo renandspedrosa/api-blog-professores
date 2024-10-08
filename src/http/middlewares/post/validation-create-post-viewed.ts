@@ -6,22 +6,17 @@ export async function validateCreatePostViewed(
   res: Response,
   next: NextFunction,
 ) {
-  const registerBodySchema = z.object({ user_id: z.coerce.number() })
+  const registerBodySchema = z.object({
+    user_id: z.coerce.number().min(1, 'User Id cannot be empty'),
+  })
+
   const registerParamsSchema = z.object({
-    post_id: z.string(),
+    post_id: z.string().uuid().trim().min(1, 'Post Id cannot be empty'),
   })
 
   try {
     req.body = registerBodySchema.parse(req.body)
     req.params = registerParamsSchema.parse(req.params)
-
-    // const { user_id } = req.body
-    // const { post_id } = req.params
-
-    // const postViewedReq: IPostViewed = { user_id: user_id, post_id: post_id }
-
-    // const createPostViewedUseCase = makeCreatePostViewedUseCase()
-    // const postViewed = await createPostViewedUseCase.handler(postViewedReq)
     next()
   } catch (error) {
     if (error instanceof ZodError) {

@@ -17,7 +17,7 @@ export class PostViewed implements IPostViewed {
   user_id: number
 
   @Column({
-    name: 'status',
+    name: 'post_id',
     type: 'uuid',
   })
   post_id: string
