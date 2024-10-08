@@ -1,3 +1,4 @@
+import { IUser } from '@/entities/models/user.interface'
 import { makeCreateTeacherUseCase } from '@/use-cases/factory/teacher/make-create-teacher-use-case'
 import { makeCreateUserUseCase } from '@/use-cases/factory/user/make-create-user-use-case'
 import { hash } from 'bcryptjs'
@@ -20,7 +21,13 @@ export async function create(req: Request, res: Response, next: NextFunction) {
       subjects,
     })
 
-    return res.status(201).json(teacher)
+    if (!teacher) {
+      throw new Error('Teacher creation failed')
+    }
+
+    const user: IUser = userWithHashedPassword
+    user.teachers = [teacher]
+    return res.status(201).json(user)
   } catch (error) {
     next(error)
   }
