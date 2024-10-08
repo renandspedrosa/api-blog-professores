@@ -7,10 +7,14 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
+  JoinTable,
+  ManyToMany,
 } from 'typeorm'
 import { User } from './user.entity'
 import { ITeacher } from './models/teacher.interface'
 import { Post } from './post.entity'
+import { ISubject } from './models/subject.interface'
+import { Subject } from './subject.entity'
 
 @Entity({
   name: 'teachers',
@@ -20,13 +24,6 @@ export class Teacher implements ITeacher {
     type: 'integer',
   })
   id?: number
-
-  @Column({
-    name: 'name',
-    type: 'varchar',
-    length: 100,
-  })
-  name: string
 
   @Column({
     name: 'user_id',
@@ -64,6 +61,22 @@ export class Teacher implements ITeacher {
   })
   @JoinColumn({ name: 'user_id' })
   user?: User
+
+  @ManyToMany(() => Subject, {
+    cascade: true,
+  })
+  @JoinTable({
+    name: 'teacher_subjects',
+    joinColumn: {
+      name: 'teacher_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'subject_id',
+      referencedColumnName: 'id',
+    },
+  })
+  subjects?: ISubject[] | undefined
 
   @OneToMany(() => Post, (post) => post.teacher_id)
   posts?: Post[]

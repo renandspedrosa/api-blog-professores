@@ -18,6 +18,7 @@ export class TeacherRepository implements ITeacherRepository {
 
   async getAllTeachers(page: number, limit: number): Promise<ITeacher[]> {
     return this.repository.find({
+      relations: ['subjects'],
       where: { status: 1 },
       skip: (page - 1) * limit,
       take: limit,
@@ -26,11 +27,6 @@ export class TeacherRepository implements ITeacherRepository {
 
   async getById(teacherId: number): Promise<ITeacher | null> {
     return this.repository.findOne({ where: { id: teacherId, status: 1 } })
-  }
-
-  async update(teacherData: ITeacher): Promise<ITeacher> {
-    const teacher = this.repository.create(teacherData)
-    return this.repository.save(teacher)
   }
 
   async delete(teacherId: number): Promise<void> {

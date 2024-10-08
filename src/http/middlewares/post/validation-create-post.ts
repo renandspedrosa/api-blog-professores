@@ -13,10 +13,15 @@ export async function validateCreatePost(
     teacher_id: z.coerce.number(),
     tags: z
       .array(
-        z.object({
-          id: z.coerce.number().optional(),
-          name: z.string(),
-        }),
+        z
+          .object({
+            id: z.coerce.number().optional(),
+            name: z.string().optional(),
+          })
+          .refine((data) => data.id || data.name, {
+            message: 'Either "id" or "name" must be provided for each tag',
+            path: ['tags'],
+          }),
       )
       .optional(),
   })

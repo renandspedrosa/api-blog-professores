@@ -17,7 +17,7 @@ export async function findAllSubject(
   } catch (error) {
     if (error instanceof Error) {
       if (error.message === 'Subject not found') {
-        return res.status(404).json({})
+        return res.status(404).json([])
       }
     }
     next(error)

@@ -24,11 +24,6 @@ export class StudentRepository implements IStudentRepository {
     })
   }
 
-  async update(studentData: IStudent): Promise<IStudent> {
-    const student = this.repository.create(studentData)
-    return this.repository.save(student)
-  }
-
   async delete(studentId: number): Promise<void> {
     await this.repository.update(studentId, { status: 0 })
   }

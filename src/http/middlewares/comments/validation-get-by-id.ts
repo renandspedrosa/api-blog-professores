@@ -1,18 +1,17 @@
 import { Request, Response, NextFunction } from 'express'
 import { ZodError, z } from 'zod'
 
-export function validateCreateStudent(
+export async function validationGetCommentById(
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
-  const registerBodySchema = z.object({
-    name: z.string(),
-    user_id: z.coerce.number(),
+  const registerParamsSchema = z.object({
+    id: z.coerce.string(),
   })
 
   try {
-    req.body = registerBodySchema.parse(req.body)
+    req.params = registerParamsSchema.parse(req.params)
     next()
   } catch (error) {
     if (error instanceof ZodError) {
