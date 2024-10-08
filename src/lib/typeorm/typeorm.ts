@@ -6,11 +6,13 @@ import { Tag } from '@/entities/tag.entity'
 import { User } from '@/entities/user.entity'
 import { Teacher } from '@/entities/teacher.entity'
 import { Post } from '@/entities/post.entity'
+import { Comment } from '@/entities/comment.entity'
 import { AlterCommentsTable1726544526547 } from './migrations/1726544526547-AlterCommentsTable'
 import { AlterTableUsersToUniqueUsername1726795708879 } from './migrations/1726795708879-AlterTableUsersToUniqueUsername'
 import { AlterTableUsersToChangeUsernameToEmail1727228921260 } from './migrations/1727228921260-AlterTableUsersToChangeUsernameToEmail'
 import { DropTeachersUserIdIndex1727742920773 } from './migrations/1727742920773-DropTeachersUserIdIndex'
 import { Student } from '@/entities/student.entity'
+import { AlterCommentsIdToUUID1728184531106 } from './migrations/1728184531106-AlterCommentsIdToUUID'
 import { AddNameColumnToUsers1728226144255 } from './migrations/1728226144255-AddNameColumnToUsers'
 import { DropNameColumnFromTeachers1728226361845 } from './migrations/1728226361845-DropNameColumnFromTeachers'
 import { DropNameColumnFromStudents1728226454832 } from './migrations/1728226454832-DropNameColumnFromStudents'
@@ -23,13 +25,14 @@ export const appDataSource = new DataSource({
   password: env.DATABASE_PASSWORD,
   database: env.DATABASE_NAME,
   // entities: ['src/entities/**/*.entity.ts'],
-  entities: [Subject, Tag, User, Teacher, Post, Student],
+  entities: [Subject, Tag, User, Teacher, Post, Student, Comment],
   migrations: [
     CreateTablesWithConstraints1725488490452,
     AlterCommentsTable1726544526547,
     AlterTableUsersToUniqueUsername1726795708879,
     AlterTableUsersToChangeUsernameToEmail1727228921260,
     DropTeachersUserIdIndex1727742920773,
+    AlterCommentsIdToUUID1728184531106,
     AddNameColumnToUsers1728226144255,
     DropNameColumnFromTeachers1728226361845,
     DropNameColumnFromStudents1728226454832,
