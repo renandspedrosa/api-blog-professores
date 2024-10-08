@@ -21,7 +21,7 @@ export function validateCreateTeacher(
             name: z.string().optional(),
           })
           .refine((data) => data.id || data.name, {
-            message: 'Either "id" or "name" must be provided for each tag',
+            message: 'Either "id" or "name" must be provided for each subject',
             path: ['subjects'],
           }),
       )
