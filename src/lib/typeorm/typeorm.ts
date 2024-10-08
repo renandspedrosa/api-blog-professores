@@ -16,6 +16,7 @@ import { AlterCommentsIdToUUID1728184531106 } from './migrations/1728184531106-A
 import { AddNameColumnToUsers1728226144255 } from './migrations/1728226144255-AddNameColumnToUsers'
 import { DropNameColumnFromTeachers1728226361845 } from './migrations/1728226361845-DropNameColumnFromTeachers'
 import { DropNameColumnFromStudents1728226454832 } from './migrations/1728226454832-DropNameColumnFromStudents'
+import { PostViewed } from '@/entities/post-viewed.entity'
 
 export const appDataSource = new DataSource({
   type: 'postgres',
@@ -25,7 +26,7 @@ export const appDataSource = new DataSource({
   password: env.DATABASE_PASSWORD,
   database: env.DATABASE_NAME,
   // entities: ['src/entities/**/*.entity.ts'],
-  entities: [Subject, Tag, User, Teacher, Post, Student, Comment],
+  entities: [Subject, Tag, User, Teacher, Post, Student, PostViewed, Comment],
   migrations: [
     CreateTablesWithConstraints1725488490452,
     AlterCommentsTable1726544526547,
