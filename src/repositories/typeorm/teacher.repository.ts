@@ -18,6 +18,7 @@ export class TeacherRepository implements ITeacherRepository {
 
   async getAllTeachers(page: number, limit: number): Promise<ITeacher[]> {
     return this.repository.find({
+      relations: ['subjects'],
       where: { status: 1 },
       skip: (page - 1) * limit,
       take: limit,
