@@ -92,6 +92,8 @@ export class Post implements IPost {
 
   @ManyToOne(() => Teacher, (teacher) => teacher.posts)
   @JoinColumn({ name: 'teacher_id' })
+  teacher: Teacher
+
   @Column({ name: 'teacher_id', type: 'integer' })
   teacher_id: number
 }
