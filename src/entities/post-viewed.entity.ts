@@ -11,10 +11,10 @@ export class PostViewed implements IPostViewed {
   id?: number
 
   @Column({
-    name: 'user_id',
+    name: 'student_id',
     type: 'integer',
   })
-  user_id: number
+  student_id: number
 
   @Column({
     name: 'post_id',

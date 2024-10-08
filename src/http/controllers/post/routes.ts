@@ -26,6 +26,6 @@ router.put('/:id', isTeacher, validationFindPost, updatePost)
 router.get('/:id', validationFindPost, findPost)
 router.get('/:id/comments', findCommentsByPostId)
 router.delete('/:id', isTeacher, validationFindPost, deletePost)
-router.post('/:post_id/viewed', validateCreatePostViewed, createPostViewed)
+router.post('/:post_id/viewed', validateCreatePostViewed, createPostViewed) // TODO: criar midleware para permitir somente students
 
 export default router

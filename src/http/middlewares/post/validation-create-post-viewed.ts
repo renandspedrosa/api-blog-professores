@@ -7,7 +7,7 @@ export async function validateCreatePostViewed(
   next: NextFunction,
 ) {
   const registerBodySchema = z.object({
-    user_id: z.coerce.number().min(1, 'User Id cannot be empty'),
+    student_id: z.coerce.number().min(1, 'Student Id cannot be empty'),
   })
 
   const registerParamsSchema = z.object({

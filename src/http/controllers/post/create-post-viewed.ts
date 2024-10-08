@@ -8,11 +8,11 @@ export async function createPostViewed(
 ) {
   try {
     const createPostViewedUseCase = makeCreatePostViewedUseCase()
-    const { user_id } = req.body
+    const { student_id } = req.body
     const { post_id } = req.params
 
     const postViewed = {
-      user_id,
+      student_id,
       post_id,
     }
 
