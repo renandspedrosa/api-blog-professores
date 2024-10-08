@@ -15,10 +15,15 @@ export function validateCreateTeacher(
     password: z.string().min(1, 'Password is required'),
     subjects: z
       .array(
-        z.object({
-          id: z.string().optional(),
-          name: z.string().optional(),
-        }),
+        z
+          .object({
+            id: z.coerce.string().optional(),
+            name: z.string().optional(),
+          })
+          .refine((data) => data.id || data.name, {
+            message: 'Either "id" or "name" must be provided for each subject',
+            path: ['subjects'],
+          }),
       )
       .optional(),
   })
