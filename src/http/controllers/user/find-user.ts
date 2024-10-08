@@ -1,4 +1,4 @@
-import { makeFindWithTeacherUseCase } from '@/use-cases/factory/teacher/make-find-with-teacher'
+import { makeFindWithTeacherUseCase } from '@/use-cases/factory/user/make-find-with-teacher'
 import { Request, Response, NextFunction } from 'express'
 import { z } from 'zod'
 import { makeFindWithStudentUseCase } from '@/use-cases/factory/student/make-find-with-student'
