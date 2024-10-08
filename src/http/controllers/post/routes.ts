@@ -12,6 +12,8 @@ import { isTeacher } from '@/http/middlewares/teacher/is-teacher'
 import { findPostByTerm } from './find-post-by-term'
 import { validationFindByTerm } from '@/http/middlewares/post/validation-find-by-term'
 import { validationFindAll } from '@/http/middlewares/utils/validation-find-all'
+import { validateCreatePostViewed } from '@/http/middlewares/post/validation-create-post-viewed'
+import { createPostViewed } from './create-post-viewed'
 
 const router = Router()
 
@@ -22,5 +24,6 @@ router.get('/search', validationFindByTerm, findPostByTerm)
 router.put('/:id', isTeacher, validationFindPost, updatePost)
 router.get('/:id', validationFindPost, findPost)
 router.delete('/:id', isTeacher, validationFindPost, deletePost)
+router.post('/:post_id/viewed', validateCreatePostViewed, createPostViewed)
 
 export default router
