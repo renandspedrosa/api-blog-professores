@@ -14,6 +14,7 @@ import { Student } from '@/entities/student.entity'
 import { AddNameColumnToUsers1728226144255 } from './migrations/1728226144255-AddNameColumnToUsers'
 import { DropNameColumnFromTeachers1728226361845 } from './migrations/1728226361845-DropNameColumnFromTeachers'
 import { DropNameColumnFromStudents1728226454832 } from './migrations/1728226454832-DropNameColumnFromStudents'
+import { AlterTeacherSubjectsStatusColumnMigration1728432062988 } from './migrations/1728432062988-AlterTeacherSubjectsStatusColumnMigration'
 
 export const appDataSource = new DataSource({
   type: 'postgres',
@@ -33,6 +34,7 @@ export const appDataSource = new DataSource({
     AddNameColumnToUsers1728226144255,
     DropNameColumnFromTeachers1728226361845,
     DropNameColumnFromStudents1728226454832,
+    AlterTeacherSubjectsStatusColumnMigration1728432062988,
   ],
   logging: env.NODE_ENV === 'development',
 })
