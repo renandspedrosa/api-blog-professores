@@ -17,12 +17,24 @@ export class TeacherRepository implements ITeacherRepository {
   }
 
   async getAllTeachers(page: number, limit: number): Promise<ITeacher[]> {
-    return this.repository.find({
-      relations: ['subjects'],
+    const teachers = await this.repository.find({
+      relations: ['subjects', 'user'],
       where: { status: 1 },
       skip: (page - 1) * limit,
       take: limit,
     })
+
+    return teachers.map((teacher) => ({
+      id: teacher.id,
+      user_id: teacher.user_id,
+      email: teacher.user?.email || null,
+      name: teacher.user?.name || null,
+      subjects:
+        teacher.subjects?.map((subject) => ({
+          id: subject.id,
+          name: subject.name,
+        })) || [],
+    }))
   }
 
   async getById(teacherId: number): Promise<ITeacher | null> {
