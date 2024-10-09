@@ -5,6 +5,7 @@ import { validateCreateUser } from '@/http/middlewares/user/validation-create-us
 import { signin } from './signin'
 import { validateCreateUserWithUniqueEmail } from '@/http/middlewares/user/validation-unique-email'
 import { update } from './update'
+import { validateLoginUser } from '@/http/middlewares/user/validation-login-user'
 // import { validateJwt } from '@/http/middlewares/jwt-validate'
 
 const router = Router()
@@ -12,6 +13,6 @@ const router = Router()
 router.post('/', validateCreateUser, validateCreateUserWithUniqueEmail, create)
 router.get('/:id', findUser)
 router.put('/:id', update)
-router.post('/signin', validateCreateUser, signin)
+router.post('/signin', validateLoginUser, signin)
 
 export default router

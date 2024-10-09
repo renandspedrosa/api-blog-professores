@@ -20,6 +20,13 @@ export class UserRepository implements IUserRepository {
     return user ?? undefined
   }
 
+  async findById(id: number): Promise<IUser | undefined> {
+    const user = await this.repository.findOne({
+      where: { id },
+    })
+    return user ?? undefined
+  }
+
   async create(user: IUser): Promise<IUser> {
     return this.repository.save(user)
   }

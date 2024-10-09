@@ -1,3 +1,4 @@
+import { IComment } from './comment.interface'
 import { ITag } from './tags.interface'
 export interface IPost {
   id?: string
@@ -8,4 +9,5 @@ export interface IPost {
   updated_at?: Date | null
   teacher_id?: number
   tags?: ITag[]
+  comments?: IComment[]
 }
