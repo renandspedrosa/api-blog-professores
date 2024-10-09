@@ -8,8 +8,13 @@ export async function findCommentsByPostId(
 ) {
   try {
     const { post_id } = req.params
+    const { page, limit } = req.query
     const getCommentsByPostId = await makeGetCommentsByPostIdUseCase()
-    const comments = await getCommentsByPostId.handler(post_id)
+    const comments = await getCommentsByPostId.handler(
+      post_id,
+      Number(page),
+      Number(limit),
+    )
 
     res.status(200).json(comments)
   } catch (error) {
