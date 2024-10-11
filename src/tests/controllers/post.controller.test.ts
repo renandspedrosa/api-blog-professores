@@ -145,7 +145,7 @@ describe('Post Controller', () => {
       .set('Authorization', `Bearer ${token}`)
 
     const commentsResponse = await request(app)
-      .get(`/posts/${postId}/comments`)
+      .get(`/posts/${postId}/comments?page=1&limit=10`)
       .set('Authorization', `Bearer ${token}`)
     expect(commentsResponse.status).toBe(200)
     expect(commentsResponse.body).toEqual(
