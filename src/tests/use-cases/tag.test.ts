@@ -18,14 +18,14 @@ describe('Use Cases for the Tag', () => {
   })
 
   it('It should create a new tag using the repository', async () => {
-    const tagName = 'Recado'
+    const newTag: ITag = { name: 'Recado' }
 
-    mockTagRepository.create.mockResolvedValue(Promise.resolve())
+    mockTagRepository.create.mockResolvedValue(newTag)
 
-    const result = await createTagUseCase.handler(tagName)
+    const result = await createTagUseCase.handler(newTag)
 
-    expect(mockTagRepository.create).toHaveBeenCalledWith(tagName)
-    expect(result).toBeUndefined()
+    expect(mockTagRepository.create).toHaveBeenCalledWith(newTag)
+    expect(result).toBe(newTag)
   })
 
   it('It should update a tag using the repository', async () => {

@@ -6,9 +6,9 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     const { name } = req.body
 
     const createTagUseCase = makeCreateTagUseCase()
-    await createTagUseCase.handler(name)
+    const tag = await createTagUseCase.handler({ name })
 
-    return res.status(201).json()
+    return res.status(201).json(tag)
   } catch (error) {
     next(error)
   }

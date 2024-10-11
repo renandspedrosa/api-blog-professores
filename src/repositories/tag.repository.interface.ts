@@ -1,7 +1,6 @@
 import { ITag } from '@/entities/models/tags.interface'
 
 export interface ITagRepository {
-  create(name: string): Promise<void>
-
+  create(tag: ITag): Promise<ITag>
   update(tag: ITag): Promise<ITag>
 }
