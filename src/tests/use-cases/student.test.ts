@@ -9,7 +9,7 @@ const mockStudentRepository: jest.Mocked<IStudentRepository> = {
   create: jest.fn(),
   delete: jest.fn(),
   getAllStudents: jest.fn(),
-  getById: jest.fn(),
+  getById: jest.fn()
 }
 
 const mockStudents: Student[] = [
