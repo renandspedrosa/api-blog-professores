@@ -5,7 +5,8 @@ import { appDataSource } from '@/lib/typeorm/typeorm'
 
 let token: string
 let userId: number
-let idPost: string
+let postId: string
+let teacherId: number
 
 describe('Post Controller', () => {
   afterAll(async () => {
@@ -29,6 +30,7 @@ describe('Post Controller', () => {
     expect(userResponse.status).toBe(201)
 
     userId = userResponse.body.teachers.user_id
+    teacherId = userResponse.body.teachers.id
 
     const payload = { id: userId, email: userData.email }
     token = generateJwt(payload)
@@ -54,7 +56,7 @@ describe('Post Controller', () => {
     expect(response.body).toHaveProperty('id')
     expect(response.body.title).toBe(postData.title)
     expect(response.body.content).toBe(postData.content)
-    idPost = response.body.id
+    postId = response.body.id
   })
 
   it('GET /posts - should return a list of post', async () => {
@@ -77,7 +79,7 @@ describe('Post Controller', () => {
 
   it('GET /posts/:id - should return a post by ID', async () => {
     const findResponse = await request(app)
-      .get(`/posts/${idPost}`)
+      .get(`/posts/${postId}`)
       .set('Authorization', `Bearer ${token}`)
 
     expect(findResponse.status).toBe(200)
@@ -92,6 +94,70 @@ describe('Post Controller', () => {
     )
   })
 
+  it('GET /posts/search - should find posts by search term', async () => {
+    const searchTerm = 'lore'
+
+    const searchResponse = await request(app)
+      .get(`/posts/search?page=1&limit=10&term=${searchTerm}`)
+      .set('Authorization', `Bearer ${token}`)
+      .set('Authorization', `Bearer ${token}`)
+    expect(searchResponse.status).toBe(200)
+    expect(searchResponse.body).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: postId,
+          title: 'loren ipsum',
+          content:
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+        }),
+      ]),
+    )
+  })
+
+  it('GET /posts/teacher/:teacherId - should find posts by teacher ID', async () => {
+    const findTeacherResponse = await request(app)
+      .get(`/posts/teacher/${teacherId}`)
+      .set('Authorization', `Bearer ${token}`)
+    expect(findTeacherResponse.status).toBe(200)
+    expect(findTeacherResponse.body).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: expect.any(String),
+          title: expect.any(String),
+          content: expect.any(String),
+          teacher_id: expect.any(Number),
+          tags: expect.any(Array),
+        }),
+      ]),
+    )
+  })
+
+  it('GET /posts/:id/comments - should find comments by post ID', async () => {
+    const commentData = {
+      content: 'comentario teste',
+      user_id: userId,
+    }
+    await request(app)
+      .post(`/comments/${postId}`)
+      .send(commentData)
+      .set('Authorization', `Bearer ${token}`)
+
+    const commentsResponse = await request(app)
+      .get(`/posts/${postId}/comments`)
+      .set('Authorization', `Bearer ${token}`)
+    expect(commentsResponse.status).toBe(200)
+    expect(commentsResponse.body).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: expect.any(String),
+          post_id: expect.any(String),
+          content: expect.any(String),
+          user_id: expect.any(Number),
+        }),
+      ]),
+    )
+  })
+
   it('PUT /posts/:id - should update a post by ID', async () => {
     const updatedData = {
       title: 'Novo titulo',
@@ -103,7 +169,7 @@ describe('Post Controller', () => {
       ],
     }
     const updateResponse = await request(app)
-      .put(`/posts/${idPost}`)
+      .put(`/posts/${postId}`)
       .send(updatedData)
       .set('Authorization', `Bearer ${token}`)
 
@@ -121,7 +187,7 @@ describe('Post Controller', () => {
 
   it('DELETE /posts/:id - should delete a post by ID', async () => {
     const deleteResponse = await request(app)
-      .delete(`/posts/${idPost}`)
+      .delete(`/posts/${postId}`)
       .set('Authorization', `Bearer ${token}`)
 
     expect(deleteResponse.status).toBe(204)
