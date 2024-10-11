@@ -18,7 +18,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
       user_id: Number(newUser.id),
     })
 
-    return res.status(201).json(student)
+    return res.status(201).json({ name, email, student })
   } catch (error) {
     next(error)
   }

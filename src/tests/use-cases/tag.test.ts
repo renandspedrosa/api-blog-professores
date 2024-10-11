@@ -6,6 +6,7 @@ import { UpdateTagUseCase } from '@/use-cases/tag/update-tag'
 const mockTagRepository: jest.Mocked<ITagRepository> = {
   create: jest.fn(),
   update: jest.fn(),
+  findByName: jest.fn(),
 }
 
 describe('Use Cases for the Tag', () => {
@@ -18,14 +19,14 @@ describe('Use Cases for the Tag', () => {
   })
 
   it('It should create a new tag using the repository', async () => {
-    const tagName = 'Recado'
+    const newTag: ITag = { name: 'Recado' }
 
-    mockTagRepository.create.mockResolvedValue(Promise.resolve())
+    mockTagRepository.create.mockResolvedValue(newTag)
 
-    const result = await createTagUseCase.handler(tagName)
+    const result = await createTagUseCase.handler(newTag)
 
-    expect(mockTagRepository.create).toHaveBeenCalledWith(tagName)
-    expect(result).toBeUndefined()
+    expect(mockTagRepository.create).toHaveBeenCalledWith(newTag)
+    expect(result).toBe(newTag)
   })
 
   it('It should update a tag using the repository', async () => {
@@ -42,5 +43,23 @@ describe('Use Cases for the Tag', () => {
 
     expect(mockTagRepository.update).toHaveBeenCalledWith(updatedTag)
     expect(result).toBe(updatedTag)
+  })
+
+  it('It should find a tag by name using the repository', async () => {
+    const tagName = 'Recado'
+    const tag: ITag = {
+      id: 1,
+      name: tagName,
+      created_at: new Date(),
+      updated_at: new Date(),
+      status: true,
+    }
+
+    mockTagRepository.findByName.mockResolvedValue(tag)
+
+    const result = await mockTagRepository.findByName(tagName)
+
+    expect(mockTagRepository.findByName).toHaveBeenCalledWith(tagName)
+    expect(result).toBe(tag)
   })
 })

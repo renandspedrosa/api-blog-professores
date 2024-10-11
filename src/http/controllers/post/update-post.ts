@@ -8,7 +8,7 @@ export async function updatePost(
 ) {
   try {
     const { id } = req.params
-    const { title, content } = req.body
+    const { title, content, tags } = req.body
 
     const updatePostUseCase = await makeUpdatePostUseCase()
 
@@ -16,6 +16,7 @@ export async function updatePost(
       id,
       title,
       content,
+      tags,
     })
 
     return res.status(200).json(post)
