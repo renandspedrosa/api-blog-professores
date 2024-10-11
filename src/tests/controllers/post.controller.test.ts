@@ -171,15 +171,15 @@ describe('Post Controller', () => {
       .post('/student')
       .send(studentData)
     expect(studentResponse.status).toBe(201)
-    expect(studentResponse.body).toHaveProperty('id')
-
-    const viewedData = {
-      student_id: studentResponse.body.id,
+    expect(studentResponse.body).toHaveProperty('student')
+    const payloadStudent = {
+      id: studentResponse.body.student.user_id,
+      email: studentResponse.body.email,
     }
+    const tokenStudent = generateJwt(payloadStudent)
     const viewedResponse = await request(app)
       .post(`/posts/${postId}/viewed`)
-      .send(viewedData)
-      .set('Authorization', `Bearer ${token}`)
+      .set('Authorization', `Bearer ${tokenStudent}`)
 
     expect(viewedResponse.status).toBe(201)
     expect(viewedResponse.body).toEqual(

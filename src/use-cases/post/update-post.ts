@@ -35,7 +35,7 @@ export class UpdatePostUseCase {
     for (const tag of tagData) {
       const existingTag = await this.tagRepository.findByName(tag.name)
       if (!existingTag) {
-        await this.tagRepository.create(tag.name)
+        await this.tagRepository.create(tag)
       }
       tags.push(tag)
     }
