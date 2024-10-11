@@ -20,7 +20,10 @@ export async function create(req: Request, res: Response, next: NextFunction) {
       subjects,
     })
 
-    return res.status(201).json(teacher)
+    if (!teacher) {
+      throw new Error('Teacher creation failed')
+    }
+    return res.status(201).json({ name, email, teachers: teacher })
   } catch (error) {
     next(error)
   }

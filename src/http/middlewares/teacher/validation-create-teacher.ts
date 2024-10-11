@@ -28,7 +28,6 @@ export function validateCreateTeacher(
       .optional(),
   })
   try {
-    console.log(req.body)
     req.body = registerBodySchema.parse(req.body)
     next()
   } catch (error) {
