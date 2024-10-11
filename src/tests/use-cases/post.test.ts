@@ -1,5 +1,7 @@
 import { IPost } from '@/entities/models/post.interface'
 import { IPostRepository } from '@/repositories/post.repository.interface'
+import { IPostViewed } from '@/entities/models/post-viewed.interface'
+import { IPostViewedRepository } from '@/repositories/post-viewed.repository.interface'
 import { CreatePostUseCase } from '@/use-cases/post/create-post'
 import { DeletePostUseCase } from '@/use-cases/post/delete-post'
 import { FindAllPostUseCase } from '@/use-cases/post/find-all-post'
@@ -7,6 +9,8 @@ import { FindPostByTeacherUseCase } from '@/use-cases/post/find-post-by-teacher'
 import { UpdatePostUseCase } from '@/use-cases/post/update-post'
 import { FindPostByTermUseCase } from '@/use-cases/post/find-post-by-term'
 import { FindPostUseCase } from '@/use-cases/post/find-post'
+import { CreatePostViewedUseCase } from '@/use-cases/post/create-post-viewed'
+import { ITagRepository } from '@/repositories/tag.repository.interface'
 
 const mockPostRepository: jest.Mocked<IPostRepository> = {
   create: jest.fn(),
@@ -16,6 +20,15 @@ const mockPostRepository: jest.Mocked<IPostRepository> = {
   findPostByTextSearch: jest.fn(),
   updatePost: jest.fn(),
   deletePost: jest.fn(),
+}
+
+const mockTagRepository: jest.Mocked<ITagRepository> = {
+  create: jest.fn(),
+  findByName: jest.fn(),
+  update: jest.fn(),
+}
+const mockPostViewedRepository: jest.Mocked<IPostViewedRepository> = {
+  create: jest.fn(),
 }
 
 const mockPosts: IPost[] = [
@@ -49,6 +62,7 @@ describe('Use Cases for the Post', () => {
   let findPostByTermUseCase: FindPostByTermUseCase
   let findPostUseCase: FindPostUseCase
   let updatePostUseCase: UpdatePostUseCase
+  let createPostViewedUseCase: CreatePostViewedUseCase
 
   beforeEach(() => {
     createPostUseCase = new CreatePostUseCase(mockPostRepository)
@@ -57,7 +71,13 @@ describe('Use Cases for the Post', () => {
     findPostByTeacherUseCase = new FindPostByTeacherUseCase(mockPostRepository)
     findPostByTermUseCase = new FindPostByTermUseCase(mockPostRepository)
     findPostUseCase = new FindPostUseCase(mockPostRepository)
-    updatePostUseCase = new UpdatePostUseCase(mockPostRepository)
+    updatePostUseCase = new UpdatePostUseCase(
+      mockPostRepository,
+      mockTagRepository,
+    )
+    createPostViewedUseCase = new CreatePostViewedUseCase(
+      mockPostViewedRepository,
+    )
   })
 
   it('It should create a new post using the repository', async () => {
@@ -141,18 +161,36 @@ describe('Use Cases for the Post', () => {
   })
 
   it('It should update a post by its ID', async () => {
-    const postId = '591d008b-95e1-47a0-a1e8-33a84b8a02f2'
     const updatedPost: IPost = {
-      id: postId,
-      title: 'Post 2 Updated',
-      content: 'Content 2 Updated',
+      id: mockPosts[0].id,
+      title: 'Post 1 Updated',
+      content: 'Content 1 Updated',
       teacher_id: 1,
+      created_at: mockPosts[0].created_at,
+      updated_at: mockPosts[0].updated_at,
+      status: 1,
+      tags: [],
     }
     mockPostRepository.updatePost.mockResolvedValue(updatedPost)
 
     const result = await updatePostUseCase.handler(updatedPost)
-
     expect(mockPostRepository.updatePost).toHaveBeenCalledWith(updatedPost)
-    expect(result).toBe(updatedPost)
+    expect(result).toEqual(updatedPost)
+  })
+
+  it('It should create a new post viewed entry using the repository', async () => {
+    const postViewed: IPostViewed = {
+      id: 1,
+      student_id: 1,
+      post_id: '4e106c23-98cd-456a-955d-adc35295d5d4',
+      created_at: new Date(),
+    }
+
+    mockPostViewedRepository.create.mockResolvedValue(postViewed)
+
+    const result = await createPostViewedUseCase.handler(postViewed)
+
+    expect(mockPostViewedRepository.create).toHaveBeenCalledWith(postViewed)
+    expect(result).toBe(postViewed)
   })
 })

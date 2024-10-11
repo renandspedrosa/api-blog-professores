@@ -1,5 +1,5 @@
 import request from 'supertest'
-import app from '@/app' // your Express app
+import app from '@/app'
 import { generateJwt } from '@/http/middlewares/jwt-validate'
 import { appDataSource } from '@/lib/typeorm/typeorm'
 
