@@ -20,19 +20,21 @@ describe('Post Controller', () => {
       await appDataSource.initialize()
     }
 
-    const userData = {
-      name: 'user teste',
-      email: `userteste${Date.now()}@example.com`,
+    const teacherData = {
+      name: 'teacher teste',
+      email: `teacherteste${Date.now()}@example.com`,
       password: 'password123',
     }
 
-    const userResponse = await request(app).post('/teacher').send(userData)
-    expect(userResponse.status).toBe(201)
+    const teacherResponse = await request(app)
+      .post('/teacher')
+      .send(teacherData)
+    expect(teacherResponse.status).toBe(201)
 
-    userId = userResponse.body.teachers.user_id
-    teacherId = userResponse.body.teachers.id
+    userId = teacherResponse.body.teachers.user_id
+    teacherId = teacherResponse.body.teachers.id
 
-    const payload = { id: userId, email: userData.email }
+    const payload = { id: userId, email: teacherData.email }
     token = generateJwt(payload)
   })
 
@@ -155,6 +157,38 @@ describe('Post Controller', () => {
           user_id: expect.any(Number),
         }),
       ]),
+    )
+  })
+
+  it('POST /posts/:id/viewed - should create a post viewed', async () => {
+    const studentData = {
+      name: 'student teste',
+      email: `studentteste${Date.now()}@example.com`,
+      password: 'password123',
+    }
+
+    const studentResponse = await request(app)
+      .post('/student')
+      .send(studentData)
+    expect(studentResponse.status).toBe(201)
+    expect(studentResponse.body).toHaveProperty('id')
+
+    const viewedData = {
+      student_id: studentResponse.body.id,
+    }
+    const viewedResponse = await request(app)
+      .post(`/posts/${postId}/viewed`)
+      .send(viewedData)
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(viewedResponse.status).toBe(201)
+    expect(viewedResponse.body).toEqual(
+      expect.objectContaining({
+        created_at: expect.any(String),
+        id: expect.any(Number),
+        post_id: expect.any(String),
+        student_id: expect.any(Number),
+      }),
     )
   })
 
