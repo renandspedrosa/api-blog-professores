@@ -11,8 +11,8 @@ export class TagRepository implements ITagRepository {
     this.repository = appDataSource.getRepository(Tag)
   }
 
-  async create(name: string): Promise<void> {
-    await this.repository.save({ name })
+  async create(tag: ITag): Promise<ITag> {
+    return this.repository.save(tag)
   }
 
   async update(tag: ITag): Promise<ITag> {
