@@ -36,7 +36,7 @@ export async function isTeacher(
         .status(403)
         .json({ message: 'Access denied. User is not a teacher.' })
     }
-
+    req.body.teacher_id = user.teachers[0].id
     next()
   } catch (error) {
     if (error instanceof ZodError) {

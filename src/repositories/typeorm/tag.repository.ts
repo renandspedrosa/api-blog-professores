@@ -22,4 +22,8 @@ export class TagRepository implements ITagRepository {
     }
     return this.repository.save(updatedTag)
   }
+
+  async findByName(name: string): Promise<ITag | null> {
+    return this.repository.findOne({ where: { name } })
+  }
 }
