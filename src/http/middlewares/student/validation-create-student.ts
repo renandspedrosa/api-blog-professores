@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { ZodError, z } from 'zod'
 
-export function validateCreateUser(
+export function validateCreateStudent(
   req: Request,
   res: Response,
   next: NextFunction,
@@ -21,7 +21,7 @@ export function validateCreateUser(
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed for create User',
+        message: 'Validation failed for create Student',
         errors: error.format(),
       })
     }
