@@ -15,6 +15,7 @@ import { validationFindAll } from '@/http/middlewares/utils/validation-find-all'
 import { validateCreatePostViewed } from '@/http/middlewares/post/validation-create-post-viewed'
 import { createPostViewed } from './create-post-viewed'
 import { findCommentsByPostId } from '@/http/controllers/post/find-comments-by-post-id'
+import { isStudent } from '@/http/middlewares/student/is-student'
 
 const router = Router()
 
@@ -26,6 +27,11 @@ router.put('/:id', isTeacher, validationFindPost, updatePost)
 router.get('/:id', validationFindPost, findPost)
 router.get('/:id/comments', findCommentsByPostId)
 router.delete('/:id', isTeacher, validationFindPost, deletePost)
-router.post('/:post_id/viewed', validateCreatePostViewed, createPostViewed) // TODO: criar midleware para permitir somente students
+router.post(
+  '/:post_id/viewed',
+  isStudent,
+  validateCreatePostViewed,
+  createPostViewed,
+)
 
 export default router

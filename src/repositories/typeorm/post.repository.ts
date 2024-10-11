@@ -80,6 +80,7 @@ export class PostRepository implements IPostRepository {
   }
 
   async updatePost(post: IPost): Promise<IPost> {
+    post.updated_at = new Date()
     return this.repository.save(post)
   }
 
