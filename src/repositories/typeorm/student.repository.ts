@@ -17,11 +17,19 @@ export class StudentRepository implements IStudentRepository {
   }
 
   async getAllStudents(page: number, limit: number): Promise<IStudent[]> {
-    return this.repository.find({
+    const students = await this.repository.find({
+      relations: ['user'],
       where: { status: 1 },
       skip: (page - 1) * limit,
       take: limit,
     })
+
+    return students.map((student: Student) => ({
+      id: student.id,
+      user_id: student.user_id,
+      email: student.user?.email || null,
+      name: student.user?.name || null,
+    }))
   }
 
   async delete(studentId: number): Promise<void> {
