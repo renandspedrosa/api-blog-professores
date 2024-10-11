@@ -1,4 +1,4 @@
-import { makeFindWithStudentUseCase } from '@/use-cases/factory/student/make-find-with-student'
+import { makeFindWithStudentUseCase } from '@/use-cases/factory/user/make-find-with-student'
 import { Request, Response, NextFunction } from 'express'
 import { ZodError } from 'zod'
 
