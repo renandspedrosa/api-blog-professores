@@ -4,7 +4,6 @@ import { generateJwt } from '@/http/middlewares/jwt-validate'
 import { appDataSource } from '@/lib/typeorm/typeorm'
 import { validateCreateTag } from '@/http/middlewares/tag/validation-create-tag'
 import { Request, Response, NextFunction } from 'express'
-import { z } from 'zod'
 
 let token: string
 
