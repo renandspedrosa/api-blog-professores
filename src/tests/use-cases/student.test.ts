@@ -9,7 +9,7 @@ const mockStudentRepository: jest.Mocked<IStudentRepository> = {
   create: jest.fn(),
   delete: jest.fn(),
   getAllStudents: jest.fn(),
-  getById: jest.fn()
+  getById: jest.fn(),
 }
 
 const mockStudents: Student[] = [
@@ -18,14 +18,14 @@ const mockStudents: Student[] = [
     user_id: 1,
     status: 1,
     created_at: new Date(),
-    updated_at: new Date()
+    updated_at: new Date(),
   },
   {
     id: 2,
     user_id: 2,
     status: 1,
     created_at: new Date(),
-    updated_at: new Date()
+    updated_at: new Date(),
   },
 ]
 
@@ -44,7 +44,7 @@ describe('Use Cases for the Student', () => {
 
   it('It should create a new student using the repository', async () => {
     const newStudent: Student = {
-      user_id: 2
+      user_id: 2,
     }
 
     mockStudentRepository.create.mockResolvedValue({
