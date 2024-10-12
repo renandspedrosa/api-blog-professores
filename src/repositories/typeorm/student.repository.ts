@@ -32,6 +32,10 @@ export class StudentRepository implements IStudentRepository {
     }))
   }
 
+  async getById(studentId: number): Promise<IStudent | null> {
+    return this.repository.findOne({ where: { id: studentId, status: 1 } })
+  }
+
   async delete(studentId: number): Promise<void> {
     await this.repository.update(studentId, { status: 0 })
   }
