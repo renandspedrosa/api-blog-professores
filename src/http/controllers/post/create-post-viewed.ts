@@ -1,5 +1,5 @@
 import { makeCreatePostViewedUseCase } from '@/use-cases/factory/post/make-create-post-viewed-use-case'
-import { makeFindWithStudentUseCase } from '@/use-cases/factory/student/make-find-with-student'
+import { makeFindWithStudentUseCase } from '@/use-cases/factory/user/make-find-with-student'
 import { Request, Response, NextFunction } from 'express'
 
 interface AuthenticatedRequest extends Request {
