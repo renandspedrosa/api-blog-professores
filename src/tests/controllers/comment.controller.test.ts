@@ -4,6 +4,7 @@ import { generateJwt } from '@/http/middlewares/jwt-validate'
 import { appDataSource } from '@/lib/typeorm/typeorm'
 
 let token: string
+let userId: number
 
 describe('Comment Controller', () => {
   afterAll(async () => {
@@ -17,7 +18,20 @@ describe('Comment Controller', () => {
       await appDataSource.initialize()
     }
 
-    const payload = { id: 1, email: 'cc@gmail.com' }
+    const teacherData = {
+      name: 'teacher teste',
+      email: `teacherteste${Date.now()}@example.com`,
+      password: 'password123',
+    }
+
+    const teacherResponse = await request(app)
+      .post('/teacher')
+      .send(teacherData)
+    expect(teacherResponse.status).toBe(201)
+
+    userId = teacherResponse.body.teachers.user_id
+
+    const payload = { id: userId, email: teacherData.email }
     token = generateJwt(payload)
   })
 
