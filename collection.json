@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "23010a5a-f2b8-4bfd-a7c1-fafe215a4447",
+		"_postman_id": "eac98b4a-4447-45da-b567-95e2982cc759",
 		"name": "API Blog Professores",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "12044180"
@@ -394,14 +394,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"2222\",\r\n    \"content\": \"EEEEEEEEEEE\",\r\n    \"tags\":[\r\n        {\r\n            \"id\":\"4\"\r\n        },\r\n        {\r\n            \"name\":\"renan\"\r\n        }\r\n    ]\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{base_url}}/posts"
+						"url": "{{base_url}}/posts/idPost/viewed"
 					},
 					"response": []
 				},
