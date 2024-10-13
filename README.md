@@ -58,7 +58,15 @@ Certifique-se de ter o Docker instalado em sua máquina e execute o seguinte com
 
 O arquivo da coleção está na raiz do projeto e se chama `collection.json`. Importe-o no Postman ou Insomnia para acessar todos os endpoints da aplicação.
 
-#### 7. 🧪 Realize os testes
+#### 7. 📖 Acesse a documentação do Swagger
+
+Você pode acessar a documentação do Swagger em:
+
+[![Swagger](https://img.shields.io/badge/Swagger-API-yellow?logo=swagger&logoColor=white)](http://localhost:3000)
+
+**URL:** [http://localhost:3000](http://localhost:3000)
+
+#### 8. 🧪 Realize os testes
 
 Execute o seguinte comando para realizar os testes:
 
@@ -68,7 +76,7 @@ Execute o seguinte comando para realizar os testes:
 npm run test
 ```
 
-#### 8. 📊 Realize os testes de cobertura
+#### 9. 📊 Realize os testes de cobertura
 
 [![Coverage Status](https://coveralls.io/repos/github/USERNAME/REPO_NAME/badge.svg?branch=main)](https://coveralls.io/github/USERNAME/REPO_NAME)
 
@@ -76,7 +84,7 @@ npm run test
 npm run test:coverage
 ```
 
-#### 9. 🎥 Link para vídeo explicativo
+#### 10. 🎥 Link para vídeo explicativo
 
 [Assista ao vídeo aqui](https://)
 

@@ -3,6 +3,13 @@ import { makeFindWithTeacherUseCase } from '@/use-cases/factory/user/make-find-w
 import { Request, Response, NextFunction } from 'express'
 import { ZodError, z } from 'zod'
 
+interface AuthenticatedRequest extends Request {
+  auth?: {
+    id: number
+    userType: string
+  }
+}
+
 export async function validateDeleteComment(
   req: Request,
   res: Response,
@@ -17,6 +24,14 @@ export async function validateDeleteComment(
 
     const { id } = req.params
 
+    const { auth } = req as AuthenticatedRequest
+
+    if (!auth || !auth.id) {
+      return res.status(401).json({ message: 'Unauthorized' })
+    }
+
+    const user_id: number = auth.id
+
     const getCommentUseCase = makeGetCommentByIdUseCase()
     const comment = await getCommentUseCase.handler(id)
 
@@ -25,8 +40,12 @@ export async function validateDeleteComment(
     const findWithTeacherUseCase = makeFindWithTeacherUseCase()
     const teacher = await findWithTeacherUseCase.handler(comment.user_id)
 
-    if (!teacher)
-      return res.status(403).json({ message: 'User is not a teacher' })
+    if (!teacher || comment.user_id !== user_id) {
+      return res.status(403).json({
+        message:
+          'User is not a teacher or user is not responsible for the comment.',
+      })
+    }
 
     next()
   } catch (error) {
