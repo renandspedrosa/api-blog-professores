@@ -12,28 +12,29 @@ services:
     volumes:
       - postgres:/data/postgres
     ports:
-      - "${DATABASE_PORT}:${DATABASE_PORT}"
+      - "5432:5432"
     networks:
       - app-network
     restart: unless-stopped
 
-  # alterar o DATABASE_HOST=postgres do env para executar a api em modo de container para produção
-  # api:
-  #   build: 
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: api-blog
-  #   restart: always
-  #   ports:
-  #     - "${PORT}:${PORT}" 
-  #   networks:
-  #     - app-network
-  #   depends_on:
-  #     - postgres
-  #   environment:
-  #     DATABASE_USER: ${DATABASE_USER}
-  #     DATABASE_HOST: ${DATABASE_HOST}
-  #     DATABASE_PORT: ${DATABASE_PORT}
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-blog
+    restart: always
+    ports:
+      - "${PORT}:${PORT}"
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_HOST: postgres 
+      DATABASE_PORT: 5432  
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
 
 networks:
   app-network: 
