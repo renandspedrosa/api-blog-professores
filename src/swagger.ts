@@ -12,7 +12,16 @@ const swaggerOptions = {
     info: {
       title: 'API Documentation',
       version: '1.0.0',
-      description: 'API de exemplo usando Swagger com TypeScript',
+      description: 'API blog dos professores usando Swagger com TypeScript',
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
     },
     servers: [
       {
