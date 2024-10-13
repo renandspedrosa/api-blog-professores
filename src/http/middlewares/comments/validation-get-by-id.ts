@@ -1,3 +1,4 @@
+import { makeGetCommentByIdUseCase } from '@/use-cases/factory/comment/get-comment-by-id-use-case'
 import { Request, Response, NextFunction } from 'express'
 import { ZodError, z } from 'zod'
 
@@ -6,12 +7,20 @@ export async function validationGetCommentById(
   res: Response,
   next: NextFunction,
 ) {
-  const registerParamsSchema = z.object({
-    id: z.coerce.string(),
-  })
-
   try {
-    req.params = registerParamsSchema.parse(req.params)
+    const commentParamsSchema = z.object({
+      id: z.coerce.string(),
+    })
+
+    req.params = commentParamsSchema.parse(req.params)
+
+    const { id } = req.params
+
+    const getCommentUseCase = makeGetCommentByIdUseCase()
+    const comment = await getCommentUseCase.handler(id)
+
+    if (!comment) return res.status(404).json({ message: 'Comment not found' })
+
     next()
   } catch (error) {
     if (error instanceof ZodError) {

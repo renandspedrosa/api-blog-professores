@@ -5,6 +5,7 @@ import { appDataSource } from '@/lib/typeorm/typeorm'
 
 let token: string
 let userId: number
+let postId: string
 
 describe('Comment Controller', () => {
   afterAll(async () => {
@@ -19,9 +20,9 @@ describe('Comment Controller', () => {
     }
 
     const teacherData = {
-      name: 'teacher teste',
-      email: `teacherteste${Date.now()}@example.com`,
-      password: 'password123',
+      name: 'Thiago Araujo',
+      email: `thiago.araujo_${Date.now()}@example.com`,
+      password: '12345678',
     }
 
     const teacherResponse = await request(app)
@@ -33,16 +34,34 @@ describe('Comment Controller', () => {
 
     const payload = { id: userId, email: teacherData.email }
     token = generateJwt(payload)
+
+    const postData = {
+      title: 'loren ipsum',
+      content:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      tags: [
+        {
+          name: 'Novidades',
+        },
+      ],
+    }
+
+    const postResponse = await request(app)
+      .post('/posts')
+      .send(postData)
+      .set('Authorization', `Bearer ${token}`)
+
+    postId = postResponse.body.id
   })
 
   it('POST /comments/:post_id - should create a new comment', async () => {
     console.log(token)
 
-    const post_id = '62a87cad-ffbd-498d-9ff9-f4acea442334'
+    const post_id = postId
 
     const commentData = {
       content: 'This is a test comment.',
-      user_id: '1',
+      user_id: userId,
     }
     const response = await request(app)
       .post(`/comments/${post_id}`)
@@ -55,12 +74,11 @@ describe('Comment Controller', () => {
   })
 
   it('DELETE /comments/:id - should delete a comment', async () => {
-    // Crie um comment primeiro para garantir que há algo para deletar
-    const post_id = '62a87cad-ffbd-498d-9ff9-f4acea442334'
+    const post_id = postId
 
     const commentData = {
       content: 'This is a test comment to delete.',
-      user_id: '1',
+      user_id: userId,
     }
     const createResponse = await request(app)
       .post(`/comments/${post_id}`)
@@ -71,14 +89,12 @@ describe('Comment Controller', () => {
 
     const commentId = createResponse.body.id
 
-    // Agora delete o comment
     const deleteResponse = await request(app)
       .delete(`/comments/${commentId}`)
       .set('Authorization', `Bearer ${token}`)
 
     expect(deleteResponse.status).toBe(204)
 
-    // Verifique se o comment foi realmente deletado
     const findResponse = await request(app)
       .get(`/comments/${post_id}/${commentId}`)
       .set('Authorization', `Bearer ${token}`)
@@ -95,13 +111,12 @@ describe('Comment Controller', () => {
   })
 
   it('GET /comments/:id - should return a comment by ID', async () => {
-    // Primeiro, crie um post para associar o comment
-    const post_id = '62a87cad-ffbd-498d-9ff9-f4acea442334'
+    const post_id = postId
 
     // Crie um novo comment para buscar em seguida
     const commentData = {
       content: 'This is a test comment to find.',
-      user_id: '1',
+      user_id: userId,
     }
     const createResponse = await request(app)
       .post(`/comments/${post_id}`)
@@ -112,7 +127,6 @@ describe('Comment Controller', () => {
 
     const commentId = createResponse.body.id
 
-    // Buscar o comment pelo ID
     const findResponse = await request(app)
       .get(`/comments/${commentId}`)
       .set('Authorization', `Bearer ${token}`)
@@ -123,7 +137,7 @@ describe('Comment Controller', () => {
   })
 
   it('GET /comments/:id - should return 404 if comment is not found', async () => {
-    const post_id = '62a87cad-ffbd-498d-9ff9-f4acea442334'
+    const post_id = postId
     const invalidId = '251c5ff9-6e9d-4536-8863-e3ecb676934e'
     const response = await request(app)
       .get(`/comments/${post_id}/${invalidId}`)
@@ -133,12 +147,10 @@ describe('Comment Controller', () => {
   })
 
   it('PUT /comments/:id - should update a comment by ID', async () => {
-    // Primeiro, crie um post para associar o comment
-    const post_id = '62a87cad-ffbd-498d-9ff9-f4acea442334'
-    // Primeiro, crie um novo comment para ser atualizado em seguida
+    const post_id = postId
     const commentData = {
       content: 'This is a test comment to update.',
-      user_id: '1',
+      user_id: userId,
     }
     const createResponse = await request(app)
       .post(`/comments/${post_id}`)
@@ -148,8 +160,6 @@ describe('Comment Controller', () => {
     expect(createResponse.status).toBe(201)
 
     const commentId = createResponse.body.id
-
-    // Atualizar o comment com novo conteúdo
     const updatedData = {
       content: 'Updated test comment.',
       user_id: commentData.user_id,
