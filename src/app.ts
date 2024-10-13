@@ -10,7 +10,7 @@ import tagRouter from '@/http/controllers/tag/routes'
 import studentRoute from '@/http/controllers/student/routes'
 import { validateJwt } from './http/middlewares/jwt-validate'
 import errorMiddleware from './global/error-midleware'
-// import { globalErrorHandler } from '@/utils/global-error-handler';
+import { setupSwagger } from './swagger'
 
 const app = express()
 
@@ -25,5 +25,7 @@ app.use('/tag', validateJwt, tagRouter)
 app.use('/student', studentRoute)
 
 app.use(errorMiddleware)
+
+setupSwagger(app)
 
 export default app
