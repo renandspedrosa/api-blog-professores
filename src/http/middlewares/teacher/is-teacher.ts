@@ -2,7 +2,6 @@ import { makeFindWithTeacherUseCase } from '@/use-cases/factory/user/make-find-w
 import { Request, Response, NextFunction } from 'express'
 import { ZodError } from 'zod'
 
-// Interface para o objeto auth no JWT
 interface AuthenticatedRequest extends Request {
   auth?: {
     id: number // Tipo esperado do userId

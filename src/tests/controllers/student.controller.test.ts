@@ -33,7 +33,6 @@ describe('Student Controller', () => {
     expect(response.body.students).toHaveProperty('user_id')
     expect(response.body.students).toHaveProperty('status', 1)
     studentId = response.body.students.id
-
   })
 
   it('GET /student - should get all students with pagination', async () => {

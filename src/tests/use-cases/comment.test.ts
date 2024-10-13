@@ -2,7 +2,6 @@ import { IComment } from '@/entities/models/comment.interface'
 import { ICommentRepository } from '@/repositories/comment.repository.interface'
 import { CreateCommentUseCase } from '@/use-cases/comment/create-comment'
 import { DeleteCommentUseCase } from '@/use-cases/comment/delete-comment'
-import { GetAllCommentsUseCase } from '@/use-cases/comment/get-all-comments'
 import { GetCommentByPostIdUseCase } from '@/use-cases/comment/get-comment-by-post-id'
 import { UpdateCommentUseCase } from '@/use-cases/comment/update-comment'
 import { GetCommentByIdUseCase } from '@/use-cases/comment/get-comment-by-id'
@@ -40,7 +39,6 @@ const mockComments: IComment[] = [
 describe('Use Cases for the Comment', () => {
   let createCommentUseCase: CreateCommentUseCase
   let deleteUseCase: DeleteCommentUseCase
-  let getAllCommentsUseCase: GetAllCommentsUseCase
   let getCommentByPostIdUseCase: GetCommentByPostIdUseCase
   let getCommentByIdUseCase: GetCommentByIdUseCase
   let updateUseCase: UpdateCommentUseCase
@@ -48,7 +46,6 @@ describe('Use Cases for the Comment', () => {
   beforeEach(() => {
     createCommentUseCase = new CreateCommentUseCase(mockCommentRepository)
     deleteUseCase = new DeleteCommentUseCase(mockCommentRepository)
-    getAllCommentsUseCase = new GetAllCommentsUseCase(mockCommentRepository)
     getCommentByPostIdUseCase = new GetCommentByPostIdUseCase(
       mockCommentRepository,
     )
@@ -81,20 +78,6 @@ describe('Use Cases for the Comment', () => {
     await deleteUseCase.handler(commentId)
 
     expect(mockCommentRepository.delete).toHaveBeenCalledWith(commentId)
-  })
-
-  it('should find all comments with pagination', async () => {
-    const page = 1
-    const limit = 10
-    mockCommentRepository.getAllComments.mockResolvedValue(mockComments)
-
-    const result = await getAllCommentsUseCase.handler(page, limit)
-
-    expect(mockCommentRepository.getAllComments).toHaveBeenCalledWith(
-      page,
-      limit,
-    )
-    expect(result).toEqual(mockComments)
   })
 
   it('should find comments by post ID', async () => {

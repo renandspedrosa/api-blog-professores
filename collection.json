@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"user@teste.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"renan1728853964633@example.com\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -571,7 +571,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"content\":\"comentário teste\",\r\n    \"user_id\":2\r\n}",
+							"raw": "{\r\n    \"content\":\"comentário teste 2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -583,20 +583,11 @@
 					"response": []
 				},
 				{
-					"name": "find comments",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{base_url}}/comments"
-					},
-					"response": []
-				},
-				{
 					"name": "find comments by id",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{base_url}}/comments/41dd53de-4beb-4018-b502-c00ef48f9f86"
+						"url": "{{base_url}}/comments/aa68a849-6ef4-4dd2-af67-3898763c3bee"
 					},
 					"response": []
 				},
@@ -607,14 +598,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"content\":\"comentario teste 2\",\r\n    \"user_id\":2,\r\n    \"post_id\":\"cfffef6a-56c6-44a6-9635-0ce21085b39c\"\r\n}",
+							"raw": "{\r\n    \"content\":\"comentario teste 2\",\r\n    \"post_id\":\"cfffef6a-56c6-44a6-9635-0ce21085b39c\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{base_url}}/comments/41dd53de-4beb-4018-b502-c00ef48f9f86"
+						"url": "{{base_url}}/comments/aa68a849-6ef4-4dd2-af67-3898763c3bee"
 					},
 					"response": []
 				},
@@ -623,7 +614,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{base_url}}/comments/41dd53de-4beb-4018-b502-c00ef48f9f86"
+						"url": "{{base_url}}/comments/33cc392f-f649-4fd6-a86e-56e73a78668a"
 					},
 					"response": []
 				}
@@ -633,7 +624,7 @@
 	"auth": {
 		"type": "bearer",
 		"bearer": {
-			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyQHRlc3RlLmNvbSIsImlhdCI6MTcyODc3ODU3MiwiZXhwIjoxNzI4NzgyMTcyfQ.QbCuUrTyWckHGxj0Jf3Eg6iUnlEWlEUbQcYZMQoVUgg"
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImVtYWlsIjoicmVuYW4xNzI4ODUzOTY0NjMzQGV4YW1wbGUuY29tIiwiaWF0IjoxNzI4ODU2NDIyLCJleHAiOjE3Mjg4NjAwMjJ9.3Ib7I7cfHK1loXnuvc86zdb0x_2nRQ2Mrq_l4dVNnpo"
 		}
 	},
 	"event": [

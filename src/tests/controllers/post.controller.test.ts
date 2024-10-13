@@ -168,8 +168,8 @@ describe('Post Controller', () => {
     }
 
     const studentResponse = await request(app)
-        .post('/student')
-        .send(studentData)
+      .post('/student')
+      .send(studentData)
 
     expect(studentResponse.status).toBe(201)
     expect(studentResponse.body).toHaveProperty('students')
@@ -182,17 +182,17 @@ describe('Post Controller', () => {
     const tokenStudent = generateJwt(payloadStudent)
 
     const viewedResponse = await request(app)
-        .post(`/posts/${postId}/viewed`)
-        .set('Authorization', `Bearer ${tokenStudent}`)
+      .post(`/posts/${postId}/viewed`)
+      .set('Authorization', `Bearer ${tokenStudent}`)
 
     expect(viewedResponse.status).toBe(201)
     expect(viewedResponse.body).toEqual(
-        expect.objectContaining({
-          created_at: expect.any(String),
-          id: expect.any(Number),
-          post_id: expect.any(String),
-          student_id: expect.any(Number),
-        }),
+      expect.objectContaining({
+        created_at: expect.any(String),
+        id: expect.any(Number),
+        post_id: expect.any(String),
+        student_id: expect.any(Number),
+      }),
     )
   })
 
