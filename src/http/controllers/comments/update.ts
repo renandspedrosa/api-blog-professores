@@ -7,13 +7,14 @@ export async function update(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params
     const { content, user_id, post_id } = req.body
 
-    const updatedComment = await updateCommentUseCase.handler({
+    const comment = {
       post_id: post_id as string,
       id: id as string,
       content,
       user_id,
-    })
-    return res.status(201).json(updatedComment)
+    }
+    await updateCommentUseCase.handler(comment)
+    return res.status(201).json(comment)
   } catch (error) {
     next(error)
   }

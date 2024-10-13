@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "23010a5a-f2b8-4bfd-a7c1-fafe215a4447",
+		"_postman_id": "eac98b4a-4447-45da-b567-95e2982cc759",
 		"name": "API Blog Professores",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "12044180"
@@ -10,31 +10,13 @@
 			"name": "Usuário",
 			"item": [
 				{
-					"name": "create",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"teste@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{base_url}}/user"
-					},
-					"response": []
-				},
-				{
 					"name": "signin",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"teste@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"renan1728853964633@example.com\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -46,11 +28,41 @@
 					"response": []
 				},
 				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"fulano\",\r\n    \"email\": \"user@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/user/2"
+					},
+					"response": []
+				},
+				{
 					"name": "find user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{base_url}}/user/1"
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/user/2"
 					},
 					"response": []
 				}
@@ -66,7 +78,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"renan\", \r\n    \"user_id\":\"2\"\r\n}\r\n",
+							"raw": "{\r\n    \"name\": \"usuário teste\",\r\n    \"email\": \"user@teste.com\",\r\n    \"password\": \"123456\",\r\n    \"subjects\":[\r\n        {\r\n            \"name\":\"Matemática\"\r\n        },\r\n        {\r\n            \"name\":\"História\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -87,20 +99,52 @@
 					"response": []
 				},
 				{
-					"name": "update",
+					"name": "delete",
 					"request": {
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"joao\", \r\n    \"user_id\":\"2\"\r\n}\r\n",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{base_url}}/teacher/34"
+						"url": "{{base_url}}/teacher/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Estudante",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"estudante\", \r\n    \"email\":\"teste@estudante.com\",\r\n    \"password\":\"123456\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/student"
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/student"
 					},
 					"response": []
 				},
@@ -118,7 +162,7 @@
 								}
 							}
 						},
-						"url": "{{base_url}}/teacher/34"
+						"url": "{{base_url}}/student/1"
 					},
 					"response": []
 				}
@@ -134,7 +178,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Matemática\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Português\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -217,7 +261,7 @@
 							"mode": "formdata",
 							"formdata": []
 						},
-						"url": "{{base_url}}/subject/18076474-49a3-4e2b-a361-0d3090590544"
+						"url": "{{base_url}}/subject/e00904aa-33ef-4553-ac84-adc1e5fe31b0"
 					},
 					"response": []
 				},
@@ -241,14 +285,14 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"His\"\r\n}",
+							"raw": "{\r\n    \"name\":\"português\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{base_url}}/subject/18076474-49a3-4e2b-a361-0d3090590544"
+						"url": "{{base_url}}/subject/e00904aa-33ef-4553-ac84-adc1e5fe31b0"
 					},
 					"response": []
 				},
@@ -274,7 +318,7 @@
 							"mode": "formdata",
 							"formdata": []
 						},
-						"url": "{{base_url}}/subject/9caa14ab-7a35-4f36-b6d6-fd3f27de7487"
+						"url": "{{base_url}}/subject/e00904aa-33ef-4553-ac84-adc1e5fe31b0"
 					},
 					"response": []
 				}
@@ -291,7 +335,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"novidade\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Novidade\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -309,7 +353,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"novidade\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Novidades\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -332,7 +376,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"AAAAAAAAAAA\",\r\n    \"content\": \"EEEEEEEEEEE\",\r\n    \"teacher_id\": \"36\",\r\n    \"tags\":[\r\n        {\r\n            \"id\":\"1\",\r\n            \"name\":\"teste\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"title\": \"Feriado\",\r\n    \"content\": \"não haverá aula nos dias 14 e 15\",\r\n    \"tags\":[\r\n        {\r\n            \"name\":\"Novidades\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -340,6 +384,42 @@
 							}
 						},
 						"url": "{{base_url}}/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "create viewed",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/posts/idPost/viewed"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Feriado\",\r\n    \"content\": \"não haverá aula nos dias 14 e 15, as aulas voltam normal no dia 16.\",\r\n    \"tags\":[\r\n        {\r\n            \"name\":\"Novidades\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/posts/cfffef6a-56c6-44a6-9635-0ce21085b39c"
 					},
 					"response": []
 				},
@@ -357,52 +437,7 @@
 								}
 							}
 						},
-						"url": "{{base_url}}/posts/176e3fd0-e8dc-4414-8e0e-62050ab734b8"
-					},
-					"response": []
-				},
-				{
-					"name": "find-post-by-teacher",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"url": {
-							"raw": "{{base_url}}/posts/teacher/35?page=1&limit=2",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"posts",
-								"teacher",
-								"35"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "limit",
-									"value": "2"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "find-post",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{base_url}}/posts/5c949026-5c3a-4e89-9809-4bb410a78b96"
+						"url": "{{base_url}}/posts/40ac6c01-5338-4206-bfa8-c7d95098f251"
 					},
 					"response": []
 				},
@@ -412,7 +447,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/posts?page=1&limit=2&tag=1",
+							"raw": "{{base_url}}/posts?page=1&limit=10",
 							"host": [
 								"{{base_url}}"
 							],
@@ -426,14 +461,24 @@
 								},
 								{
 									"key": "limit",
-									"value": "2"
+									"value": "10"
 								},
 								{
 									"key": "tag",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								}
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/posts/cfffef6a-56c6-44a6-9635-0ce21085b39c"
 					},
 					"response": []
 				},
@@ -443,7 +488,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/posts/search?page=1&limit=2&term=EEEEEEEE",
+							"raw": "{{base_url}}/posts/search?page=1&limit=2&term=aula",
 							"host": [
 								"{{base_url}}"
 							],
@@ -462,10 +507,114 @@
 								},
 								{
 									"key": "term",
-									"value": "EEEEEEEE"
+									"value": "aula"
 								}
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-post-by-teacher",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/posts/teacher/2?page=1&limit=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posts",
+								"teacher",
+								"2"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find comments by id post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/posts/cfffef6a-56c6-44a6-9635-0ce21085b39c/comments"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comentários",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"comentário teste 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/comments/cfffef6a-56c6-44a6-9635-0ce21085b39c"
+					},
+					"response": []
+				},
+				{
+					"name": "find comments by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/comments/aa68a849-6ef4-4dd2-af67-3898763c3bee"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"comentario teste 2\",\r\n    \"post_id\":\"cfffef6a-56c6-44a6-9635-0ce21085b39c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/comments/aa68a849-6ef4-4dd2-af67-3898763c3bee"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{base_url}}/comments/33cc392f-f649-4fd6-a86e-56e73a78668a"
 					},
 					"response": []
 				}
@@ -475,7 +624,7 @@
 	"auth": {
 		"type": "bearer",
 		"bearer": {
-			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0ZUBnbWFpbC5jb20iLCJpYXQiOjE3Mjc4MjkwODQsImV4cCI6MTcyNzgzMjY4NH0.RQGRMC5FmvJ18iBbS2pZ30dH9P3iZ2pTEMobiAL4hdQ"
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImVtYWlsIjoicmVuYW4xNzI4ODUzOTY0NjMzQGV4YW1wbGUuY29tIiwiaWF0IjoxNzI4ODU2NDIyLCJleHAiOjE3Mjg4NjAwMjJ9.3Ib7I7cfHK1loXnuvc86zdb0x_2nRQ2Mrq_l4dVNnpo"
 		}
 	},
 	"event": [

@@ -30,9 +30,15 @@ export class CommentRepository implements ICommentRepository {
     })
   }
 
-  getCommentsByPostId(post_id: string): Promise<IComment[]> {
+  getCommentsByPostId(
+    post_id: string,
+    page: number,
+    limit: number,
+  ): Promise<IComment[]> {
     return this.repository.find({
       where: { post_id, status: 1 },
+      skip: (page - 1) * limit,
+      take: limit,
     })
   }
 

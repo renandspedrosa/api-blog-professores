@@ -145,7 +145,7 @@ describe('Post Controller', () => {
       .set('Authorization', `Bearer ${token}`)
 
     const commentsResponse = await request(app)
-      .get(`/posts/${postId}/comments`)
+      .get(`/posts/${postId}/comments?page=1&limit=10`)
       .set('Authorization', `Bearer ${token}`)
     expect(commentsResponse.status).toBe(200)
     expect(commentsResponse.body).toEqual(
@@ -170,13 +170,17 @@ describe('Post Controller', () => {
     const studentResponse = await request(app)
       .post('/student')
       .send(studentData)
+
     expect(studentResponse.status).toBe(201)
-    expect(studentResponse.body).toHaveProperty('student')
+    expect(studentResponse.body).toHaveProperty('students')
+
     const payloadStudent = {
-      id: studentResponse.body.student.user_id,
+      id: studentResponse.body.students.user_id,
       email: studentResponse.body.email,
     }
+
     const tokenStudent = generateJwt(payloadStudent)
+
     const viewedResponse = await request(app)
       .post(`/posts/${postId}/viewed`)
       .set('Authorization', `Bearer ${tokenStudent}`)
