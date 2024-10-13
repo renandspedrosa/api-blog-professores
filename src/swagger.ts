@@ -5,10 +5,9 @@ import { env } from './env'
 
 const PORT = env.PORT
 
-// Defina as opções do Swagger
 const swaggerOptions = {
   swaggerDefinition: {
-    openapi: '3.0.0', // Define a versão do OpenAPI
+    openapi: '3.0.0',
     info: {
       title: 'API Documentation',
       version: '1.0.0',
@@ -28,11 +27,40 @@ const swaggerOptions = {
         url: `http://localhost:${PORT}`,
       },
     ],
+    tags: [
+      {
+        name: 'User',
+        description: 'Operações relacionadas a usuários',
+      },
+      {
+        name: 'Teacher',
+        description: 'Operações relacionadas a professores',
+      },
+      {
+        name: 'Student',
+        description: 'Operações relacionadas a estudantes',
+      },
+      {
+        name: 'Posts',
+        description: 'Operações relacionadas as postagem dos professores',
+      },
+      {
+        name: 'Comments',
+        description: 'Operações relacionadas aos comentários',
+      },
+      {
+        name: 'Subject',
+        description: 'Operações relacionadas as disciplinas',
+      },
+      {
+        name: 'Tag',
+        description: 'Operações relacionadas as tags',
+      },
+    ],
   },
-  apis: ['./src/http/controllers/**/*.ts'], // Caminho para os arquivos de rotas
+  apis: ['./src/http/controllers/**/*.ts'],
 }
 
-// Gerar a especificação do Swagger a partir das opções
 const swaggerDocs = swaggerJSDoc(swaggerOptions)
 
 export const setupSwagger = (app: Express): void => {

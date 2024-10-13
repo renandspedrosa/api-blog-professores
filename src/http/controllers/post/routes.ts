@@ -25,7 +25,7 @@ const router = Router()
  *   post:
  *     summary: Cria um novo post
  *     tags:
- *       - Post
+ *       - Posts
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -71,7 +71,7 @@ router.post('/', isTeacher, validateCreatePost, create)
  *   get:
  *     summary: Recupera todos os posts
  *     tags:
- *       - Post
+ *       - Posts
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -108,7 +108,7 @@ router.get('/', validationFindAllPost, findAllPost)
  *   get:
  *     summary: Recupera todos os posts de um professor específico
  *     tags:
- *       - Post
+ *       - Posts
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -146,7 +146,7 @@ router.get('/teacher/:teacherId', validationFindAll, findPostByTeacher)
  *   get:
  *     summary: Busca posts pelo termo especificado
  *     tags:
- *       - Post
+ *       - Posts
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -184,7 +184,7 @@ router.get('/search', validationFindByTerm, findPostByTerm)
  *   put:
  *     summary: Atualiza um post existente
  *     tags:
- *       - Post
+ *       - Posts
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -193,7 +193,6 @@ router.get('/search', validationFindByTerm, findPostByTerm)
  *         required: true
  *         schema:
  *           type: string
- *           example: "c3c882b2-070e-43d2-81ac-acba3e888e31"
  *         description: ID do post a ser atualizado
  *     requestBody:
  *       required: true
@@ -229,7 +228,7 @@ router.put('/:id', isTeacher, validationFindPost, updatePost)
  *   get:
  *     summary: Busca um post específico
  *     tags:
- *       - Post
+ *       - Posts
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -238,7 +237,6 @@ router.put('/:id', isTeacher, validationFindPost, updatePost)
  *         required: true
  *         schema:
  *           type: string
- *           example: "75e47797-09ce-46c0-b8bb-d8e0d7555dc1"
  *         description: ID do post a ser buscado
  *     responses:
  *       200:
@@ -253,7 +251,7 @@ router.get('/:id', validationFindPost, findPost)
  *   get:
  *     summary: Busca os comentários de um post específico
  *     tags:
- *       - Post
+ *       - Posts
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -262,7 +260,6 @@ router.get('/:id', validationFindPost, findPost)
  *         required: true
  *         schema:
  *           type: string
- *           example: "75e47797-09ce-46c0-b8bb-d8e0d7555dc1"
  *         description: ID do post para o qual os comentários serão buscados
  *     responses:
  *       200:
@@ -277,7 +274,7 @@ router.get('/:id/comments', findCommentsByPostId)
  *   delete:
  *     summary: Remove um post específico
  *     tags:
- *       - Post
+ *       - Posts
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -286,7 +283,6 @@ router.get('/:id/comments', findCommentsByPostId)
  *         required: true
  *         schema:
  *           type: string
- *           example: "75e47797-09ce-46c0-b8bb-d8e0d7555dc1"
  *         description: ID do post que será removido
  *     responses:
  *       204:
@@ -301,7 +297,7 @@ router.delete('/:id', isTeacher, validationFindPost, deletePost)
  *   post:
  *     summary: Registra a visualização de um post por um estudante, PRECISA ESTAR LOGADO COMO ESTUDANTE
  *     tags:
- *       - Post
+ *       - Posts
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -310,7 +306,6 @@ router.delete('/:id', isTeacher, validationFindPost, deletePost)
  *         required: true
  *         schema:
  *           type: string
- *           example: "75e47797-09ce-46c0-b8bb-d8e0d7555dc1"
  *         description: ID do post que foi visualizado
  *     responses:
  *       201:

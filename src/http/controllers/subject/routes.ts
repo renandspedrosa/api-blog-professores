@@ -86,7 +86,6 @@ router.get('/', validationFindAll, findAllSubject)
  *         description: ID do assunto a ser recuperado
  *         schema:
  *           type: string
- *           example: f0fcf82a-fc2f-4995-9769-c8b2665a2291
  *     responses:
  *       200:
  *         description: Assunto recuperado com sucesso
@@ -110,7 +109,6 @@ router.get('/:id', validationFindSubject, findSubject)
  *         description: ID do assunto a ser atualizado
  *         schema:
  *           type: string
- *           example: f0fcf82a-fc2f-4995-9769-c8b2665a2291
  *     requestBody:
  *       required: true
  *       content:
@@ -147,7 +145,6 @@ router.put('/:id', validationFindSubject, validateCreateSubject, update)
  *         description: ID do assunto a ser removido
  *         schema:
  *           type: string
- *           example: f0fcf82a-fc2f-4995-9769-c8b2665a2291
  *     responses:
  *       204:
  *         description: Assunto removido com sucesso
