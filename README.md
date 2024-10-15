@@ -86,6 +86,6 @@ npm run test:coverage
 
 #### 10. 🎥 Link para vídeo explicativo
 
-[Assista ao vídeo aqui](https://)
+[Assista ao vídeo aqui](https://www.youtube.com/watch?v=0ul2U9wRSEA)
 
 ![YouTube](https://img.shields.io/badge/YouTube-Watch-red?logo=youtube&logoColor=white)
