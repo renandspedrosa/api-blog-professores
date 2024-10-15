@@ -6,6 +6,7 @@ import { validateCreateTag } from '@/http/middlewares/tag/validation-create-tag'
 import { Request, Response, NextFunction } from 'express'
 
 let token: string
+let userId: number
 
 describe('Tag Controller', () => {
   afterAll(async () => {
@@ -19,7 +20,20 @@ describe('Tag Controller', () => {
       await appDataSource.initialize()
     }
 
-    const payload = { id: 1, email: 'cc@gmail.com' }
+    const teacherData = {
+      name: 'teacher teste',
+      email: `teacherteste${Date.now()}@example.com`,
+      password: 'password123',
+    }
+
+    const teacherResponse = await request(app)
+      .post('/teacher')
+      .send(teacherData)
+    expect(teacherResponse.status).toBe(201)
+
+    userId = teacherResponse.body.teachers.user_id
+
+    const payload = { id: userId, email: teacherData.email }
     token = generateJwt(payload)
   })
 

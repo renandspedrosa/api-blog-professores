@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { create } from './create'
 import { update } from './update'
 import { validateCreateTag } from '@/http/middlewares/tag/validation-create-tag'
+import { isTeacher } from '@/http/middlewares/teacher/is-teacher'
 
 const router = Router()
 
@@ -31,7 +32,7 @@ const router = Router()
  *       201:
  *         description: Tag criada com sucesso
  */
-router.post('/', validateCreateTag, create)
+router.post('/', isTeacher, validateCreateTag, create)
 
 /**
  * @swagger
@@ -67,6 +68,6 @@ router.post('/', validateCreateTag, create)
  *         description: Tag atualizada com sucesso
  */
 
-router.put('/:id', validateCreateTag, update)
+router.put('/:id', isTeacher, validateCreateTag, update)
 
 export default router
