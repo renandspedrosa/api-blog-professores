@@ -30,16 +30,20 @@ export class CommentRepository implements ICommentRepository {
     })
   }
 
-  getCommentsByPostId(
+  async getCommentsByPostId(
     post_id: string,
     page: number,
     limit: number,
   ): Promise<IComment[]> {
-    return this.repository.find({
+    const pageNumber = Number(page) || 1
+    const limitNumber = Number(limit) || 10
+
+    const teste = await this.repository.find({
       where: { post_id, status: 1 },
-      skip: (page - 1) * limit,
-      take: limit,
+      skip: (pageNumber - 1) * limitNumber,
+      take: limitNumber,
     })
+    return teste
   }
 
   async update(comment: IComment): Promise<IComment> {
