@@ -24,7 +24,7 @@ describe('Tag Controller', () => {
   })
 
   it('POST /tag - should create a new tag', async () => {
-    const tagData = { name: 'Novidade' }
+    const tagData = { name: `Tag teste ${Date.now()}` }
     const response = await request(app)
       .post('/tag')
       .send(tagData)
@@ -40,7 +40,7 @@ describe('Tag Controller', () => {
 
   it('PUT /tag/:id - should update a tag by ID', async () => {
     // Primeiro, crie uma nova tag para ser atualizada em seguida
-    const tagData = { name: 'Novidades' }
+    const tagData = { name: `Tag teste atualizada ${Date.now()}` }
     const createResponse = await request(app)
       .post('/tag')
       .send(tagData)

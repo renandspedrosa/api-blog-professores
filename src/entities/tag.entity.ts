@@ -36,7 +36,7 @@ export class Tag implements ITag {
     type: 'timestamp without time zone',
     default: () => 'CURRENT_TIMESTAMP',
   })
-  status?: boolean
+  status?: number
 
   @ManyToMany(() => Post, (post) => post.tags)
   posts: Post[]

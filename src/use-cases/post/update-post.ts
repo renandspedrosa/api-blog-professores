@@ -5,8 +5,8 @@ import { ITagRepository } from '@/repositories/tag.repository.interface'
 
 export class UpdatePostUseCase {
   constructor(
-      private postRepository: IPostRepository,
-      private tagRepository: ITagRepository,
+    private postRepository: IPostRepository,
+    private tagRepository: ITagRepository,
   ) {}
 
   async handler(post: Partial<IPost>): Promise<IPost | undefined> {
@@ -37,7 +37,7 @@ export class UpdatePostUseCase {
       if (!existingTag) {
         existingTag = await this.tagRepository.create(tag)
       }
-      tags.push(existingTag) // Sempre adiciona a tag existente ou recém-criada
+      tags.push(existingTag)
     }
 
     return tags

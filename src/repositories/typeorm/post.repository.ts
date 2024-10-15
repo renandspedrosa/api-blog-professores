@@ -4,6 +4,7 @@ import { Post } from '@/entities/post.entity'
 import { Tag } from '@/entities/tag.entity'
 import { appDataSource } from '@/lib/typeorm/typeorm'
 import { IPost } from '@/entities/models/post.interface'
+import { ITag } from '@/entities/models/tags.interface'
 
 export class PostRepository implements IPostRepository {
   private repository: Repository<Post>
@@ -15,15 +16,16 @@ export class PostRepository implements IPostRepository {
   }
 
   async create(postData: IPost): Promise<IPost | undefined> {
+    let post = this.repository.create(postData)
     if (postData.tags && postData.tags.length > 0) {
       postData.tags = await this.handleTags(postData.tags)
     }
 
-    const post = this.repository.create(postData)
+    post = this.repository.create(postData)
     return this.repository.save(post)
   }
 
-  private async handleTags(tags: Tag[]): Promise<Tag[]> {
+  private async handleTags(tags: ITag[]): Promise<Tag[]> {
     const processedTags: Tag[] = []
 
     for (const tag of tags) {
@@ -74,9 +76,9 @@ export class PostRepository implements IPostRepository {
   }
 
   async findPostByIdTeacher(
-      teacherId: number,
-      page: number,
-      limit: number,
+    teacherId: number,
+    page: number,
+    limit: number,
   ): Promise<IPost[]> {
     const offset = (page - 1) * limit
 
@@ -89,9 +91,9 @@ export class PostRepository implements IPostRepository {
   }
 
   async findPostByTextSearch(
-      text: string,
-      page: number,
-      limit: number,
+    text: string,
+    page: number,
+    limit: number,
   ): Promise<IPost[]> {
     return this.repository.find({
       relations: ['tags'],
