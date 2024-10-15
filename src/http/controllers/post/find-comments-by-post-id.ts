@@ -7,11 +7,11 @@ export async function findCommentsByPostId(
   next: NextFunction,
 ) {
   try {
-    const { post_id } = req.params
+    const { id } = req.params
     const { page, limit } = req.query
     const getCommentsByPostId = await makeGetCommentsByPostIdUseCase()
     const comments = await getCommentsByPostId.handler(
-      post_id,
+      id,
       Number(page),
       Number(limit),
     )
