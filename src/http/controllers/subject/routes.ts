@@ -7,6 +7,7 @@ import { update } from './update'
 import { deleteSubject } from './delete'
 import { validationFindAll } from '@/http/middlewares/utils/validation-find-all'
 import { validationFindSubject } from '@/http/middlewares/subject/validation-find-subject'
+import { isTeacher } from '@/http/middlewares/teacher/is-teacher'
 
 const router = Router()
 
@@ -37,7 +38,7 @@ const router = Router()
  *         description: Assunto criado com sucesso
  */
 
-router.post('/', validateCreateSubject, create)
+router.post('/', isTeacher, validateCreateSubject, create)
 
 /**
  * @swagger
@@ -127,7 +128,13 @@ router.get('/:id', validationFindSubject, findSubject)
  *         description: Assunto atualizado com sucesso
  */
 
-router.put('/:id', validationFindSubject, validateCreateSubject, update)
+router.put(
+  '/:id',
+  isTeacher,
+  validationFindSubject,
+  validateCreateSubject,
+  update,
+)
 
 /**
  * @swagger
@@ -150,6 +157,6 @@ router.put('/:id', validationFindSubject, validateCreateSubject, update)
  *         description: Assunto removido com sucesso
  */
 
-router.delete('/:id', validationFindSubject, deleteSubject)
+router.delete('/:id', isTeacher, validationFindSubject, deleteSubject)
 
 export default router
