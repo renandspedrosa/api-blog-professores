@@ -11,7 +11,12 @@ export class TagRepository implements ITagRepository {
     this.repository = appDataSource.getRepository(Tag)
   }
 
-  async create(tag: ITag): Promise<ITag> {
+  async create(tag: ITag): Promise<ITag | string> {
+    const existingTag = await this.findByName(tag.name)
+    if (existingTag) {
+      return 'Tag já cadastrada'
+    }
+
     return this.repository.save(tag)
   }
 

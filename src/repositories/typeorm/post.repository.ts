@@ -1,19 +1,44 @@
 import { IPostRepository } from '../post.repository.interface'
 import { FindManyOptions, FindOptionsWhere, Like, Repository } from 'typeorm'
 import { Post } from '@/entities/post.entity'
+import { Tag } from '@/entities/tag.entity'
 import { appDataSource } from '@/lib/typeorm/typeorm'
 import { IPost } from '@/entities/models/post.interface'
 
 export class PostRepository implements IPostRepository {
   private repository: Repository<Post>
+  private tagRepository: Repository<Tag>
 
   constructor() {
     this.repository = appDataSource.getRepository(Post)
+    this.tagRepository = appDataSource.getRepository(Tag)
   }
 
   async create(postData: IPost): Promise<IPost | undefined> {
+    if (postData.tags && postData.tags.length > 0) {
+      postData.tags = await this.handleTags(postData.tags)
+    }
+
     const post = this.repository.create(postData)
     return this.repository.save(post)
+  }
+
+  private async handleTags(tags: Tag[]): Promise<Tag[]> {
+    const processedTags: Tag[] = []
+
+    for (const tag of tags) {
+      let existingTag = await this.tagRepository.findOne({
+        where: { name: tag.name, status: 1 },
+      })
+
+      if (!existingTag) {
+        existingTag = await this.tagRepository.save(tag)
+      }
+
+      processedTags.push(existingTag)
+    }
+
+    return processedTags
   }
 
   async findAll(page: number, limit: number, tagId?: number): Promise<IPost[]> {
@@ -49,9 +74,9 @@ export class PostRepository implements IPostRepository {
   }
 
   async findPostByIdTeacher(
-    teacherId: number,
-    page: number,
-    limit: number,
+      teacherId: number,
+      page: number,
+      limit: number,
   ): Promise<IPost[]> {
     const offset = (page - 1) * limit
 
@@ -64,9 +89,9 @@ export class PostRepository implements IPostRepository {
   }
 
   async findPostByTextSearch(
-    text: string,
-    page: number,
-    limit: number,
+      text: string,
+      page: number,
+      limit: number,
   ): Promise<IPost[]> {
     return this.repository.find({
       relations: ['tags'],
@@ -80,6 +105,10 @@ export class PostRepository implements IPostRepository {
   }
 
   async updatePost(post: IPost): Promise<IPost> {
+    if (post.tags && post.tags.length > 0) {
+      post.tags = await this.handleTags(post.tags)
+    }
+
     post.updated_at = new Date()
     return this.repository.save(post)
   }
