@@ -37,7 +37,6 @@ const router = Router()
  *             required:
  *               - title
  *               - content
- *               - teacher_id
  *               - tags
  *             properties:
  *               title:
@@ -48,10 +47,6 @@ const router = Router()
  *                 type: string
  *                 description: Conteúdo do post
  *                 example: "Este é o conteúdo do meu primeiro post."
- *               teacher_id:
- *                 type: integer
- *                 description: ID do professor associado ao post
- *                 example: 1
  *               tags:
  *                 type: array
  *                 items:
