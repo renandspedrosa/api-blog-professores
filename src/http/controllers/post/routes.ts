@@ -93,7 +93,7 @@ router.post('/', isTeacher, validateCreatePost, create)
  *         name: tag
  *         required: false
  *         schema:
- *           type: string
+ *           type: integer
  *         description: ID da Tag para filtrar os posts retornados
  *     responses:
  *       200:
