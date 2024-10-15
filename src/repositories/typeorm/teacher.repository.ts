@@ -3,16 +3,39 @@ import { appDataSource } from '@/lib/typeorm/typeorm'
 import { Teacher } from '@/entities/teacher.entity'
 import { ITeacherRepository } from '@/repositories/teacher.repository.interface'
 import { ITeacher } from '@/entities/models/teacher.interface'
+import { ISubject } from '@/entities/models/subject.interface'
+import { Subject } from '@/entities/subject.entity'
 
 export class TeacherRepository implements ITeacherRepository {
   private repository: Repository<Teacher>
+  private subjectRepository: Repository<Subject>
 
   constructor() {
     this.repository = appDataSource.getRepository(Teacher)
+    this.subjectRepository = appDataSource.getRepository(Subject)
   }
 
   async create(teacherData: ITeacher): Promise<ITeacher> {
-    const teacher = this.repository.create(teacherData)
+    const { subjects, ...rest } = teacherData
+
+    let existingSubjects: ISubject[] = []
+
+    if (subjects && subjects.length > 0) {
+      existingSubjects = await Promise.all(
+        subjects.map(async (subject) => {
+          const existingSubject = await this.subjectRepository.findOne({
+            where: { name: subject.name, status: 1 },
+          })
+          return existingSubject || this.subjectRepository.create(subject)
+        }),
+      )
+    }
+
+    const teacher = this.repository.create({
+      ...rest,
+      subjects: existingSubjects.length > 0 ? existingSubjects : undefined,
+    })
+
     return this.repository.save(teacher)
   }
 

@@ -37,7 +37,7 @@ export class UpdatePostUseCase {
       if (!existingTag) {
         existingTag = await this.tagRepository.create(tag)
       }
-      tags.push(existingTag) // Sempre adiciona a tag existente ou recém-criada
+      tags.push(existingTag)
     }
 
     return tags

@@ -3,5 +3,5 @@ export interface ITag {
   name: string
   created_at?: Date
   updated_at?: Date
-  status?: boolean
+  status?: number
 }
