@@ -35,7 +35,7 @@ describe('Use Cases for the Tag', () => {
       name: 'Novidade Atualizada',
       created_at: new Date(),
       updated_at: new Date(),
-      status: true,
+      status: 1,
     }
     mockTagRepository.update.mockResolvedValue(updatedTag)
 
@@ -52,7 +52,7 @@ describe('Use Cases for the Tag', () => {
       name: tagName,
       created_at: new Date(),
       updated_at: new Date(),
-      status: true,
+      status: 1,
     }
 
     mockTagRepository.findByName.mockResolvedValue(tag)

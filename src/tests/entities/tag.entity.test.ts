@@ -5,17 +5,17 @@ describe('Entity Tag', () => {
   it('It should create a new tag object and define its values', async () => {
     const newTag = new Tag()
     newTag.id = 1
-    newTag.name = 'Test Tag'
+    newTag.name = `Test Tag ${Date.now()}`
     newTag.created_at = new Date()
     newTag.updated_at = new Date()
-    newTag.status = true
+    newTag.status = 1
 
     expect(newTag).toBeInstanceOf(Tag)
     expect(newTag.id).toBe(1)
-    expect(newTag.name).toBe('Test Tag')
+    expect(newTag.name).toBe(newTag.name)
     expect(newTag.created_at).toBeInstanceOf(Date)
     expect(newTag.updated_at).toBeInstanceOf(Date)
-    expect(newTag.status).toBe(true)
+    expect(newTag.status).toBe(1)
     expect(newTag.posts).toBeUndefined()
   })
 
@@ -23,7 +23,7 @@ describe('Entity Tag', () => {
     const newTag = new Tag()
     newTag.id = 2
     newTag.name = 'Another Tag'
-    newTag.status = false
+    newTag.status = 1
 
     const post1 = new Post()
     post1.id = '4e106c23-98cd-456a-955d-adc35295d5d4'

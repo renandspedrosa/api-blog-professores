@@ -33,11 +33,11 @@ export class UpdatePostUseCase {
     const tags: ITag[] = []
 
     for (const tag of tagData) {
-      const existingTag = await this.tagRepository.findByName(tag.name)
+      let existingTag = await this.tagRepository.findByName(tag.name)
       if (!existingTag) {
-        await this.tagRepository.create(tag)
+        existingTag = await this.tagRepository.create(tag)
       }
-      tags.push(tag)
+      tags.push(existingTag)
     }
 
     return tags
