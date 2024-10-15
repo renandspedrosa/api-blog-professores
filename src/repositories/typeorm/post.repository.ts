@@ -74,9 +74,9 @@ export class PostRepository implements IPostRepository {
   }
 
   async findPostByIdTeacher(
-      teacherId: number,
-      page: number,
-      limit: number,
+    teacherId: number,
+    page: number,
+    limit: number,
   ): Promise<IPost[]> {
     const offset = (page - 1) * limit
 
@@ -89,9 +89,9 @@ export class PostRepository implements IPostRepository {
   }
 
   async findPostByTextSearch(
-      text: string,
-      page: number,
-      limit: number,
+    text: string,
+    page: number,
+    limit: number,
   ): Promise<IPost[]> {
     return this.repository.find({
       relations: ['tags'],
