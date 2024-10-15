@@ -256,6 +256,20 @@ router.get('/:id', validationFindPost, findPost)
  *         schema:
  *           type: string
  *         description: ID do post para o qual os comentários serão buscados
+ *       - in: query
+ *         name: page
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Número da página para paginação dos resultados
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           example: 15
+ *         description: Número máximo de posts a serem retornados por página
  *     responses:
  *       200:
  *         description: Comentários encontrados
