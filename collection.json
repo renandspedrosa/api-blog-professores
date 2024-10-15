@@ -555,7 +555,27 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{base_url}}/posts/cfffef6a-56c6-44a6-9635-0ce21085b39c/comments"
+						"url": {
+							"raw": "{{base_url}}/posts/2c64972f-26a2-43c3-a03b-cd73387684ad/comments?page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posts",
+								"2c64972f-26a2-43c3-a03b-cd73387684ad",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
 					},
 					"response": []
 				}
@@ -587,7 +607,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{base_url}}/comments/aa68a849-6ef4-4dd2-af67-3898763c3bee"
+						"url": "{{base_url}}/comments/dd80f515-ce9c-4c9f-bfec-46ec1441154c"
 					},
 					"response": []
 				},
@@ -598,14 +618,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"content\":\"comentario teste 2\",\r\n    \"post_id\":\"cfffef6a-56c6-44a6-9635-0ce21085b39c\"\r\n}",
+							"raw": "{\r\n    \"content\":\"comentario teste 3\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{base_url}}/comments/aa68a849-6ef4-4dd2-af67-3898763c3bee"
+						"url": "{{base_url}}/comments/dd80f515-ce9c-4c9f-bfec-46ec1441154c"
 					},
 					"response": []
 				},
@@ -624,7 +644,7 @@
 	"auth": {
 		"type": "bearer",
 		"bearer": {
-			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImVtYWlsIjoicmVuYW4xNzI4ODUzOTY0NjMzQGV4YW1wbGUuY29tIiwiaWF0IjoxNzI4ODU2NDIyLCJleHAiOjE3Mjg4NjAwMjJ9.3Ib7I7cfHK1loXnuvc86zdb0x_2nRQ2Mrq_l4dVNnpo"
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQHByb2Zlc3Nvci5jb20iLCJpYXQiOjE3Mjg5NTA3NjYsImV4cCI6MTcyODk1NDM2Nn0.8_MX7yps97CchD5If8JemRiA6yxZ3dTi8A7abSYC3Yo"
 		}
 	},
 	"event": [
