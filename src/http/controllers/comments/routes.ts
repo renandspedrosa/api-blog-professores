@@ -93,10 +93,6 @@ router.get('/:id', getById)
  *                   type: string
  *                   description: O novo conteúdo do comentário.
  *                   example: "Este é um comentário atualizado."
- *                 post_id:
- *                   type: string
- *                   description: O ID do post associado ao comentário.
- *                   example: ""
  *     responses:
  *       200:
  *         description: O comentário foi atualizado com sucesso.

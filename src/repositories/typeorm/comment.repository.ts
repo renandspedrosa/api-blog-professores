@@ -38,12 +38,11 @@ export class CommentRepository implements ICommentRepository {
     const pageNumber = Number(page) || 1
     const limitNumber = Number(limit) || 10
 
-    const teste = await this.repository.find({
+    return await this.repository.find({
       where: { post_id, status: 1 },
       skip: (pageNumber - 1) * limitNumber,
       take: limitNumber,
     })
-    return teste
   }
 
   async update(comment: IComment): Promise<IComment> {
