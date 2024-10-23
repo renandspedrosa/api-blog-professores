@@ -110,10 +110,15 @@ describe('Use Cases for the Post', () => {
     const page = 1
     const limit = 10
     mockPostRepository.findAll.mockResolvedValue(mockPosts)
-    
+
     const result = await findAllPostUseCase.handler(page, limit)
 
-    expect(mockPostRepository.findAll).toHaveBeenCalledWith(page, limit, undefined, undefined)
+    expect(mockPostRepository.findAll).toHaveBeenCalledWith(
+      page,
+      limit,
+      undefined,
+      undefined,
+    )
     expect(result).toEqual(mockPosts)
   })
 
