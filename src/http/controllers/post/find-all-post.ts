@@ -7,9 +7,9 @@ export async function findAllPost(
   next: NextFunction,
 ) {
   try {
-    const { page, limit, tag } = req.body
+    const { page, limit, tag, term } = req.body
     const findAllPostUseCase = makeFindAllPostUseCase()
-    const posts = await findAllPostUseCase.handler(page, limit, tag)
+    const posts = await findAllPostUseCase.handler(page, limit, tag, term)
 
     return res.status(200).json(posts)
   } catch (error) {

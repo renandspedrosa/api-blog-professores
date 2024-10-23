@@ -8,7 +8,7 @@ export async function updatePost(
 ) {
   try {
     const { id } = req.params
-    const { title, content, tags } = req.body
+    const { title, content, path_img, tags } = req.body
 
     const updatePostUseCase = await makeUpdatePostUseCase()
 
@@ -16,6 +16,7 @@ export async function updatePost(
       id,
       title,
       content,
+      path_img,
       tags,
     })
 

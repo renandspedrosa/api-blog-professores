@@ -16,6 +16,7 @@ import { validateCreatePostViewed } from '@/http/middlewares/post/validation-cre
 import { createPostViewed } from './create-post-viewed'
 import { findCommentsByPostId } from '@/http/controllers/post/find-comments-by-post-id'
 import { isStudent } from '@/http/middlewares/student/is-student'
+import { validateJwt } from '@/http/middlewares/jwt-validate'
 
 const router = Router()
 
@@ -47,6 +48,10 @@ const router = Router()
  *                 type: string
  *                 description: Conteúdo do post
  *                 example: "Este é o conteúdo do meu primeiro post."
+ *               path_img:
+ *                 type: string
+ *                 description: Url para a imagem do post
+ *                 example: "https://estudantemoderno.com.br/wp-content/uploads/pedagogia-300x200.png"
  *               tags:
  *                 type: array
  *                 items:
@@ -58,7 +63,7 @@ const router = Router()
  *         description: Post criado com sucesso
  */
 
-router.post('/', isTeacher, validateCreatePost, create)
+router.post('/', validateJwt, isTeacher, validateCreatePost, create)
 
 /**
  * @swagger
@@ -90,6 +95,13 @@ router.post('/', isTeacher, validateCreatePost, create)
  *         schema:
  *           type: integer
  *         description: ID da Tag para filtrar os posts retornados
+ *       - in: query
+ *         name: term
+ *         required: false
+ *         schema:
+ *           type: string
+ *           example: "Meu Primeiro"
+ *         description: Termo a ser pesquisado nos posts
  *     responses:
  *       200:
  *         description: Lista de posts recuperada com sucesso
@@ -204,6 +216,10 @@ router.get('/search', validationFindByTerm, findPostByTerm)
  *                 type: string
  *                 example: "Conteúdo do post atualizado."
  *                 description: Novo conteúdo do post
+ *               path_img:
+ *                 type: string
+ *                 example: "https://estudantemoderno.com.br/wp-content/uploads/pedagogia-300x200.png"
+ *                 description: Novo conteúdo do post
  *               tags:
  *                 type: array
  *                 items:
@@ -215,7 +231,7 @@ router.get('/search', validationFindByTerm, findPostByTerm)
  *         description: Post atualizado com sucesso
  */
 
-router.put('/:id', isTeacher, validationFindPost, updatePost)
+router.put('/:id', validateJwt, isTeacher, validationFindPost, updatePost)
 
 /**
  * @swagger
@@ -298,7 +314,7 @@ router.get('/:id/comments', findCommentsByPostId)
  *         description: Post removido com sucesso
  */
 
-router.delete('/:id', isTeacher, validationFindPost, deletePost)
+router.delete('/:id', validateJwt, isTeacher, validationFindPost, deletePost)
 
 /**
  * @swagger
