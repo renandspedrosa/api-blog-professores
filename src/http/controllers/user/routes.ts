@@ -92,7 +92,7 @@ router.put('/:id', update)
  *               email:
  *                 type: string
  *                 description: Email do usuário
- *                 example: "user@teste.com"
+ *                 example: "user@professor.com"
  *               password:
  *                 type: string
  *                 description: Senha do usuário
