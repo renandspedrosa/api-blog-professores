@@ -41,7 +41,7 @@ export class Post implements IPost {
     name: 'path_img',
     type: 'text',
   })
-  path_img: string
+  path_img?: string
 
   @Column({
     name: 'status',

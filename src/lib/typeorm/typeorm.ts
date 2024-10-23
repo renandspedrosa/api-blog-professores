@@ -19,6 +19,7 @@ import { DropNameColumnFromStudents1728226454832 } from './migrations/1728226454
 import { AlterTeacherSubjectsStatusColumnMigration1728432062988 } from './migrations/1728432062988-AlterTeacherSubjectsStatusColumnMigration'
 import { PostViewed } from '@/entities/post-viewed.entity'
 import { AddPathImgToPosts1729423314496 } from './migrations/1729423314496-AddPathImgToPosts'
+import { UpdatePostsColumns1729717659262 } from './migrations/1729717659262-UpdatePostsColumns'
 
 export const appDataSource = new DataSource({
   type: 'postgres',
@@ -41,6 +42,7 @@ export const appDataSource = new DataSource({
     DropNameColumnFromStudents1728226454832,
     AlterTeacherSubjectsStatusColumnMigration1728432062988,
     AddPathImgToPosts1729423314496,
+    UpdatePostsColumns1729717659262,
   ],
   logging: env.NODE_ENV === 'development',
 })

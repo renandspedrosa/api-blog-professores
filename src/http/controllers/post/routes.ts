@@ -339,6 +339,7 @@ router.delete('/:id', validateJwt, isTeacher, validationFindPost, deletePost)
 
 router.post(
   '/:post_id/viewed',
+  validateJwt,
   isStudent,
   validateCreatePostViewed,
   createPostViewed,

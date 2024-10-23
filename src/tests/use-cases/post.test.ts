@@ -37,6 +37,7 @@ const mockPosts: IPost[] = [
     title: 'Post 1',
     content: 'Content 1',
     teacher_id: 1,
+    path_img: '',
     status: 1,
     created_at: new Date(),
     updated_at: null,
@@ -47,6 +48,7 @@ const mockPosts: IPost[] = [
     title: 'Post  2',
     content: 'Content 2',
     teacher_id: 1,
+    path_img: '',
     status: 1,
     created_at: new Date(),
     updated_at: null,
@@ -108,10 +110,10 @@ describe('Use Cases for the Post', () => {
     const page = 1
     const limit = 10
     mockPostRepository.findAll.mockResolvedValue(mockPosts)
-
+    
     const result = await findAllPostUseCase.handler(page, limit)
 
-    expect(mockPostRepository.findAll).toHaveBeenCalledWith(page, limit)
+    expect(mockPostRepository.findAll).toHaveBeenCalledWith(page, limit, undefined, undefined)
     expect(result).toEqual(mockPosts)
   })
 
@@ -165,6 +167,7 @@ describe('Use Cases for the Post', () => {
       id: mockPosts[0].id,
       title: 'Post 1 Updated',
       content: 'Content 1 Updated',
+      path_img: '',
       teacher_id: 1,
       created_at: mockPosts[0].created_at,
       updated_at: mockPosts[0].updated_at,
