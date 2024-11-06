@@ -10,6 +10,7 @@ export function validationFindAllPost(
     page: z.coerce.number().default(1),
     limit: z.coerce.number().default(10),
     tag: z.coerce.number().optional(),
+    term: z.coerce.string().optional(),
   })
 
   try {

@@ -38,6 +38,12 @@ export class Post implements IPost {
   content: string
 
   @Column({
+    name: 'path_img',
+    type: 'text',
+  })
+  path_img?: string
+
+  @Column({
     name: 'status',
     type: 'int',
     default: 1,

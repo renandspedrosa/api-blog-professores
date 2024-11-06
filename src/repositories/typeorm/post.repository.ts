@@ -43,7 +43,13 @@ export class PostRepository implements IPostRepository {
     return processedTags
   }
 
-  async findAll(page: number, limit: number, tagId?: number): Promise<IPost[]> {
+  async findAll(
+    page: number,
+    limit: number,
+    tagId?: number,
+    term?: string,
+  ): Promise<IPost[]> {
+    console.log(term)
     const queryOptions: FindManyOptions<IPost> = {
       relations: ['tags'],
       skip: (page - 1) * limit,
@@ -59,7 +65,14 @@ export class PostRepository implements IPostRepository {
       whereConditions.tags = { id: tagId }
     }
 
-    queryOptions.where = whereConditions
+    if (term) {
+      queryOptions.where = [
+        { ...whereConditions, content: Like(`%${term}%`) },
+        { ...whereConditions, title: Like(`%${term}%`) },
+      ]
+    } else {
+      queryOptions.where = whereConditions
+    }
 
     return this.repository.find(queryOptions)
   }

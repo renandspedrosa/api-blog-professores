@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 import '@/lib/typeorm/typeorm'
 import express from 'express'
+import cors from 'cors'
 import teacherRouter from '@/http/controllers/teacher/routes'
 import userRouter from '@/http/controllers/user/routes'
 import postRouter from '@/http/controllers/post/routes'
@@ -14,11 +15,13 @@ import { setupSwagger } from './swagger'
 
 const app = express()
 
+app.use(cors())
+
 app.use(express.json())
 
 app.use('/teacher', teacherRouter)
 app.use('/user', userRouter)
-app.use('/posts', validateJwt, postRouter)
+app.use('/posts', postRouter)
 app.use('/comments', validateJwt, commentsRouter)
 app.use('/subject', validateJwt, subjectRouter)
 app.use('/tag', validateJwt, tagRouter)

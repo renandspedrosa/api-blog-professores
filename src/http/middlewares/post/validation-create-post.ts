@@ -10,6 +10,7 @@ export async function validateCreatePost(
   const registerBodySchema = z.object({
     title: z.string(),
     content: z.string(),
+    path_img: z.string().optional(),
     teacher_id: z.coerce.number(),
     tags: z
       .array(
