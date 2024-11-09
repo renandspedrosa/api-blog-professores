@@ -21,7 +21,7 @@ export async function signin(req: Request, res: Response, next: NextFunction) {
       email: user.email,
     }
     const token = generateJwt(plainUser)
-    return res.status(200).json({ token })
+    return res.status(200).json({ token:token, user: {email:user.email,name:user.name} })
   } catch (error) {
     next(error)
   }
