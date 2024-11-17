@@ -15,7 +15,7 @@ export async function findSubject(
   } catch (error) {
     console.log(error)
     if (error instanceof Error) {
-      if (error.message === "Matéria não encontrado") {
+      if (error.message === 'Matéria não encontrado') {
         return res.status(404).json({})
       }
     }

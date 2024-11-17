@@ -35,7 +35,8 @@ export async function validateDeleteComment(
     const getCommentUseCase = makeGetCommentByIdUseCase()
     const comment = await getCommentUseCase.handler(id)
 
-    if (!comment) return res.status(404).json({ message: 'Comentário não encontrado' })
+    if (!comment)
+      return res.status(404).json({ message: 'Comentário não encontrado' })
 
     const findWithTeacherUseCase = makeFindWithTeacherUseCase()
     const teacher = await findWithTeacherUseCase.handler(comment.user_id)

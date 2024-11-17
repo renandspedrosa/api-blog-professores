@@ -7,7 +7,11 @@ export async function validateCreatePostViewed(
   next: NextFunction,
 ) {
   const registerParamsSchema = z.object({
-    post_id: z.string().uuid().trim().min(1, 'O ID da postagem não pode estar vazio.'),
+    post_id: z
+      .string()
+      .uuid()
+      .trim()
+      .min(1, 'O ID da postagem não pode estar vazio.'),
   })
 
   try {

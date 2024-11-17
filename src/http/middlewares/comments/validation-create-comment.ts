@@ -19,7 +19,9 @@ export async function validateCreateComment(
       post_id: z.coerce.string(),
     })
     const commentBodySchema = z.object({
-      content: z.coerce.string().min(1, 'Comentário deve ter ao menos 1 caractere'),
+      content: z.coerce
+        .string()
+        .min(1, 'Comentário deve ter ao menos 1 caractere'),
     })
 
     const { auth } = req as AuthenticatedRequest
