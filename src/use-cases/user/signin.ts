@@ -7,7 +7,7 @@ export class SigninUseCase {
     const user = await this.userRepository.findByEmail(email)
 
     if (!user) {
-      throw new Error('Invalid credentials')
+      throw new Error('Credenciais inválidas')
     }
 
     return user
