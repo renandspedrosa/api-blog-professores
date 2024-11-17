@@ -20,7 +20,7 @@ export async function validateCreatePost(
             name: z.string().optional(),
           })
           .refine((data) => data.id || data.name, {
-            message: 'Either "id" or "name" must be provided for each tag',
+            message: 'É necessário fornecer "id" ou "nome" para cada tag.',
             path: ['tags'],
           }),
       )
@@ -33,13 +33,13 @@ export async function validateCreatePost(
     const findWithTeacherUseCase = makeFindTeacherByIdUseCase()
     const teacher = await findWithTeacherUseCase.handler(teacher_id)
     if (!teacher) {
-      return res.status(404).json({ message: 'Teacher not found' })
+      return res.status(404).json({ message: 'Professor não encontrado' })
     }
     next()
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed',
+        message: 'Validação falhou',
         errors: error.format(),
       })
     }

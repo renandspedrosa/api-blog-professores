@@ -8,7 +8,7 @@ export class GetAllTeachersUseCase {
     const teachers = await this.teacherRepository.getAllTeachers(page, limit)
 
     if (!teachers) {
-      throw new Error('Teachers not found')
+      throw new Error('Professor não encontrado')
     }
     return teachers
   }

@@ -17,7 +17,7 @@ export function validationFindAll(
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed',
+        message: 'Validação falhou',
         errors: error.format(),
       })
     }

@@ -103,7 +103,7 @@ describe('validateCreateTag Middleware', () => {
     expect(mockResponse.status).toHaveBeenCalledWith(400)
     expect(mockResponse.json).toHaveBeenCalledWith(
       expect.objectContaining({
-        message: 'Validation failed',
+        message: 'Validação falhou',
         errors: expect.any(Object), // Verify that errors are returned
       }),
     )

@@ -14,7 +14,7 @@ export async function findAllPost(
     return res.status(200).json(posts)
   } catch (error) {
     if (error instanceof Error) {
-      if (error.message === 'Post not found') {
+      if (error.message === 'Postagem não encontrada') {
         return res.status(404).json([])
       }
     }

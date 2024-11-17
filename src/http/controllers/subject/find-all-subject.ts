@@ -16,7 +16,7 @@ export async function findAllSubject(
     return res.status(200).json(subjects)
   } catch (error) {
     if (error instanceof Error) {
-      if (error.message === 'Subject not found') {
+      if (error.message === 'Matéria não encontrada') {
         return res.status(404).json([])
       }
     }

@@ -15,7 +15,7 @@ export async function getAllStudents(
     return res.status(200).json(students)
   } catch (error) {
     if (error instanceof Error) {
-      if (error.message === 'student not found') {
+      if (error.message === 'Estudante não encontrado') {
         return res.status(404).json([])
       }
     }
