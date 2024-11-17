@@ -15,7 +15,7 @@ export class GetCommentByPostIdUseCase {
       limit,
     )
 
-    if (!comments) throw new Error('Comments not found!')
+    if (!comments) throw new Error('Comentários não encontrados')
 
     return comments
   }

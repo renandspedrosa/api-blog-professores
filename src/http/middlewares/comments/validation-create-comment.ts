@@ -19,13 +19,13 @@ export async function validateCreateComment(
       post_id: z.coerce.string(),
     })
     const commentBodySchema = z.object({
-      content: z.coerce.string().min(1, 'Content cannot be empty'),
+      content: z.coerce.string().min(1, 'Comentário deve ter ao menos 1 caractere'),
     })
 
     const { auth } = req as AuthenticatedRequest
 
     if (!auth || !auth.id) {
-      return res.status(401).json({ message: 'Unauthorized' })
+      return res.status(401).json({ message: 'Não autorizado' })
     }
 
     const user_id: number = auth.id
@@ -37,18 +37,18 @@ export async function validateCreateComment(
     const findWithUserUseCase = makeFindUserByIdUseCase()
     const user = await findWithUserUseCase.handler(user_id)
     if (!user) {
-      return res.status(404).json({ message: 'User not found' })
+      return res.status(404).json({ message: 'Usuário não encontrado' })
     }
 
     if (!post_id) {
-      return res.status(404).json({ message: 'Post not found' })
+      return res.status(404).json({ message: 'Postagem não encontrada' })
     }
     req.body.user_id = user_id
     next()
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed',
+        message: 'Validação falhou',
         errors: error.format(),
       })
     }

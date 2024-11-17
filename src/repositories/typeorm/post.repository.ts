@@ -49,7 +49,6 @@ export class PostRepository implements IPostRepository {
     tagId?: number,
     term?: string,
   ): Promise<IPost[]> {
-    console.log(term)
     const queryOptions: FindManyOptions<IPost> = {
       relations: ['tags'],
       skip: (page - 1) * limit,

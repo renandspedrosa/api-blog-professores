@@ -14,7 +14,7 @@ export async function signin(req: Request, res: Response, next: NextFunction) {
     const doestPasswordMatch = await compare(password, user.password)
 
     if (!doestPasswordMatch) {
-      throw new Error('Invalid credentials')
+      throw new Error('Credenciais inválidas')
     }
     const plainUser = {
       id: user.id,

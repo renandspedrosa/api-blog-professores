@@ -7,7 +7,7 @@ export class GetCommentByIdUseCase {
   async handler(id: string): Promise<IComment | null> {
     const comment = await this.commentRepository.getById(id)
 
-    if (!comment) throw new Error('Comment not found!')
+    if (!comment) throw new Error('Comentário não encontrado')
 
     return comment
   }

@@ -17,7 +17,7 @@ export async function createPostViewed(
     const { auth } = req as AuthenticatedRequest
 
     if (!auth || !auth.id) {
-      return res.status(401).json({ message: 'Unauthorized' })
+      return res.status(401).json({ message: 'Não autorizado' })
     }
 
     const createPostViewedUseCase = makeCreatePostViewedUseCase()
@@ -33,7 +33,7 @@ export async function createPostViewed(
     if (!student_id) {
       return res
         .status(403)
-        .json({ message: 'Access denied. User is not a student.' })
+        .json({ message: 'Acesso negado. O usuário não é um aluno.' })
     }
 
     const postViewed = { post_id, student_id }

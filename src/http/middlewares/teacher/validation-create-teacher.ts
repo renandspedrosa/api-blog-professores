@@ -10,9 +10,9 @@ export function validateCreateTeacher(
     name: z.string(),
     email: z
       .string()
-      .min(1, 'Email is required')
-      .email('Invalid email format. Please try again'),
-    password: z.string().min(1, 'Password is required'),
+      .min(1, 'E-mail é obrigatório')
+      .email('E-mail com formato inválido. Tente novamente'),
+    password: z.string().min(1, 'Senha é obrigatório'),
     subjects: z
       .array(
         z
@@ -21,7 +21,7 @@ export function validateCreateTeacher(
             name: z.string().optional(),
           })
           .refine((data) => data.id || data.name, {
-            message: 'Either "id" or "name" must be provided for each subject',
+            message: 'É necessário fornecer "id" ou "nome" para cada disciplina.',
             path: ['subjects'],
           }),
       )
@@ -33,7 +33,7 @@ export function validateCreateTeacher(
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed',
+        message: 'Validação falhou',
         errors: error.format(),
       })
     }

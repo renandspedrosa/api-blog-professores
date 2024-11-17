@@ -17,19 +17,19 @@ export async function isNotTeacher(
     const user = await findWithTeacherUseCase.handler(user_id)
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' })
+      return res.status(404).json({ message: 'Usuário não encontrado' })
     }
     if (user.teachers !== undefined && user.teachers.length > 0) {
       return res
         .status(403)
-        .json({ message: 'User is already registered as a teacher' })
+        .json({ message: 'O usuário já está registrado como professor.' })
     }
 
     next()
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed',
+        message: 'Validação falhou',
         errors: error.format(),
       })
     }

@@ -9,8 +9,8 @@ export function validateLoginUser(
   const registerBodySchema = z.object({
     email: z
       .string()
-      .min(1, 'Email is required')
-      .email('Invalid email format. Please try again'),
+      .min(1, 'E-mail é obrigatório')
+      .email('E-mail com formato inválido. Tente novamente'),
     password: z.string().min(1, 'Password is required'),
   })
 
@@ -20,7 +20,7 @@ export function validateLoginUser(
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed for creare User',
+        message: 'Falha ao validar a criação do usuário.',
         errors: error.format(),
       })
     }
