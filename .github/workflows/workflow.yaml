@@ -79,7 +79,7 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
     - name: Build Docker image
-      run: docker build -t fiappos/api-blog-professores .
+      run: docker build -t fiappos/api-blog-professores -f ./Dockerfile .
 
     - name: Push Docker image to Docker Hub
       run: docker push fiappos/api-blog-professores
