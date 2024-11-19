@@ -1,7 +1,10 @@
-name: testing code
+name: CI/CD Pipeline
 
 on:
-  pull_request
+  pull_request:
+  push:
+    branches:
+      - master
 
 jobs:
   test:
@@ -62,6 +65,8 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
+
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master' # Executa apenas em merges para master
 
     steps:
     - name: Checkout repository
