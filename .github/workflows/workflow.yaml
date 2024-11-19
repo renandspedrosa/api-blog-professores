@@ -64,7 +64,7 @@ jobs:
 
   build:
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: node:18-slim
 
     if: github.event_name == 'push' && github.ref == 'refs/heads/master' # Executa apenas em merges para master
 
@@ -79,7 +79,7 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
     - name: Build Docker image
-      run: docker build -t fiappos/api-blog-professores .
+      run: docker build -t fiappos/api-blog-professores -f ./Dockerfile .
 
     - name: Push Docker image to Docker Hub
       run: docker push fiappos/api-blog-professores

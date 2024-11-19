@@ -1,8 +1,5 @@
 FROM node:18-slim
 
-# Instala o cliente do PostgreSQL
-# RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
-
 # Define o diretório de trabalho
 WORKDIR /app
 
