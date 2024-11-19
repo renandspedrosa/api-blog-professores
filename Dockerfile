@@ -19,5 +19,4 @@ RUN cp .env.example .env
 RUN npm run build
 
 # Inicia a aplicação e realiza as migrações após garantir que o PostgreSQL está acessível
-# CMD ["sh", "-c", "npm run migrate:prod && npm run start"]
-CMD ["sh", "-c", "npm run start"]
+CMD ["sh", "-c", "npm run migrate:prod && npm run start"]
