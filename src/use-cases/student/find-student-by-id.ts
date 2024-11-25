@@ -8,8 +8,9 @@ export class FindStudentByIdUseCase {
     const student = await this.studentRepository.getById(id)
 
     if (!student) {
-      throw new Error('Aluno não encontrado')
+      return null
     }
+
     return student
   }
 }
