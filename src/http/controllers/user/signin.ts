@@ -40,7 +40,7 @@ export async function signin(req: Request, res: Response, next: NextFunction) {
       email: user.email,
       type,
     }
-    
+
     const token = generateJwt(plainUser)
     return res
       .status(200)
