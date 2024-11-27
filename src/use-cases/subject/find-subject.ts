@@ -6,7 +6,7 @@ export class FindSubjectUseCase {
   async handler(id: string) {
     const subject = await this.subjectRepository.findById(id)
     if (!subject) {
-      throw new Error('Subject not found')
+      throw new Error('Matéria não encontrado')
     }
     return subject
   }

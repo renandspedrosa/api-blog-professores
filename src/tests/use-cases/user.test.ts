@@ -156,7 +156,7 @@ describe('Use Cases for the User', () => {
     mockUserRepository.findByEmail.mockResolvedValue(undefined)
 
     await expect(signinUseCase.handler(email)).rejects.toThrow(
-      'Invalid credentials',
+      'Credenciais inválidas',
     )
 
     expect(mockUserRepository.findByEmail).toHaveBeenCalledWith(email)

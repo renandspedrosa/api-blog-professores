@@ -16,13 +16,13 @@ export async function validateCreateUserWithUniqueEmail(
     if (userByEmail) {
       return res
         .status(409)
-        .json({ message: 'There is already a registration with this e-mail.' })
+        .json({ message: 'Já existe um registro com este e-mail.' })
     }
     next()
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed for create unique user email',
+        message: 'A validação falhou para criar um e-mail de usuário único.',
         errors: error.format(),
       })
     }

@@ -8,7 +8,7 @@ export class GetAllStudentsUseCase {
     const students = await this.studentRepository.getAllStudents(page, limit)
 
     if (!students) {
-      throw new Error('students not found')
+      throw new Error('Estudante não encontrado')
     }
     return students
   }

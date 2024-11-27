@@ -7,7 +7,11 @@ export async function validateCreatePostViewed(
   next: NextFunction,
 ) {
   const registerParamsSchema = z.object({
-    post_id: z.string().uuid().trim().min(1, 'Post Id cannot be empty'),
+    post_id: z
+      .string()
+      .uuid()
+      .trim()
+      .min(1, 'O ID da postagem não pode estar vazio.'),
   })
 
   try {
@@ -16,7 +20,7 @@ export async function validateCreatePostViewed(
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed',
+        message: 'Validação falhou',
         errors: error.format(),
       })
     }

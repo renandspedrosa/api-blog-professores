@@ -10,9 +10,9 @@ export function validateCreateStudent(
     name: z.string(),
     email: z
       .string()
-      .min(1, 'Email is required')
-      .email('Invalid email format. Please try again'),
-    password: z.string().min(1, 'Password is required'),
+      .min(1, 'E-mail é obrigatório')
+      .email('Formato de e-mail inválido. Por favor, tente novamente.'),
+    password: z.string().min(1, 'Senha é obrigatória'),
   })
 
   try {
@@ -21,7 +21,7 @@ export function validateCreateStudent(
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed for create Student',
+        message: 'Falha ao criar o estudante',
         errors: error.format(),
       })
     }

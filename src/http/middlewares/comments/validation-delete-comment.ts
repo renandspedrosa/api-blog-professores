@@ -27,7 +27,7 @@ export async function validateDeleteComment(
     const { auth } = req as AuthenticatedRequest
 
     if (!auth || !auth.id) {
-      return res.status(401).json({ message: 'Unauthorized' })
+      return res.status(401).json({ message: 'Não autorizado' })
     }
 
     const user_id: number = auth.id
@@ -35,7 +35,8 @@ export async function validateDeleteComment(
     const getCommentUseCase = makeGetCommentByIdUseCase()
     const comment = await getCommentUseCase.handler(id)
 
-    if (!comment) return res.status(404).json({ message: 'Comment not found' })
+    if (!comment)
+      return res.status(404).json({ message: 'Comentário não encontrado' })
 
     const findWithTeacherUseCase = makeFindWithTeacherUseCase()
     const teacher = await findWithTeacherUseCase.handler(comment.user_id)
@@ -43,7 +44,7 @@ export async function validateDeleteComment(
     if (!teacher || comment.user_id !== user_id) {
       return res.status(403).json({
         message:
-          'User is not a teacher or user is not responsible for the comment.',
+          'O usuário não é um professor ou não é o responsável pelo comentário.',
       })
     }
 
@@ -51,7 +52,7 @@ export async function validateDeleteComment(
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed',
+        message: 'Validação falhou',
         errors: error.format(),
       })
     }

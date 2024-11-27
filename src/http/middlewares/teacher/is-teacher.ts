@@ -18,7 +18,7 @@ export async function isTeacher(
     const { auth } = req as AuthenticatedRequest
 
     if (!auth || !auth.id) {
-      return res.status(401).json({ message: 'Unauthorized' })
+      return res.status(401).json({ message: 'Não autorizado' })
     }
 
     const user_id = auth.id
@@ -27,20 +27,20 @@ export async function isTeacher(
     const user = await findWithTeacherUseCase.handler(user_id)
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' })
+      return res.status(404).json({ message: 'Usuário não encontrado' })
     }
 
     if (!user.teachers || user.teachers.length === 0) {
       return res
         .status(403)
-        .json({ message: 'Access denied. User is not a teacher.' })
+        .json({ message: 'Acesso negado. O usuário não é um professor.' })
     }
     req.body.teacher_id = user.teachers[0].id
     next()
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'Validation failed',
+        message: 'Validação falhou',
         errors: error.format(),
       })
     }

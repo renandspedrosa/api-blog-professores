@@ -21,7 +21,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     })
 
     if (!teacher) {
-      throw new Error('Teacher creation failed')
+      throw new Error('Professor não cadastrado')
     }
     return res.status(201).json({ name, email, teachers: teacher })
   } catch (error) {

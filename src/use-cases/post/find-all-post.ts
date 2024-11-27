@@ -6,7 +6,7 @@ export class FindAllPostUseCase {
   async handler(page: number, limit: number, tagId?: number, term?: string) {
     const posts = await this.postRepository.findAll(page, limit, tagId, term)
     if (!posts) {
-      throw new Error('Post not found')
+      throw new Error('Postagem não encontrada')
     }
     return posts
   }

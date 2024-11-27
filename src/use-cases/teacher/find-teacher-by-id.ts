@@ -8,8 +8,9 @@ export class FindTeacherByIdUseCase {
     const teacher = await this.teacherRepository.getById(id)
 
     if (!teacher) {
-      throw new Error('Teacher not found')
+      return null
     }
+
     return teacher
   }
 }
