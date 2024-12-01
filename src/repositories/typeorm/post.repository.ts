@@ -50,7 +50,7 @@ export class PostRepository implements IPostRepository {
     term?: string,
   ): Promise<IPost[]> {
     const queryOptions: FindManyOptions<IPost> = {
-      relations: ['tags'],
+      relations: ['tags', 'teacher.user'],
       skip: (page - 1) * limit,
       take: limit,
       order: {
@@ -73,7 +73,17 @@ export class PostRepository implements IPostRepository {
       queryOptions.where = whereConditions
     }
 
-    return this.repository.find(queryOptions)
+    const posts = await this.repository.find(queryOptions)
+    const mappedPosts: IPost[] = posts.map((post) => {
+      return {
+        ...post,
+        teacher: post.teacher
+          ? { user: { name: post.teacher.user?.name } }
+          : undefined,
+      }
+    })
+
+    return mappedPosts
   }
 
   async findPostById(id: string): Promise<IPost | undefined> {

@@ -9,6 +9,11 @@ export interface IPost {
   created_at?: Date
   updated_at?: Date | null
   teacher_id?: number
+  teacher?: {
+    user?: {
+      name?: string
+    }
+  }
   tags?: ITag[]
   comments?: IComment[]
 }
