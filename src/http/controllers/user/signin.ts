@@ -20,7 +20,7 @@ export async function signin(req: Request, res: Response, next: NextFunction) {
     }
 
     const teacher = await findWithTeacherByIdUser.handler(user.id)
-    
+
     const student = await findWithStudentByIdUser.handler(user.id)
 
     let type = null
