@@ -11,6 +11,14 @@ export class TagRepository implements ITagRepository {
     this.repository = appDataSource.getRepository(Tag)
   }
 
+  async findAll(page: number, limit: number): Promise<ITag[]> {
+    return this.repository.find({
+      where: { status: 1 },
+      skip: (page - 1) * limit,
+      take: limit,
+    })
+  }
+
   async create(tag: ITag): Promise<ITag> {
     const existingTag = await this.findByName(tag.name)
     if (existingTag) {
@@ -30,5 +38,9 @@ export class TagRepository implements ITagRepository {
 
   async findByName(name: string): Promise<ITag | null> {
     return this.repository.findOne({ where: { name, status: 1 } })
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.repository.update(id, { status: 0 })
   }
 }
