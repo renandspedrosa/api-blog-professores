@@ -1,21 +1,46 @@
 import { ITag } from '@/entities/models/tags.interface'
 import { ITagRepository } from '@/repositories/tag.repository.interface'
 import { CreateTagUseCase } from '@/use-cases/tag/create-tag'
+import { DeleteTagUseCase } from '@/use-cases/tag/delete-tag'
+import { FindAllTagUseCase } from '@/use-cases/tag/find-all-tag'
 import { UpdateTagUseCase } from '@/use-cases/tag/update-tag'
 
 const mockTagRepository: jest.Mocked<ITagRepository> = {
   create: jest.fn(),
   update: jest.fn(),
   findByName: jest.fn(),
+  delete: jest.fn(),
+  findAll: jest.fn(),
 }
+
+const mockTags: ITag[] = [
+  {
+    id: 1,
+    name: 'Recado',
+    created_at: new Date(),
+    updated_at: new Date(),
+    status: 1,
+  },
+  {
+    id: 2,
+    name: 'Novidade',
+    created_at: new Date(),
+    updated_at: new Date(),
+    status: 1,
+  },
+]
 
 describe('Use Cases for the Tag', () => {
   let createTagUseCase: CreateTagUseCase
   let updateTagUseCase: UpdateTagUseCase
+  let deleteTagUseCase: DeleteTagUseCase
+  let findAllTagUseCase: FindAllTagUseCase
 
   beforeEach(() => {
     createTagUseCase = new CreateTagUseCase(mockTagRepository)
     updateTagUseCase = new UpdateTagUseCase(mockTagRepository)
+    deleteTagUseCase = new DeleteTagUseCase(mockTagRepository)
+    findAllTagUseCase = new FindAllTagUseCase(mockTagRepository)
   })
 
   it('It should create a new tag using the repository', async () => {
@@ -61,5 +86,26 @@ describe('Use Cases for the Tag', () => {
 
     expect(mockTagRepository.findByName).toHaveBeenCalledWith(tagName)
     expect(result).toBe(tag)
+  })
+
+  it('It should find all tags using the repository', async () => {
+    const page = 1
+    const limit = 10
+    mockTagRepository.findAll.mockResolvedValue(mockTags)
+
+    const result = await findAllTagUseCase.handler(page, limit)
+
+    expect(mockTagRepository.findAll).toHaveBeenCalled()
+    expect(result).toBe(mockTags)
+  })
+
+  it('It should delete a tag using the repository', async () => {
+    const tagId = '1'
+
+    mockTagRepository.delete.mockResolvedValue()
+
+    await deleteTagUseCase.handler(tagId)
+
+    expect(mockTagRepository.delete).toHaveBeenCalledWith(tagId)
   })
 })
