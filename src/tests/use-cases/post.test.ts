@@ -24,8 +24,10 @@ const mockPostRepository: jest.Mocked<IPostRepository> = {
 
 const mockTagRepository: jest.Mocked<ITagRepository> = {
   create: jest.fn(),
-  findByName: jest.fn(),
   update: jest.fn(),
+  findByName: jest.fn(),
+  delete: jest.fn(),
+  findAll: jest.fn(),
 }
 const mockPostViewedRepository: jest.Mocked<IPostViewedRepository> = {
   create: jest.fn(),
