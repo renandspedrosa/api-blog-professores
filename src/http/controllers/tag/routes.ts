@@ -3,8 +3,43 @@ import { create } from './create'
 import { update } from './update'
 import { validateCreateTag } from '@/http/middlewares/tag/validation-create-tag'
 import { isTeacher } from '@/http/middlewares/teacher/is-teacher'
+import { validationFindAll } from '@/http/middlewares/utils/validation-find-all'
+import { findAllTag } from './find-all-tag'
+import { deleteTag } from './delete'
+import { validationFindTag } from '@/http/middlewares/tag/validation-find-tag'
 
 const router = Router()
+
+/**
+ * @swagger
+ * /tag:
+ *   get:
+ *     summary: Recupera todos os assuntos
+ *     tags:
+ *       - Tag
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Número da página para paginar os resultados
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           example: 10
+ *         description: Número máximo de assuntos a serem retornados por página
+ *     responses:
+ *       200:
+ *         description: Lista de assuntos recuperados com sucesso
+ */
+
+router.get('/', isTeacher, validationFindAll, findAllTag)
 
 /**
  * @swagger
@@ -69,5 +104,28 @@ router.post('/', isTeacher, validateCreateTag, create)
  */
 
 router.put('/:id', isTeacher, validateCreateTag, update)
+
+/**
+ * @swagger
+ * /tag/{id}:
+ *   delete:
+ *     summary: Remove um assunto pelo ID
+ *     tags:
+ *       - Tag
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID do assunto a ser removido
+ *         schema:
+ *           type: string
+ *     responses:
+ *       204:
+ *         description: Assunto removido com sucesso
+ */
+
+router.delete('/:id', isTeacher, validationFindTag, deleteTag)
 
 export default router
