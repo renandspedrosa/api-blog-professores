@@ -77,7 +77,7 @@ export class PostRepository implements IPostRepository {
     const mappedPosts: IPost[] = posts.map((post) => {
       return {
         ...post,
-        tags: post.tags?.filter(tag => tag.status === 1),
+        tags: post.tags?.filter((tag) => tag.status === 1),
         teacher: post.teacher
           ? { user: { name: post.teacher.user?.name } }
           : undefined,
@@ -95,12 +95,12 @@ export class PostRepository implements IPostRepository {
 
     if (!post) throw new Error('Post not found')
 
-    const filteredTags = post.tags?.filter(tag => tag.status === 1);
+    const filteredTags = post.tags?.filter((tag) => tag.status === 1)
 
     return {
       ...post,
       tags: filteredTags,
-    };
+    }
   }
 
   async findPostByIdTeacher(

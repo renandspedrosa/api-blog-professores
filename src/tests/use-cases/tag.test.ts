@@ -14,8 +14,20 @@ const mockTagRepository: jest.Mocked<ITagRepository> = {
 }
 
 const mockTags: ITag[] = [
-  { id: 1, name: 'Recado', created_at: new Date(), updated_at: new Date(), status: 1 },
-  { id: 2, name: 'Novidade', created_at: new Date(), updated_at: new Date(), status: 1 },
+  {
+    id: 1,
+    name: 'Recado',
+    created_at: new Date(),
+    updated_at: new Date(),
+    status: 1,
+  },
+  {
+    id: 2,
+    name: 'Novidade',
+    created_at: new Date(),
+    updated_at: new Date(),
+    status: 1,
+  },
 ]
 
 describe('Use Cases for the Tag', () => {
