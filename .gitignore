@@ -4,3 +4,4 @@
 .env
 .vscode/
 docker-compose.yaml
+/uploads
