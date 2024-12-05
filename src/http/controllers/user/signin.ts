@@ -1,6 +1,6 @@
 import { generateJwt } from '@/http/middlewares/jwt-validate'
-import { makeFindStudentByIdUseCase } from '@/use-cases/factory/student/make-find-student-by-id-use-case'
-import { makeFindTeacherByIdUseCase } from '@/use-cases/factory/teacher/make-find-teacher-by-id-use-case'
+import { makeFindWithTeacherUseCase } from '@/use-cases/factory/user/make-find-with-teacher'
+import { makeFindWithStudentUseCase } from '@/use-cases/factory/user/make-find-with-student'
 import { makeSigninUseCase } from '@/use-cases/factory/user/make-signin-use-case'
 import { compare } from 'bcryptjs'
 import { Request, Response, NextFunction } from 'express'
@@ -10,8 +10,8 @@ export async function signin(req: Request, res: Response, next: NextFunction) {
     const { email, password } = req.body
 
     const signinUseCase = makeSigninUseCase()
-    const findWithTeacherById = makeFindTeacherByIdUseCase()
-    const findWithStudentById = makeFindStudentByIdUseCase()
+    const findWithTeacherByIdUser = makeFindWithTeacherUseCase()
+    const findWithStudentByIdUser = makeFindWithStudentUseCase()
 
     const user = await signinUseCase.handler(email)
 
@@ -19,14 +19,14 @@ export async function signin(req: Request, res: Response, next: NextFunction) {
       throw new Error('Credenciais inválidas')
     }
 
-    const teacher = await findWithTeacherById.handler(user.id)
+    const teacher = await findWithTeacherByIdUser.handler(user.id)
 
-    const student = await findWithStudentById.handler(user.id)
+    const student = await findWithStudentByIdUser.handler(user.id)
 
     let type = null
-    if (teacher) {
+    if (teacher && teacher.teachers && teacher.teachers.length > 0) {
       type = 'teacher'
-    } else if (student) {
+    } else if (student && student.students && student.students.length > 0) {
       type = 'student'
     }
 
