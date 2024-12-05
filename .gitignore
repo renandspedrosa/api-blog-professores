@@ -4,3 +4,5 @@
 .env
 .vscode/
 docker-compose.yaml
+uploads/*
+!uploads/.keep
