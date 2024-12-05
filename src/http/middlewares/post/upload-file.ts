@@ -2,13 +2,11 @@ import multer from 'multer'
 import { Request, Response, NextFunction } from 'express'
 import path from 'path'
 
-// Configuração personalizada para salvar arquivos com extensão
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/') // Diretório de destino
+    cb(null, 'uploads/')
   },
   filename: (req, file, cb) => {
-    // Gera um nome único para o arquivo com a extensão original
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`
     const extension = path.extname(file.originalname)
     cb(null, `${uniqueSuffix}${extension}`)
