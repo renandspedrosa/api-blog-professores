@@ -7,10 +7,11 @@ export async function validateCreatePost(
   res: Response,
   next: NextFunction,
 ) {
+  // Define o schema para validar os dados do corpo da requisição
   const registerBodySchema = z.object({
-    title: z.string(),
-    content: z.string(),
-    path_img: z.string().optional(),
+    title: z.string().min(1, { message: 'Título é obrigatório' }),
+    content: z.string().min(1, { message: 'Conteúdo é obrigatório' }),
+    path_img: z.string().optional(), // O arquivo será tratado separadamente
     teacher_id: z.coerce.number(),
     tags: z
       .array(
@@ -26,15 +27,20 @@ export async function validateCreatePost(
       )
       .optional(),
   })
-
   try {
+    // Valida os dados combinados
     req.body = registerBodySchema.parse(req.body)
+
     const { teacher_id } = req.body
+
+    // Chama o use case para verificar se o professor existe
     const findWithTeacherUseCase = makeFindTeacherByIdUseCase()
     const teacher = await findWithTeacherUseCase.handler(teacher_id)
+
     if (!teacher) {
       return res.status(404).json({ message: 'Professor não encontrado' })
     }
+
     next()
   } catch (error) {
     if (error instanceof ZodError) {

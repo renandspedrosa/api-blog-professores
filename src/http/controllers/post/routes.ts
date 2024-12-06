@@ -17,6 +17,7 @@ import { createPostViewed } from './create-post-viewed'
 import { findCommentsByPostId } from '@/http/controllers/post/find-comments-by-post-id'
 import { isStudent } from '@/http/middlewares/student/is-student'
 import { validateJwt } from '@/http/middlewares/jwt-validate'
+import { uploadFile } from '@/http/middlewares/post/upload-file'
 
 const router = Router()
 
@@ -63,7 +64,7 @@ const router = Router()
  *         description: Post criado com sucesso
  */
 
-router.post('/', validateJwt, isTeacher, validateCreatePost, create)
+router.post('/', validateJwt, uploadFile, isTeacher, validateCreatePost, create)
 
 /**
  * @swagger
