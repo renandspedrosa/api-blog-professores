@@ -12,7 +12,7 @@ import studentRoute from '@/http/controllers/student/routes'
 import { validateJwt } from './http/middlewares/jwt-validate'
 import errorMiddleware from './global/error-midleware'
 import { setupSwagger } from './swagger'
-import path from 'path';
+import path from 'path'
 
 const app = express()
 
@@ -28,7 +28,7 @@ app.use('/subject', validateJwt, subjectRouter)
 app.use('/tag', validateJwt, tagRouter)
 app.use('/student', studentRoute)
 
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
 
 app.use(errorMiddleware)
 
