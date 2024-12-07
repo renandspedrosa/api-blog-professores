@@ -23,10 +23,6 @@ export const uploadFile = (req: Request, res: Response, next: NextFunction) => {
         details: err.message,
       })
     }
-
-    console.log('Campos do formulário:', req.body)
-    console.log('Arquivo enviado:', req.file)
-
     next()
   })
 }
