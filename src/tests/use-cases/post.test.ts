@@ -190,18 +190,17 @@ describe('Use Cases for the Post', () => {
   })
 
   it('It should create a new post viewed entry using the repository', async () => {
-    const postViewed: PostViewed = new PostViewed();
-    postViewed.id = 1;
-    postViewed.student_id = 1;
-    postViewed.post_id = '4e106c23-98cd-456a-955d-adc35295d5d4';
-    postViewed.created_at = new Date();
-    
-    mockPostViewedRepository.create.mockResolvedValue(postViewed);
-  
-    const result = await createPostViewedUseCase.handler(postViewed);
-  
-    expect(mockPostViewedRepository.create).toHaveBeenCalledWith(postViewed);
-    expect(result).toBe(postViewed);
-  });
-  
+    const postViewed: PostViewed = new PostViewed()
+    postViewed.id = 1
+    postViewed.student_id = 1
+    postViewed.post_id = '4e106c23-98cd-456a-955d-adc35295d5d4'
+    postViewed.created_at = new Date()
+
+    mockPostViewedRepository.create.mockResolvedValue(postViewed)
+
+    const result = await createPostViewedUseCase.handler(postViewed)
+
+    expect(mockPostViewedRepository.create).toHaveBeenCalledWith(postViewed)
+    expect(result).toBe(postViewed)
+  })
 })

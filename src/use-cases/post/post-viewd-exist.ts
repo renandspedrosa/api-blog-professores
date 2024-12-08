@@ -1,4 +1,4 @@
-import { IPostViewedRepository } from "@/repositories/post-viewed.repository.interface";
+import { IPostViewedRepository } from '@/repositories/post-viewed.repository.interface'
 
 export class PostViewedExistUseCase {
   constructor(private postViewedRepository: IPostViewedRepository) {}

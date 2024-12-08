@@ -16,7 +16,10 @@ export class PostViewedRepository implements IPostViewedRepository {
     return this.repository.save(postViewed)
   }
 
-  async postViewedExists(post_id: string, student_id: number): Promise<boolean> {
+  async postViewedExists(
+    post_id: string,
+    student_id: number,
+  ): Promise<boolean> {
     const postViewed = await this.repository.findOne({
       where: {
         post_id,

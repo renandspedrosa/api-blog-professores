@@ -44,7 +44,7 @@ export async function createPostViewed(
       return res.status(200).json({ message: 'Postagem já visualizada' })
     }
 
-    const postViewed =  new PostViewed()
+    const postViewed = new PostViewed()
     postViewed.student_id = student_id
     postViewed.post_id = post_id
     const createdPostViewed = await createPostViewedUseCase.handler(postViewed)
