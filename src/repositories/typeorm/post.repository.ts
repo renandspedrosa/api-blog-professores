@@ -107,6 +107,7 @@ export class PostRepository implements IPostRepository {
       teacher: post.teacher
       ? { user: { name: post.teacher.user?.name } }
       : undefined,
+      vieweds: undefined,
       commentCount: post.comments?.length || 0,
       viewedCount: post.vieweds?.length || 0,
     }

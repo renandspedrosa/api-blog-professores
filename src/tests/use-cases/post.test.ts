@@ -31,6 +31,7 @@ const mockTagRepository: jest.Mocked<ITagRepository> = {
 }
 const mockPostViewedRepository: jest.Mocked<IPostViewedRepository> = {
   create: jest.fn(),
+  postViewedExists: jest.fn(),
 }
 
 const mockPosts: IPost[] = [

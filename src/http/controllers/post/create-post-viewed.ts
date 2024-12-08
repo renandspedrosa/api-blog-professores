@@ -1,5 +1,6 @@
 import { PostViewed } from '@/entities/post-viewed.entity'
 import { makeCreatePostViewedUseCase } from '@/use-cases/factory/post/make-create-post-viewed-use-case'
+import { makePostViewedUseCase } from '@/use-cases/factory/post/make-post-viwed-use-case'
 import { makeFindWithStudentUseCase } from '@/use-cases/factory/user/make-find-with-student'
 import { Request, Response, NextFunction } from 'express'
 
@@ -23,6 +24,7 @@ export async function createPostViewed(
 
     const createPostViewedUseCase = makeCreatePostViewedUseCase()
     const findWithStudentUseCase = makeFindWithStudentUseCase()
+    const postViewedExists = makePostViewedUseCase()
 
     const user = await findWithStudentUseCase.handler(auth.id)
 
@@ -35,6 +37,11 @@ export async function createPostViewed(
       return res
         .status(403)
         .json({ message: 'Acesso negado. O usuário não é um aluno.' })
+    }
+
+    const postViewedExist = await postViewedExists.handler(post_id, student_id)
+    if (postViewedExist) {
+      return res.status(200).json({ message: 'Postagem já visualizada' })
     }
 
     const postViewed =  new PostViewed()
