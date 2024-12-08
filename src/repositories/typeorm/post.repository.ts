@@ -91,9 +91,9 @@ export class PostRepository implements IPostRepository {
     return mappedPosts
   }
 
-  async findPostById(id: string): Promise<IPost | undefined> {
+  async findPostById(id: string): Promise<IPost & { commentCount?: number; viewedCount?: number } | undefined> {
     const post = await this.repository.findOne({
-      relations: ['tags'],
+      relations: ['tags', 'teacher.user', 'comments', 'vieweds'],
       where: { id },
     })
 
@@ -104,6 +104,11 @@ export class PostRepository implements IPostRepository {
     return {
       ...post,
       tags: filteredTags,
+      teacher: post.teacher
+      ? { user: { name: post.teacher.user?.name } }
+      : undefined,
+      commentCount: post.comments?.length || 0,
+      viewedCount: post.vieweds?.length || 0,
     }
   }
 
