@@ -14,6 +14,7 @@ import { Tag } from './tag.entity'
 import { Teacher } from './teacher.entity'
 import { Comment } from '@/entities/comment.entity'
 import { IComment } from './models/comment.interface'
+import { PostViewed } from './post-viewed.entity'
 
 @Entity({
   name: 'posts',
@@ -82,18 +83,7 @@ export class Post implements IPost {
   })
   tags?: ITag[] | undefined
 
-  @OneToMany(() => Comment, (comment) => comment, { cascade: true })
-  @JoinTable({
-    name: 'post_comments',
-    joinColumn: {
-      name: 'post_id',
-      referencedColumnName: 'id',
-    },
-    inverseJoinColumn: {
-      name: 'comment_id',
-      referencedColumnName: 'id',
-    },
-  })
+  @OneToMany(() => Comment, (comment) => comment.post, { cascade: true })
   comments?: IComment[] | []
 
   @ManyToOne(() => Teacher, (teacher) => teacher.posts)
@@ -102,4 +92,7 @@ export class Post implements IPost {
 
   @Column({ name: 'teacher_id', type: 'integer' })
   teacher_id: number
+
+  @OneToMany(() => PostViewed, (postViewed) => postViewed.post)
+  vieweds?: PostViewed[]
 }

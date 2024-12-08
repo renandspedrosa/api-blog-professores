@@ -50,7 +50,7 @@ export class PostRepository implements IPostRepository {
     term?: string,
   ): Promise<IPost[]> {
     const queryOptions: FindManyOptions<IPost> = {
-      relations: ['tags', 'teacher.user'],
+      relations: ['tags', 'teacher.user', 'comments', 'vieweds'],
       skip: (page - 1) * limit,
       take: limit,
       order: {
@@ -81,6 +81,10 @@ export class PostRepository implements IPostRepository {
         teacher: post.teacher
           ? { user: { name: post.teacher.user?.name } }
           : undefined,
+        commentCount: post.comments?.length || 0,
+        viewedCount: post.vieweds?.length || 0,
+        vieweds: undefined,
+        comments: undefined,
       }
     })
 

@@ -1,4 +1,5 @@
 import { IComment } from './comment.interface'
+import { IPostViewed } from './post-viewed.interface'
 import { ITag } from './tags.interface'
 export interface IPost {
   id?: string
@@ -16,4 +17,5 @@ export interface IPost {
   }
   tags?: ITag[]
   comments?: IComment[]
+  vieweds?: IPostViewed[]
 }

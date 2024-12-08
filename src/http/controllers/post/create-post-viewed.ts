@@ -1,3 +1,4 @@
+import { PostViewed } from '@/entities/post-viewed.entity'
 import { makeCreatePostViewedUseCase } from '@/use-cases/factory/post/make-create-post-viewed-use-case'
 import { makeFindWithStudentUseCase } from '@/use-cases/factory/user/make-find-with-student'
 import { Request, Response, NextFunction } from 'express'
@@ -36,7 +37,9 @@ export async function createPostViewed(
         .json({ message: 'Acesso negado. O usuário não é um aluno.' })
     }
 
-    const postViewed = { post_id, student_id }
+    const postViewed =  new PostViewed()
+    postViewed.student_id = student_id
+    postViewed.post_id = post_id
     const createdPostViewed = await createPostViewedUseCase.handler(postViewed)
     return res.status(201).json(createdPostViewed)
   } catch (error) {
