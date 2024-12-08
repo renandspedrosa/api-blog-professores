@@ -93,9 +93,12 @@ router.post('/', validateJwt, uploadFile, isTeacher, validateCreatePost, create)
  *       - in: query
  *         name: tag
  *         required: false
- *         schema:
- *           type: integer
- *         description: ID da Tag para filtrar os posts retornados
+ *        schema:
+ *          type: array
+ *         items:
+ *          type: integer
+ *        example: [1, 2]
+ *        description: Lista de tags associadas ao post
  *       - in: query
  *         name: term
  *         required: false

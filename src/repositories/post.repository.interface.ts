@@ -5,7 +5,7 @@ export interface IPostRepository {
   findAll(
     page: number,
     limit: number,
-    tagId?: number,
+    tagId?: Array<number>,
     term?: string,
   ): Promise<IPost[]>
   findPostByIdTeacher(

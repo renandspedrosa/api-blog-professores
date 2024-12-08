@@ -1,5 +1,11 @@
 import { IPostRepository } from '../post.repository.interface'
-import { FindManyOptions, FindOptionsWhere, Like, Repository } from 'typeorm'
+import {
+  FindManyOptions,
+  FindOptionsWhere,
+  Like,
+  Repository,
+  In,
+} from 'typeorm'
 import { Post } from '@/entities/post.entity'
 import { Tag } from '@/entities/tag.entity'
 import { appDataSource } from '@/lib/typeorm/typeorm'
@@ -46,7 +52,7 @@ export class PostRepository implements IPostRepository {
   async findAll(
     page: number,
     limit: number,
-    tagId?: number,
+    tagIds?: Array<number>,
     term?: string,
   ): Promise<IPost[]> {
     const queryOptions: FindManyOptions<IPost> = {
@@ -60,10 +66,6 @@ export class PostRepository implements IPostRepository {
 
     const whereConditions: FindOptionsWhere<IPost> = { status: 1 }
 
-    if (tagId) {
-      whereConditions.tags = { id: tagId }
-    }
-
     if (term) {
       queryOptions.where = [
         { ...whereConditions, content: Like(`%${term}%`) },
@@ -71,6 +73,15 @@ export class PostRepository implements IPostRepository {
       ]
     } else {
       queryOptions.where = whereConditions
+    }
+
+    if (tagIds && tagIds.length > 0) {
+      queryOptions.where = {
+        ...whereConditions,
+        tags: {
+          id: In(tagIds),
+        },
+      }
     }
 
     const posts = await this.repository.find(queryOptions)
