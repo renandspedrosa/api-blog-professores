@@ -1,6 +1,5 @@
 import { IPost } from '@/entities/models/post.interface'
 import { IPostRepository } from '@/repositories/post.repository.interface'
-import { IPostViewed } from '@/entities/models/post-viewed.interface'
 import { IPostViewedRepository } from '@/repositories/post-viewed.repository.interface'
 import { CreatePostUseCase } from '@/use-cases/post/create-post'
 import { DeletePostUseCase } from '@/use-cases/post/delete-post'
@@ -11,6 +10,7 @@ import { FindPostByTermUseCase } from '@/use-cases/post/find-post-by-term'
 import { FindPostUseCase } from '@/use-cases/post/find-post'
 import { CreatePostViewedUseCase } from '@/use-cases/post/create-post-viewed'
 import { ITagRepository } from '@/repositories/tag.repository.interface'
+import { PostViewed } from '@/entities/post-viewed.entity'
 
 const mockPostRepository: jest.Mocked<IPostRepository> = {
   create: jest.fn(),
@@ -31,6 +31,7 @@ const mockTagRepository: jest.Mocked<ITagRepository> = {
 }
 const mockPostViewedRepository: jest.Mocked<IPostViewedRepository> = {
   create: jest.fn(),
+  postViewedExists: jest.fn(),
 }
 
 const mockPosts: IPost[] = [
@@ -189,12 +190,11 @@ describe('Use Cases for the Post', () => {
   })
 
   it('It should create a new post viewed entry using the repository', async () => {
-    const postViewed: IPostViewed = {
-      id: 1,
-      student_id: 1,
-      post_id: '4e106c23-98cd-456a-955d-adc35295d5d4',
-      created_at: new Date(),
-    }
+    const postViewed: PostViewed = new PostViewed()
+    postViewed.id = 1
+    postViewed.student_id = 1
+    postViewed.post_id = '4e106c23-98cd-456a-955d-adc35295d5d4'
+    postViewed.created_at = new Date()
 
     mockPostViewedRepository.create.mockResolvedValue(postViewed)
 

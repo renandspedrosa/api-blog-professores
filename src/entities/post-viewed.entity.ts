@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm'
+import { Post } from './post.entity'
 import { IPostViewed } from './models/post-viewed.interface'
 
 @Entity({
@@ -15,6 +22,10 @@ export class PostViewed implements IPostViewed {
     type: 'integer',
   })
   student_id: number
+
+  @ManyToOne(() => Post, (post) => post.vieweds)
+  @JoinColumn({ name: 'post_id' })
+  post: Post
 
   @Column({
     name: 'post_id',

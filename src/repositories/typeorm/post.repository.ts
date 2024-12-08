@@ -50,7 +50,7 @@ export class PostRepository implements IPostRepository {
     term?: string,
   ): Promise<IPost[]> {
     const queryOptions: FindManyOptions<IPost> = {
-      relations: ['tags', 'teacher.user'],
+      relations: ['tags', 'teacher.user', 'comments', 'vieweds'],
       skip: (page - 1) * limit,
       take: limit,
       order: {
@@ -81,15 +81,23 @@ export class PostRepository implements IPostRepository {
         teacher: post.teacher
           ? { user: { name: post.teacher.user?.name } }
           : undefined,
+        commentCount: post.comments?.length || 0,
+        viewedCount: post.vieweds?.length || 0,
+        vieweds: undefined,
+        comments: undefined,
       }
     })
 
     return mappedPosts
   }
 
-  async findPostById(id: string): Promise<IPost | undefined> {
+  async findPostById(
+    id: string,
+  ): Promise<
+    (IPost & { commentCount?: number; viewedCount?: number }) | undefined
+  > {
     const post = await this.repository.findOne({
-      relations: ['tags'],
+      relations: ['tags', 'teacher.user', 'comments', 'vieweds'],
       where: { id },
     })
 
@@ -100,6 +108,12 @@ export class PostRepository implements IPostRepository {
     return {
       ...post,
       tags: filteredTags,
+      teacher: post.teacher
+        ? { user: { name: post.teacher.user?.name } }
+        : undefined,
+      vieweds: undefined,
+      commentCount: post.comments?.length || 0,
+      viewedCount: post.vieweds?.length || 0,
     }
   }
 
