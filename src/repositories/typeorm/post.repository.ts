@@ -55,7 +55,7 @@ export class PostRepository implements IPostRepository {
     tagIds?: Array<number>,
     term?: string,
   ): Promise<IPost[]> {
-    const queryOptions: FindManyOptions<IPost> = {
+    const queryOptions: FindManyOptions<Post> = {
       relations: ['tags', 'teacher.user', 'comments', 'vieweds'],
       skip: (page - 1) * limit,
       take: limit,
@@ -108,13 +108,23 @@ export class PostRepository implements IPostRepository {
     (IPost & { commentCount?: number; viewedCount?: number }) | undefined
   > {
     const post = await this.repository.findOne({
-      relations: ['tags', 'teacher.user', 'comments', 'vieweds'],
+      relations: ['tags', 'teacher.user', 'comments.user', 'vieweds'],
       where: { id },
     })
 
     if (!post) throw new Error('Post not found')
 
     const filteredTags = post.tags?.filter((tag) => tag.status === 1)
+
+    // retorna apena o nome do usuerio que comentou no array de comentarios junto com os comentarios
+    post.comments = post.comments?.map((comment) => {
+      return {
+        ...comment,
+        user: {
+          name: comment.user?.name,
+        },
+      }
+    })
 
     return {
       ...post,
@@ -165,6 +175,11 @@ export class PostRepository implements IPostRepository {
     }
 
     post.updated_at = new Date()
+    delete post.vieweds
+    delete post.comments
+    delete post.commentCount
+    delete post.viewedCount
+    delete post.teacher
     return this.repository.save(post)
   }
 

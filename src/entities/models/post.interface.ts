@@ -18,4 +18,6 @@ export interface IPost {
   tags?: ITag[]
   comments?: IComment[]
   vieweds?: IPostViewed[]
+  commentCount?: number
+  viewedCount?: number
 }

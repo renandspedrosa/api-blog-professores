@@ -7,6 +7,7 @@ import {
 } from 'typeorm'
 import { Post } from './post.entity'
 import { IComment } from './models/comment.interface'
+import { User } from './user.entity'
 
 @Entity({
   name: 'comments',
@@ -60,4 +61,8 @@ export class Comment implements IComment {
     type: 'int',
   })
   user_id: number
+
+  @ManyToOne(() => User, (user) => user.id)
+  @JoinColumn({ name: 'user_id' })
+  user: User
 }
