@@ -7,6 +7,7 @@ import { validationFindAll } from '@/http/middlewares/utils/validation-find-all'
 import { findAllTag } from './find-all-tag'
 import { deleteTag } from './delete'
 import { validationFindTag } from '@/http/middlewares/tag/validation-find-tag'
+import { validateJwt } from '@/http/middlewares/jwt-validate'
 
 const router = Router()
 
@@ -39,7 +40,7 @@ const router = Router()
  *         description: Lista de assuntos recuperados com sucesso
  */
 
-router.get('/', isTeacher, validationFindAll, findAllTag)
+router.get('/', validationFindAll, findAllTag)
 
 /**
  * @swagger
@@ -67,7 +68,7 @@ router.get('/', isTeacher, validationFindAll, findAllTag)
  *       201:
  *         description: Tag criada com sucesso
  */
-router.post('/', isTeacher, validateCreateTag, create)
+router.post('/', validateJwt, isTeacher, validateCreateTag, create)
 
 /**
  * @swagger
@@ -103,7 +104,7 @@ router.post('/', isTeacher, validateCreateTag, create)
  *         description: Tag atualizada com sucesso
  */
 
-router.put('/:id', isTeacher, validateCreateTag, update)
+router.put('/:id', validateJwt, isTeacher, validateCreateTag, update)
 
 /**
  * @swagger
@@ -126,6 +127,6 @@ router.put('/:id', isTeacher, validateCreateTag, update)
  *         description: Assunto removido com sucesso
  */
 
-router.delete('/:id', isTeacher, validationFindTag, deleteTag)
+router.delete('/:id', validateJwt, isTeacher, validationFindTag, deleteTag)
 
 export default router
