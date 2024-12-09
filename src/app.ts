@@ -25,7 +25,7 @@ app.use('/user', userRouter)
 app.use('/posts', postRouter)
 app.use('/comments', validateJwt, commentsRouter)
 app.use('/subject', validateJwt, subjectRouter)
-app.use('/tag', validateJwt, tagRouter)
+app.use('/tag', tagRouter)
 app.use('/student', studentRoute)
 
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
