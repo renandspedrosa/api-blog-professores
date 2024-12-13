@@ -79,4 +79,8 @@ export class UserRepository implements IUserRepository {
     }
     return userWithStudent
   }
+
+  async updatePassword(user_id: number, password: string): Promise<void> {
+    await this.repository.update(user_id, { password })
+  }
 }
