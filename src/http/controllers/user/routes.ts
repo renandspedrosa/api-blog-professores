@@ -4,6 +4,10 @@ import { findUserByEmail } from './findUserByEmail'
 import { signin } from './signin'
 import { update } from './update'
 import { validateLoginUser } from '@/http/middlewares/user/validation-login-user'
+import { validateEmail } from '@/http/middlewares/user/validation-email'
+import { forgotPassword } from './forgot-password'
+import { validateResetPassword } from '@/http/middlewares/user/validate-reset-password'
+import { resetPassword } from './reset-password'
 
 const router = Router()
 
@@ -126,5 +130,9 @@ router.put('/:id', update)
  */
 
 router.post('/signin', validateLoginUser, signin)
+
+router.post('/forgot-password', validateEmail, forgotPassword)
+
+router.post('/reset-password/:token', validateResetPassword, resetPassword)
 
 export default router
