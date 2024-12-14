@@ -21,9 +21,9 @@ export async function update(req: Request, res: Response, next: NextFunction) {
     }
 
     const updateUserUseCase = makeUpdateUserUseCase()
-    const User = await updateUserUseCase.handler(userWithHashedPassword)
+    const user = await updateUserUseCase.handler(userWithHashedPassword)
 
-    return res.status(201).json({ id: User.id, name: User.name })
+    return res.status(201).json({ id: user.id, name: user.name })
   } catch (error) {
     next(error)
   }
