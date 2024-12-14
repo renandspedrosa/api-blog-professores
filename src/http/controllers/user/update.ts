@@ -20,10 +20,10 @@ export async function update(req: Request, res: Response, next: NextFunction) {
       password: hashedPassword,
     }
 
-    const updateStuedentUseCase = makeUpdateUserUseCase()
-    const student = await updateStuedentUseCase.handler(userWithHashedPassword)
+    const updateUserUseCase = makeUpdateUserUseCase()
+    const User = await updateUserUseCase.handler(userWithHashedPassword)
 
-    return res.status(201).json({ id: student.id, name: student.name })
+    return res.status(201).json({ id: User.id, name: User.name })
   } catch (error) {
     next(error)
   }
