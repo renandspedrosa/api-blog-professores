@@ -34,7 +34,7 @@ export async function validateResetPassword(
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
-        message: 'A validação falhou para criar um e-mail de usuário único.',
+        message: 'Erro ao validar token.',
         errors: error.format(),
       })
     }
