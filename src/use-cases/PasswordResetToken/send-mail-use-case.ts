@@ -17,7 +17,7 @@ export class SendMailUseCase {
   }
 
   async handler(email: string, token: string) {
-    const recoveryLink = `${env.HOST_FRONTEND}/recuperar-senha?token=${token}`;
+    const recoveryLink = `${env.HOST_FRONTEND}/recuperar-senha?token=${token}`
     const mailOptions = {
       from: 'fiap@thankapapers.com',
       to: email,
@@ -36,7 +36,7 @@ export class SendMailUseCase {
                   <p>GRUPO 04</p>
                 </footer>
               </body>
-            </html>`, 
+            </html>`,
     }
 
     try {

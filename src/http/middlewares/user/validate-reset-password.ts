@@ -28,7 +28,8 @@ export async function validateResetPassword(
 
     const validatePasswordResetTokenUseCase =
       makeValidatePasswordResetTokenUseCase()
-    const passwordResetToken = await validatePasswordResetTokenUseCase.handler(token)
+    const passwordResetToken =
+      await validatePasswordResetTokenUseCase.handler(token)
     req.body.user_id = passwordResetToken.user_id
     next()
   } catch (error) {
