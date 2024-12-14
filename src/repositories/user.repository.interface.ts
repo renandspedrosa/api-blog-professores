@@ -13,4 +13,5 @@ export interface IUserRepository {
   findWithStudent(
     userId: number,
   ): Promise<(IUser & IStudent) | IUser | undefined>
+  updatePassword(user_id: number, password: string): Promise<void>
 }

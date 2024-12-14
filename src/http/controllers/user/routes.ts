@@ -1,8 +1,13 @@
 import { Router } from 'express'
 import { findUser } from './find-user'
+import { findUserByEmail } from './findUserByEmail'
 import { signin } from './signin'
 import { update } from './update'
 import { validateLoginUser } from '@/http/middlewares/user/validation-login-user'
+import { validateEmail } from '@/http/middlewares/user/validation-email'
+import { forgotPassword } from './forgot-password'
+import { validateResetPassword } from '@/http/middlewares/user/validate-reset-password'
+import { resetPassword } from './reset-password'
 
 const router = Router()
 
@@ -27,6 +32,28 @@ const router = Router()
  */
 
 router.get('/:id', findUser)
+
+/**
+ * @swagger
+ * /user/email/{email}:
+ *   get:
+ *     summary: Recupera um usuário pelo email
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - in: path
+ *         name: email
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: "user@professor.com"
+ *         description: Email do usuário a ser recuperado
+ *     responses:
+ *       200:
+ *         description: Usuário recuperado com sucesso
+ */
+
+router.get('/email/:email', findUserByEmail)
 
 /**
  * @swagger
@@ -103,5 +130,9 @@ router.put('/:id', update)
  */
 
 router.post('/signin', validateLoginUser, signin)
+
+router.post('/forgot-password', validateEmail, forgotPassword)
+
+router.post('/reset-password/:token', validateResetPassword, resetPassword)
 
 export default router
