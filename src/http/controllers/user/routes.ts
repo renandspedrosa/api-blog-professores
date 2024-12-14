@@ -131,7 +131,66 @@ router.put('/:id', update)
 
 router.post('/signin', validateLoginUser, signin)
 
+/**
+ * @swagger
+ * /user/forgot-password:
+ *   post:
+ *     summary: Rota para solicitar a recuperação de senha
+ *     tags:
+ *       - User
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: Email do usuário
+ *                 example: "user@professor.com"
+ *     responses:
+ *       200:
+ *         description: Email enviado com sucesso
+ */
+
 router.post('/forgot-password', validateEmail, forgotPassword)
+
+/**
+ * @swagger
+ * /user/reset-password/{token}:
+ *   post:
+ *     summary: Rota para redefinir a senha do usuário
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - in: path
+ *         name: token
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: "abc123token"
+ *         description: Token de recuperação de senha
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - password
+ *             properties:
+ *               password:
+ *                 type: string
+ *                 description: Nova senha do usuário
+ *             example:
+ *               password: "novaSenha123"
+ *     responses:
+ *       200:
+ *         description: Senha atualizada com sucesso
+ */
 
 router.post('/reset-password/:token', validateResetPassword, resetPassword)
 
