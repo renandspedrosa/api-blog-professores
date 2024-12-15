@@ -26,9 +26,9 @@ export class UpdatePostUseCase {
       existingPost.tags = tags
     }
 
-    if(post.path_img) {
+    if (post.path_img) {
       existingPost.path_img = post.path_img
-    } 
+    }
 
     return this.postRepository.updatePost(existingPost as IPost)
   }
