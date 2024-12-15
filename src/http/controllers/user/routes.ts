@@ -1,8 +1,13 @@
 import { Router } from 'express'
 import { findUser } from './find-user'
+import { findUserByEmail } from './findUserByEmail'
 import { signin } from './signin'
 import { update } from './update'
 import { validateLoginUser } from '@/http/middlewares/user/validation-login-user'
+import { validateEmail } from '@/http/middlewares/user/validation-email'
+import { forgotPassword } from './forgot-password'
+import { validateResetPassword } from '@/http/middlewares/user/validate-reset-password'
+import { resetPassword } from './reset-password'
 
 const router = Router()
 
@@ -27,6 +32,28 @@ const router = Router()
  */
 
 router.get('/:id', findUser)
+
+/**
+ * @swagger
+ * /user/email/{email}:
+ *   get:
+ *     summary: Recupera um usuário pelo email
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - in: path
+ *         name: email
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: "user@professor.com"
+ *         description: Email do usuário a ser recuperado
+ *     responses:
+ *       200:
+ *         description: Usuário recuperado com sucesso
+ */
+
+router.get('/email/:email', findUserByEmail)
 
 /**
  * @swagger
@@ -103,5 +130,68 @@ router.put('/:id', update)
  */
 
 router.post('/signin', validateLoginUser, signin)
+
+/**
+ * @swagger
+ * /user/forgot-password:
+ *   post:
+ *     summary: Rota para solicitar a recuperação de senha
+ *     tags:
+ *       - User
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: Email do usuário
+ *                 example: "user@professor.com"
+ *     responses:
+ *       200:
+ *         description: Email enviado com sucesso
+ */
+
+router.post('/forgot-password', validateEmail, forgotPassword)
+
+/**
+ * @swagger
+ * /user/reset-password/{token}:
+ *   post:
+ *     summary: Rota para redefinir a senha do usuário
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - in: path
+ *         name: token
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: "abc123token"
+ *         description: Token de recuperação de senha
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - password
+ *             properties:
+ *               password:
+ *                 type: string
+ *                 description: Nova senha do usuário
+ *             example:
+ *               password: "novaSenha123"
+ *     responses:
+ *       200:
+ *         description: Senha atualizada com sucesso
+ */
+
+router.post('/reset-password/:token', validateResetPassword, resetPassword)
 
 export default router

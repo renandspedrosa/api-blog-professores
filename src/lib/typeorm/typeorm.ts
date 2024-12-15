@@ -20,6 +20,8 @@ import { AlterTeacherSubjectsStatusColumnMigration1728432062988 } from './migrat
 import { PostViewed } from '@/entities/post-viewed.entity'
 import { AddPathImgToPosts1729423314496 } from './migrations/1729423314496-AddPathImgToPosts'
 import { UpdatePostsColumns1729717659262 } from './migrations/1729717659262-UpdatePostsColumns'
+import { ReatePasswordResetTokens1734048446545 } from './migrations/1734048446545-reatePasswordResetTokens'
+import { PasswordResetToken } from '@/entities/password-reset-tokens.entity'
 
 export const appDataSource = new DataSource({
   type: 'postgres',
@@ -29,7 +31,17 @@ export const appDataSource = new DataSource({
   password: env.DATABASE_PASSWORD,
   database: env.DATABASE_NAME,
   // entities: ['src/entities/**/*.entity.ts'],
-  entities: [Subject, Tag, User, Teacher, Post, Student, PostViewed, Comment],
+  entities: [
+    Subject,
+    Tag,
+    User,
+    Teacher,
+    Post,
+    Student,
+    PostViewed,
+    Comment,
+    PasswordResetToken,
+  ],
   migrations: [
     CreateTablesWithConstraints1725488490452,
     AlterCommentsTable1726544526547,
@@ -43,6 +55,7 @@ export const appDataSource = new DataSource({
     AlterTeacherSubjectsStatusColumnMigration1728432062988,
     AddPathImgToPosts1729423314496,
     UpdatePostsColumns1729717659262,
+    ReatePasswordResetTokens1734048446545,
   ],
   logging: env.NODE_ENV === 'development',
 })

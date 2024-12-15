@@ -16,6 +16,7 @@ const mockUserRepository: jest.Mocked<IUserRepository> = {
   findWithTeacher: jest.fn(),
   findWithStudent: jest.fn(),
   update: jest.fn(),
+  updatePassword: jest.fn(),
 }
 
 const mockUser: IUser[] = [
