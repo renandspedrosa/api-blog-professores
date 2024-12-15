@@ -34,7 +34,7 @@ export async function updatePost(
     } else if (removerImagem) {
       formUpdate = {
         ...formUpdate,
-        path_img: null,
+        path_img: '',
       }
     }
     const updatedPost = await updatePostUseCase.handler(formUpdate)
