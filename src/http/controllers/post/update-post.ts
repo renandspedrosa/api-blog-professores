@@ -16,13 +16,19 @@ export async function updatePost(
 
     const updatePostUseCase = await makeUpdatePostUseCase();
 
-    const updatedPost = await updatePostUseCase.handler({
+    let formUpdate: { id: string; title: any; content: any; tags: any; path_img?: string } = {
       id,
       title,
       content,
-      path_img: filePath ? path.relative(process.cwd(), filePath) : req.body.path_img,
       tags,
-    });
+    };
+    if (filePath) {
+      formUpdate = {
+        ...formUpdate,
+        path_img: path.relative(process.cwd(), filePath),
+      };
+    }
+    const updatedPost = await updatePostUseCase.handler(formUpdate);
 
     return res.status(200).json(updatedPost);
   } catch (error) {
