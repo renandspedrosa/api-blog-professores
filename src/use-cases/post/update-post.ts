@@ -20,10 +20,15 @@ export class UpdatePostUseCase {
 
     existingPost.title = post.title ?? existingPost.title
     existingPost.content = post.content ?? existingPost.content
+    existingPost.path_img = post.path_img ?? existingPost.path_img
 
     if (post.tags) {
       const tags = await this.handleTags(post.tags)
       existingPost.tags = tags
+    }
+
+    if (post.path_img) {
+      existingPost.path_img = post.path_img
     }
 
     return this.postRepository.updatePost(existingPost as IPost)
