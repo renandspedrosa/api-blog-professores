@@ -12,8 +12,6 @@ export async function updatePost(
     const { title, content, tags } = req.body;
     const filePath = req.file ? req.file.path : null;
 
-    console.log('Arquivo salvo em:', filePath);
-
     const updatePostUseCase = await makeUpdatePostUseCase();
 
     let formUpdate: { id: string; title: any; content: any; tags: any; path_img?: string } = {
