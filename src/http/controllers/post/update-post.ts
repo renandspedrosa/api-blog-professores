@@ -9,7 +9,7 @@ export async function updatePost(
 ) {
   try {
     const { id } = req.params;
-    const { title, content, tags } = req.body;
+    const { title, content, tags, removerImagem } = req.body;
     const filePath = req.file ? req.file.path : null;
 
     const updatePostUseCase = await makeUpdatePostUseCase();
@@ -24,6 +24,11 @@ export async function updatePost(
       formUpdate = {
         ...formUpdate,
         path_img: path.relative(process.cwd(), filePath),
+      };
+    }else if(removerImagem){
+      formUpdate = {
+        ...formUpdate,
+        path_img: null,
       };
     }
     const updatedPost = await updatePostUseCase.handler(formUpdate);
