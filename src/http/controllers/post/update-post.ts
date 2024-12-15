@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
+import path from 'path'
 import { makeUpdatePostUseCase } from '@/use-cases/factory/post/make-update-post-use-case'
 
 export async function updatePost(
@@ -8,19 +9,37 @@ export async function updatePost(
 ) {
   try {
     const { id } = req.params
-    const { title, content, path_img, tags } = req.body
+    const { title, content, tags, removerImagem } = req.body
+    const filePath = req.file ? req.file.path : null
 
     const updatePostUseCase = await makeUpdatePostUseCase()
 
-    const post = await updatePostUseCase.handler({
+    let formUpdate: {
+      id: string
+      title: any
+      content: any
+      tags: any
+      path_img?: string
+    } = {
       id,
       title,
       content,
-      path_img,
       tags,
-    })
+    }
+    if (filePath) {
+      formUpdate = {
+        ...formUpdate,
+        path_img: path.relative(process.cwd(), filePath),
+      }
+    } else if (removerImagem) {
+      formUpdate = {
+        ...formUpdate,
+        path_img: '',
+      }
+    }
+    const updatedPost = await updatePostUseCase.handler(formUpdate)
 
-    return res.status(200).json(post)
+    return res.status(200).json(updatedPost)
   } catch (error) {
     next(error)
   }

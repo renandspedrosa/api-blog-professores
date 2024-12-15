@@ -235,7 +235,14 @@ router.get('/search', validationFindByTerm, findPostByTerm)
  *         description: Post atualizado com sucesso
  */
 
-router.put('/:id', validateJwt, isTeacher, validationFindPost, updatePost)
+router.put(
+  '/:id',
+  validateJwt,
+  isTeacher,
+  validationFindPost,
+  uploadFile,
+  updatePost,
+)
 
 /**
  * @swagger
