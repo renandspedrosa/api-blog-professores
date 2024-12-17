@@ -62,29 +62,29 @@ export class PostRepository implements IPostRepository {
       order: {
         created_at: 'DESC',
       },
-    }
-
-    const whereConditions: FindOptionsWhere<IPost> = { status: 1 }
-
+    };
+  
+    const whereConditions: FindOptionsWhere<IPost> = { status: 1 };
+  
     if (term) {
       queryOptions.where = [
         { ...whereConditions, content: Like(`%${term}%`) },
         { ...whereConditions, title: Like(`%${term}%`) },
-      ]
+      ];
     } else {
-      queryOptions.where = whereConditions
+      queryOptions.where = whereConditions;
     }
-
+  
     if (tagIds && tagIds.length > 0) {
       queryOptions.where = {
         ...whereConditions,
         tags: {
           id: In(tagIds),
         },
-      }
+      };
     }
-
-    const posts = await this.repository.find(queryOptions)
+  
+    const posts = await this.repository.find(queryOptions);
     const mappedPosts: IPost[] = posts.map((post) => {
       return {
         ...post,
@@ -92,15 +92,16 @@ export class PostRepository implements IPostRepository {
         teacher: post.teacher
           ? { user: { name: post.teacher.user?.name } }
           : undefined,
-        commentCount: post.comments?.length || 0,
+        comments: post.comments?.filter((comment) => comment.status === 1),
+        commentCount: post.comments?.filter((comment) => comment.status === 1).length || 0,
         viewedCount: post.vieweds?.length || 0,
         vieweds: undefined,
-        comments: undefined,
-      }
-    })
-
-    return mappedPosts
+      };
+    });
+  
+    return mappedPosts;
   }
+  
 
   async findPostById(
     id: string,
@@ -110,33 +111,34 @@ export class PostRepository implements IPostRepository {
     const post = await this.repository.findOne({
       relations: ['tags', 'teacher.user', 'comments.user', 'vieweds'],
       where: { id },
-    })
-
-    if (!post) throw new Error('Post not found')
-
-    const filteredTags = post.tags?.filter((tag) => tag.status === 1)
-
-    // retorna apena o nome do usuerio que comentou no array de comentarios junto com os comentarios
-    post.comments = post.comments?.map((comment) => {
-      return {
+    });
+  
+    if (!post) throw new Error('Post not found');
+  
+    // Filtrar tags com status = 1
+    const filteredTags = post.tags?.filter((tag) => tag.status === 1);
+  
+    // Filtrar comentários com status = 1 e mapear apenas o nome do usuário
+    const filteredComments = post.comments
+      ?.filter((comment) => comment.status === 1)
+      .map((comment) => ({
         ...comment,
-        user: {
-          name: comment.user?.name,
-        },
-      }
-    })
-
+        user: { name: comment.user?.name },
+      }));
+  
     return {
       ...post,
       tags: filteredTags,
       teacher: post.teacher
         ? { user: { name: post.teacher.user?.name } }
         : undefined,
-      vieweds: undefined,
-      commentCount: post.comments?.length || 0,
+      comments: filteredComments, // Apenas comentários com status = 1
+      commentCount: filteredComments?.length || 0, // Contagem de comentários filtrados
       viewedCount: post.vieweds?.length || 0,
-    }
+      vieweds: undefined, // Removido da resposta
+    };
   }
+  
 
   async findPostByIdTeacher(
     teacherId: number,
