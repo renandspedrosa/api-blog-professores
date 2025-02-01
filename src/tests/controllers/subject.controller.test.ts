@@ -74,6 +74,14 @@ describe('Subject Controller', () => {
     expect(findResponse.status).toBe(404)
   })
 
+  it('GET /subject - should return a list of subjects', async () => {
+    const response = await request(app)
+      .get('/subject')
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(response.status).toBe(200)
+  })
+
   it('GET /subject/:id - should return a subject by ID', async () => {
     // Crie um novo subject para buscar em seguida
     const subjectData = { name: 'History' }
