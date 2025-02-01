@@ -7,8 +7,8 @@ export function validationFindAll(
   next: NextFunction,
 ) {
   const registerParamsSchema = z.object({
-    page: z.coerce.number().default(1),
-    limit: z.coerce.number().default(10),
+    page: z.coerce.number().optional(),
+    limit: z.coerce.number().optional(),
   })
 
   try {
