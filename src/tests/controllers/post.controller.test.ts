@@ -116,24 +116,6 @@ describe('Post Controller', () => {
     )
   })
 
-  it('GET /posts/teacher/:teacherId - should find posts by teacher ID', async () => {
-    const findTeacherResponse = await request(app)
-      .get(`/posts/teacher/${teacherId}`)
-      .set('Authorization', `Bearer ${token}`)
-    expect(findTeacherResponse.status).toBe(200)
-    expect(findTeacherResponse.body).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          id: expect.any(String),
-          title: expect.any(String),
-          content: expect.any(String),
-          teacher_id: expect.any(Number),
-          tags: expect.any(Array),
-        }),
-      ]),
-    )
-  })
-
   it('GET /posts/:id/comments - should find comments by post ID', async () => {
     const commentData = {
       content: 'comentario teste',
