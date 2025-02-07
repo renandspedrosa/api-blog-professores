@@ -23,6 +23,7 @@ import { UpdatePostsColumns1729717659262 } from './migrations/1729717659262-Upda
 import { ReatePasswordResetTokens1734048446545 } from './migrations/1734048446545-reatePasswordResetTokens'
 import { PasswordResetToken } from '@/entities/password-reset-tokens.entity'
 import { UserPadrao1738694094830 } from './migrations/1738694094830-userPadrao'
+import { TagPadrao1738929340955 } from './migrations/1738929340955-tagPadrao'
 
 export const appDataSource = new DataSource({
   type: 'postgres',
@@ -57,7 +58,8 @@ export const appDataSource = new DataSource({
     AddPathImgToPosts1729423314496,
     UpdatePostsColumns1729717659262,
     ReatePasswordResetTokens1734048446545,
-    UserPadrao1738694094830
+    UserPadrao1738694094830,
+    TagPadrao1738929340955
   ],
   logging: env.NODE_ENV === 'development',
 })
