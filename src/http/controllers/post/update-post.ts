@@ -26,6 +26,13 @@ export async function updatePost(
       content,
       tags: parsedTags,
     }
+
+    if(tags === '') {
+      formUpdate = {
+        ...formUpdate,
+        tags: [],
+      }
+    }
     if (filePath) {
       formUpdate = {
         ...formUpdate,
