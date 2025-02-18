@@ -41,7 +41,7 @@ export class UserRepository implements IUserRepository {
   ): Promise<(IUser & ITeacher) | IUser | undefined> {
     const userWithTeacher = await this.repository
       .createQueryBuilder('user')
-      .leftJoinAndSelect(
+      .innerJoinAndSelect(
         'user.teachers',
         'teacher',
         'teacher.status = :status',
@@ -52,10 +52,7 @@ export class UserRepository implements IUserRepository {
       .where('user.id = :userId', { userId })
       .getOne()
 
-    if (!userWithTeacher) {
-      return undefined
-    }
-    return userWithTeacher
+    return userWithTeacher || undefined
   }
 
   async findWithStudent(
@@ -63,7 +60,7 @@ export class UserRepository implements IUserRepository {
   ): Promise<(IUser & IStudent) | IUser | undefined> {
     const userWithStudent = await this.repository
       .createQueryBuilder('user')
-      .leftJoinAndSelect(
+      .innerJoinAndSelect(
         'user.students',
         'student',
         'student.status = :status',
@@ -74,10 +71,7 @@ export class UserRepository implements IUserRepository {
       .where('user.id = :userId', { userId })
       .getOne()
 
-    if (!userWithStudent) {
-      return undefined
-    }
-    return userWithStudent
+    return userWithStudent || undefined
   }
 
   async updatePassword(user_id: number, password: string): Promise<void> {

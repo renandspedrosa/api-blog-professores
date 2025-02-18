@@ -59,7 +59,7 @@ export const appDataSource = new DataSource({
     UpdatePostsColumns1729717659262,
     ReatePasswordResetTokens1734048446545,
     UserPadrao1738694094830,
-    TagPadrao1738929340955
+    TagPadrao1738929340955,
   ],
   logging: env.NODE_ENV === 'development',
 })
