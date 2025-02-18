@@ -51,10 +51,9 @@ export class UserRepository implements IUserRepository {
       )
       .where('user.id = :userId', { userId })
       .getOne()
-  
+
     return userWithTeacher || undefined
   }
-  
 
   async findWithStudent(
     userId: number,
@@ -71,10 +70,9 @@ export class UserRepository implements IUserRepository {
       )
       .where('user.id = :userId', { userId })
       .getOne()
-  
+
     return userWithStudent || undefined
   }
-  
 
   async updatePassword(user_id: number, password: string): Promise<void> {
     await this.repository.update(user_id, { password })

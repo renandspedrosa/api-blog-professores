@@ -27,7 +27,7 @@ export async function updatePost(
       tags,
     }
 
-    if(tags === '') {
+    if (tags === '') {
       formUpdate = {
         ...formUpdate,
         tags: [],

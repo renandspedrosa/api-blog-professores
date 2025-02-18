@@ -23,10 +23,10 @@ export async function signin(req: Request, res: Response, next: NextFunction) {
 
     const student = await findWithStudentByIdUser.handler(user.id)
 
-    if (teacher == undefined && student == undefined) {
+    if (teacher === undefined && student === undefined) {
       throw new Error('Credenciais inválidas')
     }
-    
+
     let type = null
     if (teacher && teacher.teachers && teacher.teachers.length > 0) {
       type = 'teacher'
