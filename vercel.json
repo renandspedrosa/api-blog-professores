@@ -1,9 +1,11 @@
 {
     "version": 2,
+    "buildCommand": "npm run build && npm run migrate:prod",
+    "installCommand": "npm install",
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "public/server.js"
+        "dest": "/server.js"
       }
     ]
-  }
+}
