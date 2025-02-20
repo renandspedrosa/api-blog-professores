@@ -5,3 +5,4 @@
 docker-compose.yaml
 uploads/*
 !uploads/.keep
+.vercel
