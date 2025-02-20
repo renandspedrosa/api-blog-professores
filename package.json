@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
-    "build": "tsup src --out-dir build",
+    "build": "tsup src --out-dir public",
     "migrate": "npm run build && npx typeorm migration:run -d ./build/lib/typeorm/typeorm.js",
     "migrate:prod": "npx typeorm migration:run -d ./build/lib/typeorm/typeorm.js",
     "lint": "npx eslint src/** --fix",
