@@ -2,7 +2,7 @@
   "name": "api-blog",
   "version": "1.0.0",
   "description": "API para blog dos professores",
-  "main": "index.js",
+  "main": "public/server.js",
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "start": "node public/server.js",
