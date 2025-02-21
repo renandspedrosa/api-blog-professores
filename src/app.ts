@@ -16,7 +16,13 @@ import path from 'path'
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+    origin: '*', // Permite qualquer origem (não recomendado em produção)
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
+    credentials: true, // Permite cookies e headers de autenticação
+  }))
+  
 
 app.use(express.json())
 
