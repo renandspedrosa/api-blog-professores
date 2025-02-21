@@ -1,6 +1,6 @@
 import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
-import { Express } from 'express'
+import { Express, Request, Response, NextFunction } from 'express'
 import { env } from './env'
 
 const PORT = env.PORT
@@ -28,41 +28,24 @@ const swaggerOptions = {
       },
     ],
     tags: [
-      {
-        name: 'User',
-        description: 'Operações relacionadas a usuários',
-      },
-      {
-        name: 'Teacher',
-        description: 'Operações relacionadas a professores',
-      },
-      {
-        name: 'Student',
-        description: 'Operações relacionadas a estudantes',
-      },
-      {
-        name: 'Posts',
-        description: 'Operações relacionadas as postagem dos professores',
-      },
-      {
-        name: 'Comments',
-        description: 'Operações relacionadas aos comentários',
-      },
-      {
-        name: 'Subject',
-        description: 'Operações relacionadas as disciplinas',
-      },
-      {
-        name: 'Tag',
-        description: 'Operações relacionadas as tags',
-      },
+      { name: 'User', description: 'Operações relacionadas a usuários' },
+      { name: 'Teacher', description: 'Operações relacionadas a professores' },
+      { name: 'Student', description: 'Operações relacionadas a estudantes' },
+      { name: 'Posts', description: 'Operações relacionadas às postagens dos professores' },
+      { name: 'Comments', description: 'Operações relacionadas aos comentários' },
+      { name: 'Subject', description: 'Operações relacionadas às disciplinas' },
+      { name: 'Tag', description: 'Operações relacionadas às tags' },
     ],
   },
-  apis: ['./src/http/controllers/**/*.ts'],
+  apis: ['./src/http/controllers/**/*.{ts,js}'],
 }
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions)
 
 export const setupSwagger = (app: Express): void => {
-  app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+  app.use('/api-docs', swaggerUi.serve, (req: Request, res: Response, next: NextFunction) => {
+    if (!res.headersSent) {
+      swaggerUi.setup(swaggerDocs)(req, res, next)
+    }
+  })
 }
