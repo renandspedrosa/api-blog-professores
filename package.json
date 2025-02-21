@@ -5,14 +5,14 @@
   "engines": {
     "node": "20"
   },
-  "main": "public/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start:dev": "tsx watch src/index.ts",
-    "start": "node public/index.js",
+    "start": "node dist/index.js",
     "vercel-build": "npm run build && npm run migrate:prod",
-    "build": "tsup src --out-dir public",
-    "migrate": "npm run build && npx typeorm migration:run -d ./public/lib/typeorm/typeorm.js",
-    "migrate:prod": "npx typeorm migration:run -d ./public/lib/typeorm/typeorm.js",
+    "build": "tsup src --out-dir dist",
+    "migrate": "npm run build && npx typeorm migration:run -d ./dist/lib/typeorm/typeorm.js",
+    "migrate:prod": "npx typeorm migration:run -d ./dist/lib/typeorm/typeorm.js",
     "lint": "npx eslint src/** --fix",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose --preset ts-jest",
     "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --preset ts-jest",
