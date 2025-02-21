@@ -2,10 +2,13 @@
   "name": "api-blog",
   "version": "1.0.0",
   "description": "API para blog dos professores",
-  "main": "public/server.js",
+  "engines": {
+    "node": "20"
+  },
+  "main": "public/index.js",
   "scripts": {
-    "start:dev": "tsx watch src/server.ts",
-    "start": "node public/server.js",
+    "start:dev": "tsx watch src/index.ts",
+    "start": "node public/index.js",
     "vercel-build": "npm run build && npm run migrate:prod",
     "build": "tsup src --out-dir public",
     "migrate": "npm run build && npx typeorm migration:run -d ./public/lib/typeorm/typeorm.js",
@@ -67,6 +70,7 @@
   },
   "dependencies": {
     "@fastify/jwt": "8.0.0",
+    "@vercel/node": "5.1.7",
     "bcryptjs": "2.4.3",
     "cors": "2.8.5",
     "crypto": "1.0.1",
